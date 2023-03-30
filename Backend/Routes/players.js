@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const { body, validationResult } = require('express-validator');
+const jwt = require('jsonwebtoken');
 const catchAsync = require('../Utility/catchAsync')
 const appError = require('../Utility/appError')
 const Player = require('../Models/Player');
@@ -9,8 +11,9 @@ router.route('/')
     .post(catchAsync(async (req,res,next)=>{
         const player = new Player(req.body.player);
         // console.log(player)
+        
+        await player.save()     // now before saving we want to becrypt our password, we will use a middleware in our player schema which will automatically becrypt the password when it is changed
         res.json(player)
-        await player.save()
     }))
 
 router.route('/:id')
@@ -35,6 +38,30 @@ router.route('/:id')
     }))
     
     module.exports = router
+
+
+    router.post('/signin', async(req, res)=>{
+        const {email, password} = req.body
+        
+        try{
+            const player = await Player.findOne({email : email})
+            if(!player){
+                // if user doesn't exist, redirect the user to signup page
+                // res.redirect(200, '/api/auth/signup')
+                throw new appError('Player not found',404)
+            }
+            else if(password === player.password){
+                // res.json(player)
+                const token = jwt.sign({ playerId: player.id }, JWT_SECRET);
+                // res.json({token: token})
+                res.cookie('token', token)
+            }else{
+                throw new appError('Email or password is incorrect',400)
+            }
+        }catch(err){
+            res.json(new appError(err, 'Something went wrong'))
+        }
+    })
 
 
 
