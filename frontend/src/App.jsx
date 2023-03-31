@@ -1,9 +1,9 @@
-import {Route} from 'react-router-dom'
+import {Routes,Route} from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from './components/Home'
 import Login from './components/Login';
 import Register from './components/Register';
-// import About from './components/About';
+import About from './components/About';
 
 
 function App() {
@@ -11,21 +11,16 @@ function App() {
     <div className="App">
       <Navbar/>
 
-      <Route exact path='/'>
-        <Home/>
-      </Route>
-
-      {/* <Route exact path='/about'>
-        <About/>
-      </Route> */}
-
-      <Route exact path='/login'>
-        <Login/>
-      </Route>
-
-      <Route exact path='/register'>
-        <Register/>
-      </Route>
+      <Routes>
+     
+     <Route path="/" element={<Home />} />
+     <Route path="/about" element={<About />} />
+     <Route path="/signin" element={<Login />} />
+     <Route path="/signup" element={<Register />} />
+     {/* <Route path="/logout" element={<Logout />} /> */}
+ 
+     {/* <Route path="*" element={<Error />} /> */}
+     </Routes>
     </div>
   );
 }
