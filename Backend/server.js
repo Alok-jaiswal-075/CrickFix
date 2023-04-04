@@ -5,7 +5,7 @@ const teamRoutes = require('./Routes/teams')
 const matchRoutes = require('./Routes/match')
 const mongoose = require('mongoose')
 const app = express()
-const port = 8000
+const port = 5000
 
 // Route imports
 const auth = require('./Routes/auth')
