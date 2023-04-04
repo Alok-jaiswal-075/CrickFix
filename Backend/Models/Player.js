@@ -4,7 +4,11 @@ const bcrypt = require('bcryptjs')
 const {Schema} = mongoose
 
 const playerSchema = new Schema({
-    name: {
+    fname: {
+        type: String,
+        required: true
+    },
+    lname: {
         type: String,
         required: true
     },
@@ -17,7 +21,7 @@ const playerSchema = new Schema({
         required: true,
         unique: true
     },
-    phone:{
+    contact:{
         type: Number,
         required: true,
         unique: true
