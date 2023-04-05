@@ -9,6 +9,10 @@ module.exports = function(app) {
     '/hello',
     createProxyMiddleware(proxy)
   );
+  app.use(
+    '/players',
+    createProxyMiddleware(proxy)
+  );
 
 
   

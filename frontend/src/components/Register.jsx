@@ -21,7 +21,7 @@ const Register = () => {
                 "Content-type" : "application/json"
             },
             body : JSON.stringify({
-                player
+                player : {fname : player.fname, lname:player.lname, age:player.age, email:player.email, contact:player.contact, password:player.password}
             })
         })
 
@@ -30,7 +30,8 @@ const Register = () => {
             window.alert("Invalid data")
         }
         else{
-            window.alert("registration successfull")
+            // window.alert("registration successfull")
+            console.log(data)
         }
     }
 

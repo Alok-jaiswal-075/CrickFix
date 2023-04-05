@@ -9,14 +9,19 @@ const { findById, findByIdAndUpdate } = require('../Models/Team');
 
 router.route('/')
     .post(catchAsync(async (req,res,next)=>{
+        // console.log(req.body.player)
+        req.body.player.age = parseInt(req.body.player.age);
+        req.body.player.contact = parseInt(req.body.player.contact)
         const player = new Player(req.body.player);
         // console.log(player)
         
+        
         await player.save()     // now before saving we want to becrypt our password, we will use a middleware in our player schema which will automatically becrypt the password when it is changed
         res.json(player)
+        // res.json({"msg":"success"})
     }))
 
-router.route('/:id')
+router.route('/:id') 
     .put(catchAsync(async (req,res,next)=>{
         const {id} = req.params
         const player = await Player.findByIdAndUpdate(id, {...req.body.player});
@@ -74,6 +79,24 @@ router.route('/:id')
 "age": 19,
 "email": "alok@93",
 "phone" : 2323,
+"password": "fsd"
+}}
+
+{"player":{
+  "fname": "alok",
+  "lname": "jaiswal",
+  "age": 34,
+  "email": "alok@gmail.com",
+  "contact": 46424543342,
+  "password": "aaklj344snjrn"
+}}
+
+{"player":{
+"fname":"alok",
+"lname":"jaiswal",
+"age": 19,
+"email": "alok@93",
+"contact" : 2323,
 "password": "fsd"
 }}
     

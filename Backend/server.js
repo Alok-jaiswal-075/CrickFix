@@ -12,7 +12,7 @@ const auth = require('./Routes/auth')
 app.use(express.urlencoded({ extended: true }));
 
 // DB connection
-const dbUrl = 'mongodb://localhost:27017/hackathon'
+const dbUrl = 'mongodb://localhost:27017/gfgHackathon'
 
 mongoose.connect(dbUrl,{
     // useCreateIndex:true,
