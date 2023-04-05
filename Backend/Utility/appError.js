@@ -1,8 +1,8 @@
-class errorClass{
-    constructor(err, msg){
-        this.error = err
+class appError{
+    constructor(status, msg){
+        this.status = status
         this.message = msg
     }
 }
 
-module.exports = errorClass
+module.exports = appError

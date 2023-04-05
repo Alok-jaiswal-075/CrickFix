@@ -6,6 +6,7 @@ const catchAsync = require('../Utility/catchAsync')
 const appError = require('../Utility/appError')
 const Player = require('../Models/Player');
 const { findById, findByIdAndUpdate } = require('../Models/Team');
+const bcrypt = require('bcryptjs')
 
 router.route('/')
     .post(catchAsync(async (req,res,next)=>{
@@ -45,28 +46,22 @@ router.route('/:id')
     module.exports = router
 
 
-    router.post('/signin', async(req, res)=>{
+    router.post('/login', catchAsync(async(req, res)=>{
+
         const {email, password} = req.body
         
-        try{
             const player = await Player.findOne({email : email})
-            if(!player){
-                // if user doesn't exist, redirect the user to signup page
-                // res.redirect(200, '/api/auth/signup')
-                throw new appError('Player not found',404)
-            }
-            else if(password === player.password){
-                // res.json(player)
-                const token = jwt.sign({ playerId: player.id }, JWT_SECRET);
-                // res.json({token: token})
-                res.cookie('token', token)
+
+            if(!player || bcrypt.compareSync(password, player.password)){
+                const token = jwt.sign({ player: player}, JWT_SECRET);
+                // console.log(token)
+                // res.cookie('token', token)
+                res.json(player)
             }else{
-                throw new appError('Email or password is incorrect',400)
+                throw new appError(400,'Email or password is incorrect')
             }
-        }catch(err){
-            res.json(new appError(err, 'Something went wrong'))
-        }
-    })
+        
+    }))
 
 
 
