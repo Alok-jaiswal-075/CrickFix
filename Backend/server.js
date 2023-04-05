@@ -36,8 +36,8 @@ app.use('/matches',matchRoutes)
 // Route Drivers
 // app.use('/api/auth', auth)
 
-app.get('/', (req, res)=>{
-    res.send('Hello World')
+app.get('/hello', (req, res)=>{
+    res.send({"Hello" :"World"})
 })
 
 
