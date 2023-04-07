@@ -11,12 +11,12 @@ const Player = require('../Models/Player')
 const JWT_SECRET = 'this is a #$#@# very tough secret @&%^#&&**'
 
 const verifyPlayer =catchAsync( async (req, res, next) => {
-    console.log(req.cookies.token)
+    // console.log(req.cookies.token)
     const token = req.cookies.token
     const decoded = jwt.verify(token, JWT_SECRET)
-    const player = await Player.findById(decoded.player._id);
+    const player = await Player.findById(decoded.playerId);
     if(!player) throw new appError(401,'Not authorised')
-    req.player = player;
+    req.playerId = player._id;
     next();
 })
 

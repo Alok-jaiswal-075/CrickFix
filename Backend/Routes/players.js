@@ -33,17 +33,13 @@ router.route('/')
         await player.save();
         res.json(player)
     }))
-    .get(catchAsync(async (req,res,next)=>{
-        // console.log(req.player)
-        // const player =await Player.findById(req.params.id).populate('team_joined');
-        // if(!player){
-        //     throw new appError('Player not found',404);
-        // }
-
-        // res.json(player)
-        // res.json(req.player)
-        console.log(req.cookies)
-        res.json("got the data")
+    .get(verifyPlayer,catchAsync(async (req,res,next)=>{
+        const player =await Player.findById(req.playerId).populate('team_joined');
+        if(!player){
+            throw new appError('Player not found',404);
+        }
+        const {fname,lname,age,email,contact,ranking,half_centuries,centuries,total_score,highest_score,tournaments_played} = player
+        res.json({fname,lname,age,email,contact,ranking,half_centuries,centuries,total_score,highest_score,tournaments_played})
     }))
     .delete(verifyPlayer,catchAsync(async (req,res,next)=>{
         const {id} = req.params
@@ -60,8 +56,8 @@ router.route('/')
         
             const player = await Player.findOne({email : email})
 
-            if(!player || bcrypt.compareSync(password, player.password)){
-                const token = jwt.sign({ player: player}, JWT_SECRET);
+            if(player && bcrypt.compareSync(password, player.password)){
+                const token = jwt.sign({ "playerId": player._id}, JWT_SECRET);
                 // console.log(token)
                 res.cookie('token', token,{
                     expires:new Date(Date.now() + 25892000000),
