@@ -63,8 +63,13 @@ router.route('/')
             if(!player || bcrypt.compareSync(password, player.password)){
                 const token = jwt.sign({ player: player}, JWT_SECRET);
                 // console.log(token)
-                res.cookie('token', token)
-                res.status(200).json({"msg":"player login successfull"})
+                res.cookie('token', token,{
+                    expires:new Date(Date.now() + 25892000000),
+                    secure: true, 
+                    httpOnly: true, 
+                    sameSite: 'none' 
+                  });
+                res.status(200).json({ message: 'User signed in successfully', token })
             }else{
                 throw new appError(400,'Email or password is incorrect')
             }
