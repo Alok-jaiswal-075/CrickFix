@@ -65,7 +65,7 @@ router.route('/')
                     httpOnly: true, 
                     sameSite: 'none' 
                   });
-                res.status(200).json({ message: 'User signed in successfully', token })
+                res.status(200).json({ msg: 'User signed in successfully'})
             }else{
                 throw new appError(400,'Email or password is incorrect')
             }
