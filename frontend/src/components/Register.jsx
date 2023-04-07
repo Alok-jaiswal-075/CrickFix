@@ -30,7 +30,7 @@ const Register = () => {
             window.alert("Invalid data")
         }
         else{
-            // window.alert("registration successfull")
+            window.alert(data.msg)
             console.log(data)
         }
     }
@@ -38,7 +38,7 @@ const Register = () => {
     return(
         <div className="container">
             <div className="row">
-                <form className="row g-3 needs-validation" method="POST" noValidate >
+                <form className="row g-3 needs-validation" method="POST" noValidate autoComplete="off">
                     <div className="col-12">
                     <label htmlFor="validationCustom01" className="form-label">First name</label>
                     <input type="text" className="form-control"  name="fname" value={player.fname} onChange={handleInput} required />

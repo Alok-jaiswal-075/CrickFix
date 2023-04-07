@@ -44,7 +44,7 @@ app.get('/hello', (req, res)=>{
 app.use((err,req,res,next)=>{
     const { statusCode = 500 } = err;
     if (!err.message) err.message = 'Oh No, Something Went Wrong!'
-    res.status(statusCode).json(err)
+    res.status(statusCode).json({"msg":err.message})
 })
 
 app.listen(port, ()=>{

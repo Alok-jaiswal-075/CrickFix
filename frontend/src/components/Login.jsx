@@ -1,7 +1,10 @@
 import React,{useState} from "react";
+import {useNavigate} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css'
 
+
 const Login = () => {
+    const Navigate = useNavigate();
 
     const [player, setPlayer] = useState({email:"", password:""});
 
@@ -29,19 +32,21 @@ const Login = () => {
         })
 
         const data = await res.json()
-        if(!data){
+        if(!data || res.status!==200){
             window.alert("Invalid data")
+            Navigate('/register')
         }
         else{
-            // window.alert("registration successfull")
-            console.log(data)
+            window.alert(data.msg)
+            Navigate("/about");
+            // console.log(data)
         }
     }
 
     return(
         <div className="container">
             <div className="row">
-                <form method="POST" className="row g-3 needs-validation" noValidate>
+                <form method="POST" className="row g-3 needs-validation" noValidate autoComplete="off">
 
                     <div className="col-12">
                     <label htmlFor="validationCustom02" className="form-label">Email</label>

@@ -7,6 +7,9 @@ const appError = require('../Utility/appError')
 const Player = require('../Models/Player');
 const { findById, findByIdAndUpdate } = require('../Models/Team');
 const bcrypt = require('bcryptjs')
+const verifyPlayer = require("../Middlewares/verifyPlayer")
+
+const JWT_SECRET = "this is a #$#@# very tough secret @&%^#&&**"
 
 router.route('/')
     .post(catchAsync(async (req,res,next)=>{
@@ -18,26 +21,31 @@ router.route('/')
         
         
         await player.save()     // now before saving we want to becrypt our password, we will use a middleware in our player schema which will automatically becrypt the password when it is changed
-        res.json(player)
+        res.status(200).json({"msg":"registration successfull"})
         // res.json({"msg":"success"})
     }))
 
-router.route('/:id') 
-    .put(catchAsync(async (req,res,next)=>{
+router.route('/') 
+    .put(verifyPlayer,catchAsync(async (req,res,next)=>{
+        console.log(req.player)
         const {id} = req.params
         const player = await Player.findByIdAndUpdate(id, {...req.body.player});
         await player.save();
         res.json(player)
     }))
     .get(catchAsync(async (req,res,next)=>{
-        const player =await Player.findById(req.params.id).populate('team_joined');
-        if(!player){
-            throw new appError('Player not found',404);
-        }
+        // console.log(req.player)
+        // const player =await Player.findById(req.params.id).populate('team_joined');
+        // if(!player){
+        //     throw new appError('Player not found',404);
+        // }
 
-        res.json(player)
+        // res.json(player)
+        // res.json(req.player)
+        console.log(req.cookies)
+        res.json("got the data")
     }))
-    .delete(catchAsync(async (req,res,next)=>{
+    .delete(verifyPlayer,catchAsync(async (req,res,next)=>{
         const {id} = req.params
         await Player.findByIdAndDelete(id);
         res.json('Player Deleted Successfully')
@@ -55,8 +63,8 @@ router.route('/:id')
             if(!player || bcrypt.compareSync(password, player.password)){
                 const token = jwt.sign({ player: player}, JWT_SECRET);
                 // console.log(token)
-                // res.cookie('token', token)
-                res.json(player)
+                res.cookie('token', token)
+                res.status(200).json({"msg":"player login successfull"})
             }else{
                 throw new appError(400,'Email or password is incorrect')
             }
