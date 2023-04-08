@@ -1,14 +1,26 @@
 const express = require('express')
 const router = express.Router();
 const Team = require('../Models/Team')
+const Player = require('../Models/Player')
 const appError = require('../Utility/appError')
 const catchAsync = require('../Utility/catchAsync')
+const {verifyPlayer} = require('../Middlewares')
+
 
 
 router.route('/')
-    .post(catchAsync(async (req,res,next)=>{
+    .post(verifyPlayer,catchAsync(async (req,res,next)=>{
+        const player = await Player.findById(req.playerId);
         const team = new Team(req.body.team);
+        team.captain = player
         await team.save()
+        res.status(200).json(team)
+    }))
+    .get(catchAsync(async (req,res,next)=>{
+        const team =await Team.find({}).populate('players').populate('captain');
+        if(!team){
+            throw new appError(404,'No team exist');
+        }
         res.json(team)
     }))
 

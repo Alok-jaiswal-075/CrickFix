@@ -7,22 +7,18 @@ const appError = require('../Utility/appError')
 const Player = require('../Models/Player');
 const { findById, findByIdAndUpdate } = require('../Models/Team');
 const bcrypt = require('bcryptjs')
-const verifyPlayer = require("../Middlewares/verifyPlayer")
+const { verifyPlayer } = require("../Middlewares")
 
 const JWT_SECRET = "this is a #$#@# very tough secret @&%^#&&**"
 
 router.route('/')
     .post(catchAsync(async (req,res,next)=>{
-        // console.log(req.body.player)
         req.body.player.age = parseInt(req.body.player.age);
         req.body.player.contact = parseInt(req.body.player.contact)
         const player = new Player(req.body.player);
-        // console.log(player)
-        
         
         await player.save()     // now before saving we want to becrypt our password, we will use a middleware in our player schema which will automatically becrypt the password when it is changed
         res.status(200).json({"msg":"registration successfull"})
-        // res.json({"msg":"success"})
     }))
 
 router.route('/') 

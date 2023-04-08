@@ -13,6 +13,10 @@ module.exports = function(app) {
     '/players',
     createProxyMiddleware(proxy)
   );
+  app.use(
+    '/teams',
+    createProxyMiddleware(proxy)
+  );
 
 
   

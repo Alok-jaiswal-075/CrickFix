@@ -5,7 +5,8 @@ const {Schema} = mongoose
 const teamSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     location_based: {
         type: String,
@@ -26,6 +27,10 @@ const teamSchema = new Schema({
     matches_draw: {
         type: Number,
         default: 0
+    },
+    captain : {
+        type: Schema.Types.ObjectId,
+        ref: 'Player'
     },
     players: [
         {
