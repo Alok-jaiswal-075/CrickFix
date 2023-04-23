@@ -7,7 +7,7 @@ const appError = require('../Utility/appError')
 const Player = require('../Models/Player');
 const { findById, findByIdAndUpdate } = require('../Models/Team');
 const bcrypt = require('bcryptjs')
-const { verifyPlayer } = require("../Middlewares")
+const { isLoggedIn } = require("../Middlewares")
 
 const JWT_SECRET = "this is a #$#@# very tough secret @&%^#&&**"
 
@@ -22,14 +22,20 @@ router.route('/')
     }))
 
 router.route('/') 
-    .put(verifyPlayer,catchAsync(async (req,res,next)=>{
-        console.log(req.player)
-        const {id} = req.params
-        const player = await Player.findByIdAndUpdate(id, {...req.body.player});
-        await player.save();
-        res.json(player)
+    .put(isLoggedIn,catchAsync(async (req,res,next)=>{
+        if(!req.body.player) throw new appError('Enter data to be updated',404)
+        const {fname,lname,age,oldpassword,newpassword} = req.body.player;
+        if(!fname || !lname || !age || !oldpassword || !newpassword){
+            throw new appError(404,"Every field is mandatory")
+        }
+        const player = await Player.findById(req.playerId)
+        if(!player || !bcrypt.compareSync(oldpassword, player.password)) throw new appError(404,'Incorrect password')
+        const newplayer = await Player.findByIdAndUpdate(req.playerId, {fname: fname,lname:lname,age:age,password:newpassword});
+        res.clearCookie('token')
+        res.json({msg:"User updated successfully"})
     }))
-    .get(verifyPlayer,catchAsync(async (req,res,next)=>{
+
+    .get(isLoggedIn,catchAsync(async (req,res,next)=>{
         const player =await Player.findById(req.playerId).populate('team_joined');
         if(!player){
             throw new appError('Player not found',404);
@@ -37,10 +43,11 @@ router.route('/')
         const {fname,lname,age,email,contact,ranking,half_centuries,centuries,total_score,highest_score,tournaments_played} = player
         res.json({fname,lname,age,email,contact,ranking,half_centuries,centuries,total_score,highest_score,tournaments_played})
     }))
-    .delete(verifyPlayer,catchAsync(async (req,res,next)=>{
-        const {id} = req.params
-        await Player.findByIdAndDelete(id);
-        res.json('Player Deleted Successfully')
+
+    .delete(isLoggedIn,catchAsync(async (req,res,next)=>{
+        await Player.findByIdAndDelete(req.playerId);
+        res.clearCookie('token')
+        res.json({msg:'Player Deleted Successfully'})
     }))
     
     module.exports = router
@@ -54,7 +61,6 @@ router.route('/')
 
             if(player && bcrypt.compareSync(password, player.password)){
                 const token = jwt.sign({ "playerId": player._id}, JWT_SECRET);
-                // console.log(token)
                 res.cookie('token', token,{
                     expires:new Date(Date.now() + 25892000000),
                     secure: true, 

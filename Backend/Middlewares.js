@@ -6,7 +6,7 @@ const Player = require('./Models/Player')
 
 const JWT_SECRET = 'this is a #$#@# very tough secret @&%^#&&**'
 
-module.exports.verifyPlayer =catchAsync( async (req, res, next) => {
+module.exports.isLoggedIn =catchAsync( async (req, res, next) => {
     const token = req.cookies.token
     if(!token) throw new appError(401,'User not logged in')
     const decoded = jwt.verify(token, JWT_SECRET)

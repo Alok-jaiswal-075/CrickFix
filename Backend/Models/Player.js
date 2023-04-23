@@ -77,4 +77,18 @@ playerSchema.pre('save', async function(next){
 })
 
 
+playerSchema.pre('findOneAndUpdate', async function (next) {
+    let update = {...this.getUpdate()};
+  
+    // Only run this function if password was modified
+    if (update.password){
+  
+    // Hash the password
+    update.password = await bcrypt.hash(this.getUpdate().password, 12);
+    this.setUpdate(update);
+    }
+
+    next()
+  })
+
 module.exports = mongoose.model('Player', playerSchema);

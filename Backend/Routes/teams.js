@@ -4,12 +4,12 @@ const Team = require('../Models/Team')
 const Player = require('../Models/Player')
 const appError = require('../Utility/appError')
 const catchAsync = require('../Utility/catchAsync')
-const {verifyPlayer} = require('../Middlewares')
+const {verifyPlayer, isLoggedIn} = require('../Middlewares')
 
 
 
 router.route('/')
-    .post(verifyPlayer,catchAsync(async (req,res,next)=>{
+    .post(isLoggedIn,catchAsync(async (req,res,next)=>{
         const player = await Player.findById(req.playerId);
         const team = new Team(req.body.team);
         team.captain = player

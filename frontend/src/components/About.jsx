@@ -1,6 +1,8 @@
 import React,{useEffect,useState} from "react";
+import { useNavigate } from "react-router-dom";
 
 const About = () => {
+    const navigate = useNavigate();
     
     const [player,setPlayerData] = useState({})
 
@@ -17,7 +19,7 @@ const About = () => {
 
             const data = await res.json();
             setPlayerData(data)
-            console.log(data)
+            // console.log(data)
         } catch (error) {
             window.alert(error.msg)
         }
@@ -26,6 +28,31 @@ const About = () => {
     useEffect(() => {
         callPlayerPage();
     }, []);
+
+
+    const gotoEditPage = () =>{
+        navigate('/editPlayer');
+    }
+
+    const handleDelete = async () => {
+        try {
+            const res = await fetch('/players',{
+                method : "DELETE",
+                headers : {
+                    "Accept" : "application/json",
+                    "Content-Type" : "application/json"
+                },
+                credentials : "include"
+            })
+
+            const data = await res.json();
+            if(data){
+                window.alert("Player deleted successfully")
+            }
+        } catch (error) {
+            window.alert(error.msg)
+        }
+    }
 
 
     return(
@@ -46,6 +73,8 @@ const About = () => {
             <li className="list-group-item">Tournaments played: {player.tournaments_played}</li>
             </ul>
             <div className="card-body">
+            <button type="button" className="btn btn-success btn-sm m-2" onClick={gotoEditPage}>Edit</button>
+            <button type="button" className="btn btn-danger btn-sm m-2" onClick={handleDelete}>Delete</button>
 
             </div>
         </div>
