@@ -4,7 +4,7 @@ const Team = require('../Models/Team')
 const Player = require('../Models/Player')
 const appError = require('../Utility/appError')
 const catchAsync = require('../Utility/catchAsync')
-const {verifyPlayer, isLoggedIn} = require('../Middlewares')
+const {isLoggedIn,isCaptain} = require('../Middlewares')
 
 
 
@@ -26,13 +26,14 @@ router.route('/')
 
 
 router.route('/:id')
-    .put(catchAsync(async (req,res,next)=>{
+    .put(isLoggedIn,isCaptain,catchAsync(async (req,res,next)=>{
         const {id} = req.params
-        const team = await Team.findByIdAndUpdate(id, {...req.body.team});
-        await team.save();
-        res.json(team)
+        const teamdata = await Team.findByIdAndUpdate(id, {...req.body.team});
+        await teamdata.save();
+        res.json(teamdata)
+        // console.log(req.body.team);
     }))
-    .get(catchAsync(async (req,res,next)=>{
+    .get(isLoggedIn,catchAsync(async (req,res,next)=>{
         const team =await Team.findById(req.params.id).populate('players');
         if(!team){
             throw new appError('Team not found',404);
@@ -40,10 +41,10 @@ router.route('/:id')
 
         res.json(team)
     }))
-    .delete(catchAsync(async (req,res,next)=>{
+    .delete(isLoggedIn,isCaptain,catchAsync(async (req,res,next)=>{
         const {id} = req.params
         await Team.findByIdAndDelete(id);
-        res.json('Team Deleted Successfully')
+        res.json({'msg':'Team Deleted Successfully'})
     }))
 
 module.exports = router

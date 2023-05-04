@@ -34,7 +34,6 @@ const Login = () => {
         const data = await res.json()
         if(!data || res.status!==200){
             window.alert("Invalid data")
-            Navigate('/register')
         }
         else{
             window.alert(data.msg)

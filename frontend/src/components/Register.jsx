@@ -1,6 +1,10 @@
 import React,{useState} from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const Register = () => {
+
+    const navigate = useNavigate()
 
     const [player, setPlayer] = useState({fname:"", lname:"", age:"", email:"", contact:"", password:""});
 
@@ -31,7 +35,7 @@ const Register = () => {
         }
         else{
             window.alert(data.msg)
-            console.log(data)
+            navigate('/login')
         }
     }
 

@@ -7,6 +7,7 @@ import About from './components/About';
 import NewTeam from "./components/NewTeam";
 import AllTeams from "./components/AllTeams";
 import EditPlayer from "./components/EditPlayer";
+import EditTeam from "./components/EditTeam";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/editPlayer" element={<EditPlayer />} />
+      <Route path="/team/:id" element={<EditTeam />} />
       {/* <Route path="*" element={<Error />} /> */}
 
      </Routes>

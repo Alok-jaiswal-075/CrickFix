@@ -1,6 +1,10 @@
 import React,{useState} from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const NewTeam = () => {
+
+    const navigate = useNavigate()
 
     const [team, setTeam] = useState({name:"", location_based:""});
 
@@ -30,6 +34,7 @@ const NewTeam = () => {
         }
         else{
             window.alert("team created successfully")
+            navigate('/teams')
         }
     }
 

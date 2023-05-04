@@ -91,4 +91,7 @@ playerSchema.pre('findOneAndUpdate', async function (next) {
     next()
   })
 
+
+
+
 module.exports = mongoose.model('Player', playerSchema);
