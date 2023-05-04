@@ -57,7 +57,13 @@ const playerSchema = new Schema({
     tournaments_played: {
         type: Number,
         default: 0
-    }
+    },
+    captainOf : [
+        {
+            type: Schema.Types.ObjectId,
+            ref:'Team'
+        }
+    ]
 
 })
 
@@ -92,6 +98,14 @@ playerSchema.pre('findOneAndUpdate', async function (next) {
   })
 
 
-
+playerSchema.post('findOneAndDelete', async function (doc) {    // finding and deleting all the associated teams
+    if (doc) {
+        await Team.deleteMany({
+            _id: {
+                $in: doc.captainOf
+            }
+        })
+    }
+})
 
 module.exports = mongoose.model('Player', playerSchema);

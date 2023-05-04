@@ -36,7 +36,7 @@ router.route('/')
     }))
 
     .get(isLoggedIn,catchAsync(async (req,res,next)=>{
-        const player =await Player.findById(req.playerId).populate('team_joined');
+        const player =await Player.findById(req.playerId).populate('team_joined').populate('captainOf');
         if(!player){
             throw new appError('Player not found',404);
         }
