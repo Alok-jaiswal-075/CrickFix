@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const catchAsync = require('../Utility/catchAsync')
 const appError = require('../Utility/appError')
 const Player = require('../Models/Player');
+const Team = require('../Models/Team');
 const { findById, findByIdAndUpdate } = require('../Models/Team');
 const bcrypt = require('bcryptjs')
 const { isLoggedIn } = require("../Middlewares")
@@ -20,6 +21,8 @@ router.route('/')
         await player.save()     // now before saving we want to becrypt our password, we will use a middleware in our player schema which will automatically becrypt the password when it is changed
         res.status(200).json({"msg":"registration successfull"})
     }))
+
+   
 
 router.route('/') 
     .put(isLoggedIn,catchAsync(async (req,res,next)=>{
@@ -50,7 +53,7 @@ router.route('/')
         res.json({msg:'Player Deleted Successfully'})
     }))
     
-    module.exports = router
+    
 
 
     router.post('/login', catchAsync(async(req, res)=>{
@@ -74,6 +77,62 @@ router.route('/')
         
     }))
 
+    router.get('/all-players', isLoggedIn,async (req, res) => {
+        try {
+          const players = await Player.find();
+          res.json(players);
+        } catch (err) {
+          console.error(err);
+          res.status(500).json({ error: 'Server error' });
+        }
+      });
+
+
+    // Endpoint for accepting a request from a team by a player
+
+    router.post('/send-request/:teamId',isLoggedIn,catchAsync( async (req, res) => {
+        const { teamId } = req.params
+        console.log(teamId)
+
+        const team = await Team.findById(teamId)
+        const playerId  = req.playerId
+
+        const player = await Player.findById(playerId)
+          // add the team from the player's received requests array
+          player.sentRequests.push(team)
+          team.requests.push(player)
+          await player.save()
+          await team.save()
+
+
+          res.json({'msg':'Request sent successfully'});
+
+          if(!team){
+              new appError(500,'Error sending request')
+          }
+    
+        }))
+      
+
+    // router.post('/send-request',isLoggedIn, async (req, res) => {
+    //     const { playerId } = req.body;
+    //     const request = {
+    //     // assuming you have authentication middleware that sets req.user
+    //       from: req.player._id, 
+    //       to: playerId,
+    //       date: new Date(),
+    //     };
+    //     try {
+    //       // save the request in your database
+    //       const result = await Request.create(request);
+    //       res.json(result);
+    //     } catch (error) {
+    //       console.error(error);
+    //       res.status(500).json({ error: 'Internal server error' });
+    //     }
+    //   });
+            
+    module.exports = router
 
 
 

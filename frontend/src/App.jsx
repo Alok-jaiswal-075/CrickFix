@@ -6,6 +6,7 @@ import Register from './components/Register';
 import About from './components/About';
 import NewTeam from "./components/NewTeam";
 import AllTeams from "./components/AllTeams";
+import AllPlayers from "./components/AllPlayers";
 import EditPlayer from "./components/EditPlayer";
 import EditTeam from "./components/EditTeam";
 
@@ -20,6 +21,7 @@ function App() {
       <Route path="/about" element={<About />} />
       <Route path="/newTeam" element={<NewTeam/>} />
       <Route path="/teams" element={<AllTeams/>} />
+      <Route path="/allplayers" element={<AllPlayers/>} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/editPlayer" element={<EditPlayer />} />

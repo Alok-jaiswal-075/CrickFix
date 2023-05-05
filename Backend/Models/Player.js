@@ -34,10 +34,7 @@ const playerSchema = new Schema({
         type: Number,
         default : 0
     }, 
-    team_joined: {
-        type: Schema.Types.ObjectId,
-        ref: 'Team'
-    },
+    
     half_centuries: {
         type:Number,
         default: 0
@@ -63,7 +60,18 @@ const playerSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref:'Team'
         }
-    ]
+    ],
+
+    
+    sentRequests: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Team'
+      }],
+
+    teams_joined: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Team'
+    }]
 
 })
 

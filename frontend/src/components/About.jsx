@@ -5,6 +5,25 @@ const About = () => {
     const navigate = useNavigate();
     
     const [player,setPlayerData] = useState({})
+    const [requests, setRequests] = useState([]);
+
+    // const callRequestsPage = async () => {
+    //     try {
+    //       const res = await fetch("/requests", {
+    //         method: "GET",
+    //         headers: {
+    //           Accept: "application/json",
+    //           "Content-Type": "application/json",
+    //         },
+    //         credentials: "include",
+    //       });
+    
+    //       const data = await res.json();
+    //       setRequests(data);
+    //     } catch (error) {
+    //       window.alert(error.msg);
+    //     }
+    //   };
 
     const callPlayerPage = async () =>{
         try {
@@ -26,6 +45,7 @@ const About = () => {
     }
 
     useEffect(() => {
+        // callRequestsPage();
         callPlayerPage();
     }, []);
 
@@ -77,8 +97,29 @@ const About = () => {
             <button type="button" className="btn btn-danger btn-sm m-2" onClick={handleDelete}>Delete</button>
 
             </div>
+
+
         </div>
+        <div className="d-flex justify-content-center">
+      <div className="card" style={{ width: "18rem" }}>
+        <div className="card-header">Requests Received</div>
+        {requests.length > 0 ? (
+          <ul className="list-group list-group-flush">
+            {requests.map((request) => (
+              <li key={request._id} className="list-group-item">
+                <p>From: {request.fromPlayer}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="card-body">
+            <p>No requests received.</p>
+          </div>
+        )}
+      </div>
+    </div>
         </div>
+        
     )
 }
 

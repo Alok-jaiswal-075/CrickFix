@@ -1,8 +1,37 @@
-import React from 'react'
+import React ,{ useState } from 'react'
 import { useNavigate } from "react-router-dom";
 
 const Team = (props) => {
     const navigate = useNavigate();
+
+        const [isLoading, setIsLoading] = useState(false);
+
+        const handleSendRequest = async () => {
+          setIsLoading(true);
+
+          try {
+            const res = await fetch('/players/send-request/'+props.team._id, {
+                    method : "POST",
+                    headers : {
+                        "Accept" : "application/json",
+                        "Content-Type" : "application/json"
+                    },
+                    credentials : "include"
+                })
+    
+                const data = await res.json();
+                if(res.status === 200){
+                    window.alert(data)
+                }
+                else{
+                    window.alert(data.msg)
+                }
+                    
+            } catch (error) {
+                window.alert(error.msg)
+            }
+        };
+      
 
     const gotoEditPage = () =>{
         navigate('/team/'+props.team._id);
@@ -48,6 +77,9 @@ const Team = (props) => {
 
             <button type="button" className="btn btn-success btn-sm m-2" onClick={gotoEditPage}>Edit</button>
             <button type="button" className="btn btn-danger btn-sm m-2" onClick={handleDelete}>Delete</button>
+            <button className="btn btn-primary" onClick={handleSendRequest} disabled={isLoading}>
+              {isLoading ? 'Sent' : 'Send Request'}
+            </button>
 
             </div>
         </div>

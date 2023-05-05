@@ -38,7 +38,7 @@ router.route('/:id')
     .get(isLoggedIn,catchAsync(async (req,res,next)=>{
         const team =await Team.findById(req.params.id).populate('players');
         if(!team){
-            throw new appError('Team not found',404);
+            throw new appError(404,'Team not found');
         }
         res.json(team)
     }))
@@ -48,5 +48,56 @@ router.route('/:id')
         await Team.findByIdAndDelete(id);
         res.json({'msg':'Team Deleted Successfully'})
     }))
+
+// Endpoint for sending a request from a player to a team
+router.route('/accept-request/:id')
+    .post(isLoggedIn,catchAsync(async (req, res,next) => {
+        const playerId  = req.playerId
+        const {id} = req.params
+        console.log(id)
+        const team =await Team.findById(id)
+        const player = await Player.findById(playerId)
+        
+        player.sentRequests.pull(team)
+        player.teams_joined.push(team)
+
+        team.requests.pull(player)
+        team.players.push(player)
+         
+        await player.save()
+        await team.save()
+
+        res.json({'msg':'Request sent successfully'})
+
+        if(!team){
+            throw new appError(500,'Error sending request');
+        }
+
+        if(!player){
+            throw new appError(500,'Error sending request');
+        }
+               
+        }))
+
+router.post('/reject-request/:id',isLoggedIn,isCaptain,catchAsync( async (req, res) => {
+            const playerId  = req.playerId
+            const player = await Player.findById(playerId)
+            const {id} = req.params
+            console.log(id)
+            const team =await Team.findById(id)
+
+            // Remove the team from the player's received requests array
+            player.sentRequests.pull(team)
+            team.requests.pull(player)
+            await player.save()
+            await team.save()
+        
+            res.json({'msg':'Request rejected successfully'})
+
+            if(!team){
+                throw new appError(500,'Error rejecting request');
+            }
+        }))
+    
 
 module.exports = router
