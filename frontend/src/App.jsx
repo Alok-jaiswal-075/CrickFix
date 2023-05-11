@@ -9,6 +9,7 @@ import AllTeams from "./components/AllTeams";
 import AllPlayers from "./components/AllPlayers";
 import EditPlayer from "./components/EditPlayer";
 import EditTeam from "./components/EditTeam";
+import ScoreBoard from "./components/ScoreBoard";
 
 function App() {
   return (
@@ -26,10 +27,13 @@ function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/editPlayer" element={<EditPlayer />} />
       <Route path="/team/:id" element={<EditTeam />} />
+      <Route path="/scoreboard" element={<ScoreBoard />} />
       {/* <Route path="*" element={<Error />} /> */}
 
      </Routes>
     </div>
+
+
   );
 }
 
