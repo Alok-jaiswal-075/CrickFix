@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react'
+import React,{useState} from 'react'
 
 
 const ScoreBoard = () => {
@@ -92,7 +92,7 @@ const ScoreBoard = () => {
 
 
     const handleEndInning = ()=>{
-        if(currInning==1){
+        if(currInning===1){
             window.alert('Inning 1 completed')
             updateTeam(team1,player1,1)
             updateTeam(team1,player2,1)
@@ -116,8 +116,8 @@ const ScoreBoard = () => {
     }
 
     const handleIncreaseBalls = () => {
-        if(currBalls==5){
-            if(currOvers==maxOvers-1){
+        if(currBalls===5){
+            if(currOvers===maxOvers-1){
                 handleEndInning();
             }
             else{
@@ -201,8 +201,8 @@ const ScoreBoard = () => {
 
 
     const handleOut = () => {
-        if(currteam==1){
-            if(striker==1){
+        if(currteam===1){
+            if(striker===1){
                 updateTeam(team1,player1,1)
                 
             }
@@ -211,7 +211,7 @@ const ScoreBoard = () => {
             }
 
             setwickets(wickets+1);
-            if(wickets==maxWickets-2){
+            if(wickets===maxWickets-2){
                 handleEndInning();
             }
             else{
@@ -229,7 +229,7 @@ const ScoreBoard = () => {
 
 
         else{
-            if(striker==1){
+            if(striker===1){
                 updateTeam(team2,player1,2)
             }
             else{
@@ -237,7 +237,7 @@ const ScoreBoard = () => {
             }
 
             setwickets(wickets+1);
-            if(wickets==maxWickets-2){
+            if(wickets===maxWickets-2){
                 handleEndInning();
             }
             else{
@@ -305,7 +305,7 @@ const ScoreBoard = () => {
                             </thead>
                             <tbody className="table-group-divider">
                                 <tr>
-                                    <td>{striker==1 && '*'}</td>
+                                    <td>{striker===1 && '*'}</td>
                                     <td>{player1.id}</td>
                                     <td>{player1.total_score}({player1.balls})</td>
                                     <td>{player1.fours}</td>
@@ -313,7 +313,7 @@ const ScoreBoard = () => {
                                     {/* <td>{player1.balls!=0 ? player1.total_score/player1.balls : 0}</td> */}
                                 </tr>
                                 <tr>
-                                    <td>{striker==2 && '*'}</td>
+                                    <td>{striker===2 && '*'}</td>
                                     <td>{player2.id}</td>
                                     <td>{player2.total_score}({player2.balls})</td>
                                     <td>{player2.fours}</td>
