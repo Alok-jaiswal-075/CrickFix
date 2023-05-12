@@ -73,7 +73,7 @@ const ScoreBoard = () => {
 
 
     const maxOvers = 10;
-    const maxWickets = Team1.players.length
+    const maxWickets = 3
 
 
     const [team1,setteam1] = useState(Team1)
@@ -81,12 +81,8 @@ const ScoreBoard = () => {
     const [currteam,setcurrteam] = useState(1);
     const [player1, setplayer1] = useState(team1.players[0]);
     const [player2, setplayer2] = useState(team1.players[1]);
-    const [currplayer, setcurrplayer] = useState(team1.players[0]);
     const [isnb, setisnb] = useState(false);
-    const [iswide, setiswide] = useState(false);
     const [totalScore,settotalScore] = useState(0);
-    const [player1Score, setplayer1Score] = useState(0);
-    const [player2Score, setplayer2Score] = useState(0);
     const [nextIndex, setnextIndex] = useState(2);
     const [currOvers, setCurrOvers] = useState(0);
     const [currBalls,setcurrBalls] = useState(0);
@@ -96,14 +92,27 @@ const ScoreBoard = () => {
 
 
     const handleEndInning = ()=>{
-
-        
-
-
         if(currInning==1){
+            window.alert('Inning 1 completed')
+            updateTeam(team1,player1,1)
+            updateTeam(team1,player2,1)
             setcurrInning(2);
+            setcurrteam(2);
+            setplayer1(team2.players[0]);
+            setplayer2(team2.players[1]);
+            setCurrOvers(0);
+            setcurrBalls(0);
+            setwickets(0);
+            setstriker(1);
+            setnextIndex(2);
+            settotalScore(0);
+            setisnb(false);
         }
-        // else handleSubmit();
+        else{
+            updateTeam(team2,player1,2);
+            updateTeam(team2,player2,2);
+            window.alert('match ended')
+        }
     }
 
     const handleIncreaseBalls = () => {
@@ -193,45 +202,16 @@ const ScoreBoard = () => {
 
     const handleOut = () => {
         if(currteam==1){
-            const oldPlayers = team1.players;
-            if(striker===1){
-                team1.players = oldPlayers.map((oldPlayer) => {
-                    if (oldPlayer.id === player1.id) {
-                      return { ...oldPlayer, 
-                            total_score : player1.total_score,
-                            fours:player1.fours,
-                            sixes:player1.sixes,
-                            balls:player1.balls
-
-                            };
-                    } else {
-                      return oldPlayer;
-                    }
-                  });
-                  setteam1(team1)
-                //   console.log(team1);
+            if(striker==1){
+                updateTeam(team1,player1,1)
+                
             }
             else{
-                team1.players = oldPlayers.map((oldPlayer) => {
-                    if (oldPlayer.id === player2.id) {
-                      return { ...oldPlayer, 
-                            total_score : player2.total_score,
-                            fours:player2.fours,
-                            sixes:player2.sixes,
-                            balls:player2.balls
-
-                            };
-                    } else {
-                      return oldPlayer;
-                    }
-                  });
-
-
-                setteam1(team1)
+                updateTeam(team1,player2,1)
             }
 
             setwickets(wickets+1);
-            if(wickets===maxWickets-2){
+            if(wickets==maxWickets-2){
                 handleEndInning();
             }
             else{
@@ -244,50 +224,20 @@ const ScoreBoard = () => {
                     
                 setnextIndex(nextIndex+1);
             }
-
             
         }
 
 
         else{
-            const oldPlayers = team2.players;
             if(striker==1){
-                team2.players = oldPlayers.map((oldPlayer) => {
-                    if (oldPlayer.id === player1.id) {
-                      return { ...oldPlayer, 
-                            total_score : player1.total_score,
-                            fours:player1.fours,
-                            sixes:player1.sixes,
-                            balls:player1.balls
-
-                            };
-                    } else {
-                      return oldPlayer;
-                    }
-                  });
-
-                setteam2(team2)
+                updateTeam(team2,player1,2)
             }
             else{
-                team2.players = oldPlayers.map((oldPlayer) => {
-                    if (oldPlayer.id === player2.id) {
-                      return { ...oldPlayer, 
-                            total_score : player2.total_score,
-                            fours:player2.fours,
-                            sixes:player2.sixes,
-                            balls:player2.balls
-
-                            };
-                    } else {
-                      return oldPlayer;
-                    }
-                  });
-
-                setteam2(team2)
+                updateTeam(team2,player2,2)
             }
 
             setwickets(wickets+1);
-            if(wickets===maxWickets-2){
+            if(wickets==maxWickets-2){
                 handleEndInning();
             }
             else{
@@ -308,6 +258,26 @@ const ScoreBoard = () => {
     }
 
 
+    const updateTeam = (team, player, teamNum) => {
+        const oldPlayers = team.players
+        team.players = oldPlayers.map((oldPlayer) => {
+            if (oldPlayer.id === player.id) {
+              return { ...oldPlayer, 
+                    total_score : player.total_score,
+                    fours:player.fours,
+                    sixes:player.sixes,
+                    balls:player.balls
+
+                    };
+            } else {
+              return oldPlayer;
+            }
+          });
+
+        teamNum === 1 ? setteam1(team) : setteam2(team);
+    }
+
+
     return (
         <div className="">
             <div className='container'>
@@ -316,7 +286,10 @@ const ScoreBoard = () => {
                     <div className='col-10'>
 
                         <hr className="border border-primary border-3 opacity-75"></hr>
-                        <h4>{totalScore} ({currOvers}.{currBalls})/{wickets}</h4>
+                        <div className="d-flex justify-content-between">
+                            <h4 className="d-inline">{totalScore} ({currOvers}.{currBalls})/{wickets}</h4>
+                            <h4 className="d-inline">Inning: {currInning}</h4>
+                        </div>
                         <hr className="border border-primary border-3 opacity-75"></hr>
 
                         <table className="table">
