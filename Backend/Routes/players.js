@@ -77,15 +77,11 @@ router.route('/')
         
     }))
 
-    router.get('/all-players', isLoggedIn,async (req, res) => {
-        try {
+    router.get('/all-players', catchAsync(async (req, res) => {
           const players = await Player.find();
+          if(!players) throw new appError(401,'No player found')
           res.json(players);
-        } catch (err) {
-          console.error(err);
-          res.status(500).json({ error: 'Server error' });
-        }
-      });
+      }));
 
 
     // Endpoint for accepting a request from a team by a player

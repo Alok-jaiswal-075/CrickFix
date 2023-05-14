@@ -29,7 +29,7 @@ const PlayersList = () => {
   const filteredPlayers = players.filter(player => {
     const name = `${player.fname} ${player.lname}`.toLowerCase();
     return name.includes(searchQuery.toLowerCase());
-    
+
   });
 
   return (
