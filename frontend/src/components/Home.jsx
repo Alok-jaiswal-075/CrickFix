@@ -1,5 +1,8 @@
-import React,{useEffect} from 'react'
+import React,{useEffect, useState} from 'react'
+import Modal from './Modal'
 const Home = () => {
+
+    const [isOpen,setisopen] = useState(false);
 
     const homePage = async () => {
 
@@ -29,6 +32,8 @@ const Home = () => {
     return(
         <div>
             <h1>This is our home page</h1>
+            <button className='btn btn-primary' onClick = {()=>setisopen(true)}>modal</button>
+            <Modal open={isOpen} onClose={() => setisopen(false)}>This is our modal</Modal>
         </div>
     )
 }

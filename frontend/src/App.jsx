@@ -1,15 +1,15 @@
 import {Routes,Route} from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from './components/Home'
-import Login from './components/Login';
-import Register from './components/Register';
-import About from './components/About';
-import NewTeam from "./components/NewTeam";
-import AllTeams from "./components/AllTeams";
-import AllPlayers from "./components/AllPlayers";
-import EditPlayer from "./components/EditPlayer";
-import EditTeam from "./components/EditTeam";
-import ScoreBoard from "./components/ScoreBoard";
+import Login from './components/players/Login';
+import Register from './components/players/Register';
+import About from './components/players/About';
+import NewTeam from "./components/teams/NewTeam";
+import AllTeams from "./components/teams/AllTeams";
+import AllPlayers from "./components/players/AllPlayers";
+import EditPlayer from "./components/players/EditPlayer";
+import EditTeam from "./components/teams/EditTeam";
+import ScoreBoard from "./components/matches/ScoreBoard";
 
 function App() {
   return (
