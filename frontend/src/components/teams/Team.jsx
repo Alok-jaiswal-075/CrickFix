@@ -75,11 +75,30 @@ const Team = (props) => {
             </ul>
             <div className="card-body">
 
-            <button type="button" className="btn btn-success btn-sm m-2" onClick={gotoEditPage}>Edit</button>
-            <button type="button" className="btn btn-danger btn-sm m-2" onClick={handleDelete}>Delete</button>
-            <button className="btn btn-primary" onClick={handleSendRequest} disabled={isLoading}>
-              {isLoading ? 'Sent' : 'Send Request'}
-            </button>
+            {
+                props.isCaptain 
+                && 
+                <button type="button" className="btn btn-success btn-sm m-2" onClick={gotoEditPage}>Edit</button>
+            }
+            {
+                props.isCaptain 
+                && 
+                <button type="button" className="btn btn-danger btn-sm m-2" onClick={handleDelete}>Delete</button>
+            }
+            {
+                props.isCaptain 
+                && 
+                <a href={"/teamRequests/"+props.team._id} className="card-link">View Requests</a>
+            }
+            
+            { 
+                !props.isCaptain 
+                &&
+                <button className="btn btn-primary" onClick={handleSendRequest} disabled={isLoading}>
+                {isLoading ? 'Sent' : 'Send Request'}
+                </button>
+            }
+            
 
             </div>
         </div>
