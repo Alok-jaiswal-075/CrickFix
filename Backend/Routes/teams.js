@@ -49,12 +49,22 @@ router.route('/:id')
         res.json({'msg':'Team Deleted Successfully'})
     }))
 
+
+router.route('/requests/:id')
+    .get(isLoggedIn,isCaptain,catchAsync(async (req,res,next) => {
+        const {id} = req.params
+        const team = await Team.findById(id).populate('requests');
+        if(!team) throw new appError(500,'Cannot get team details')
+
+        res.json(team.requests)
+    }))
+
 // Endpoint for sending a request from a player to a team
 router.route('/accept-request/:id')
-    .post(isLoggedIn,catchAsync(async (req, res,next) => {
+    .post(isLoggedIn,isCaptain,catchAsync(async (req, res,next) => {
         const playerId  = req.playerId
         const {id} = req.params
-        console.log(id)
+        // console.log(id)
         const team =await Team.findById(id)
         const player = await Player.findById(playerId)
         
@@ -83,7 +93,7 @@ router.post('/reject-request/:id',isLoggedIn,isCaptain,catchAsync( async (req, r
             const playerId  = req.playerId
             const player = await Player.findById(playerId)
             const {id} = req.params
-            console.log(id)
+            // console.log(id)
             const team =await Team.findById(id)
 
             // Remove the team from the player's received requests array

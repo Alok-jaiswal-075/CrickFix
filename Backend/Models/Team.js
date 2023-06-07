@@ -39,10 +39,14 @@ const teamSchema = new Schema({
             ref: 'Player'
         }
     ],
-    requests: [{
+    requests: [
+        {
+
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Player'
-      }],
+        
+        }
+    ],
 
     
 

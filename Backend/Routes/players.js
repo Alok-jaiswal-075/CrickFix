@@ -43,8 +43,8 @@ router.route('/')
         if(!player){
             throw new appError('Player not found',404);
         }
-        const {fname,lname,age,email,contact,ranking,half_centuries,centuries,total_score,highest_score,tournaments_played} = player
-        res.json({fname,lname,age,email,contact,ranking,half_centuries,centuries,total_score,highest_score,tournaments_played})
+        const {fname,lname,age,email,contact,ranking,half_centuries,centuries,total_score,highest_score,tournaments_played,captainOf} = player
+        res.json({fname,lname,age,email,contact,ranking,half_centuries,centuries,total_score,highest_score,tournaments_played,captainOf})
     }))
 
     .delete(isLoggedIn,catchAsync(async (req,res,next)=>{
