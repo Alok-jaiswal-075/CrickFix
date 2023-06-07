@@ -1,11 +1,10 @@
 import React,{useState, useEffect} from 'react'
-import { useParams, useNavigate} from "react-router-dom";
+import { useParams} from "react-router-dom";
 import TeamRequest from './Request';
 
 
 const TeamRequests = () => {
     let temp = 1;
-    const navigate = useNavigate();
     const params = useParams();
     
     const {id} = params
@@ -41,7 +40,7 @@ const TeamRequests = () => {
         <div>
             <div>
             {requests && <div className="d-flex">
-            {requests.map((request) => <TeamRequest key={temp++} request={request}/>)}
+            {requests.map((player) => <TeamRequest key={temp++} player={player} id={id}/>)}
                     </div>}
                 
             </div>

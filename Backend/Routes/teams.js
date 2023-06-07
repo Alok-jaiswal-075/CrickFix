@@ -60,13 +60,12 @@ router.route('/requests/:id')
     }))
 
 // Endpoint for sending a request from a player to a team
-router.route('/accept-request/:id')
+router.route('/request-accept/:id/:playerid')
     .post(isLoggedIn,isCaptain,catchAsync(async (req, res,next) => {
-        const playerId  = req.playerId
-        const {id} = req.params
-        // console.log(id)
+        const {id,playerid} = req.params
+        // console.log(id,playerid)
         const team =await Team.findById(id)
-        const player = await Player.findById(playerId)
+        const player = await Player.findById(playerid)
         
         player.sentRequests.pull(team)
         player.teams_joined.push(team)
@@ -89,25 +88,27 @@ router.route('/accept-request/:id')
                
         }))
 
-router.post('/reject-request/:id',isLoggedIn,isCaptain,catchAsync( async (req, res) => {
-            const playerId  = req.playerId
-            const player = await Player.findById(playerId)
-            const {id} = req.params
-            // console.log(id)
-            const team =await Team.findById(id)
+router.post('/request-reject/:id/:playerid',isLoggedIn,isCaptain,catchAsync( async (req, res) => {
+    const {id,playerid} = req.params
+    // console.log(id,playerid)
+    const player = await Player.findById(playerid)
 
-            // Remove the team from the player's received requests array
-            player.sentRequests.pull(team)
-            team.requests.pull(player)
-            await player.save()
-            await team.save()
-        
-            res.json({'msg':'Request rejected successfully'})
+    if(!player) throw new appError(500,'Player does not exist')
+    // console.log(id)
+    const team =await Team.findById(id)
 
-            if(!team){
-                throw new appError(500,'Error rejecting request');
-            }
-        }))
+    if(!team){
+        throw new appError(500,'Error rejecting request');
+    }
+    // Remove the team from the player's received requests array
+    player.sentRequests.pull(team)
+    team.requests.pull(player)
+    await player.save()
+    await team.save()
+
+    res.json({'msg':'Request rejected successfully'})
+
+}))
     
 
 module.exports = router

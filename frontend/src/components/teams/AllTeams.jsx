@@ -5,7 +5,6 @@ const AllTeams = () => {
     const [teams,setTeamsData] = useState([])
 
     const callTeamsPage = async () =>{
-        try {
             const res = await fetch('/teams',{
                 method : "GET",
                 headers : {
@@ -18,9 +17,6 @@ const AllTeams = () => {
             const data = await res.json();
             setTeamsData(data)
             // console.log(data)
-        } catch (error) {
-            window.alert(error.msg)
-        }
     }
 
     useEffect(() => {
@@ -28,8 +24,10 @@ const AllTeams = () => {
     }, []);
     
     return(
-        <div className='d-flex flex-wrap'>
+        <div>
+            {teams && <div className='d-flex flex-wrap'>
             {teams.map((team) => <Team key={temp++} team={team}/>)}
+        </div>}
         </div>
     )
 }

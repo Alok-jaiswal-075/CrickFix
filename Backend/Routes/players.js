@@ -88,13 +88,34 @@ router.route('/')
 
     router.post('/send-request/:teamId',isLoggedIn,catchAsync( async (req, res) => {
         const { teamId } = req.params
-        console.log(teamId)
+        // console.log(teamId)
 
-        const team = await Team.findById(teamId)
+        const team = await Team.findById(teamId).populate('captain').populate('players').populate('requests')
+        if(!team){
+            new appError(500,'Error sending request')
+        }
         const playerId  = req.playerId
+
 
         const player = await Player.findById(playerId)
           // add the team from the player's received requests array
+        // console.log(team.captain._id)
+        // console.log(playerId)
+          if(playerId === team.captain._id){
+            console.log("hello")
+            throw new appError(401,'You are already joined')
+          }
+        
+          const matched = team.players.find(el => el==player)
+          if(matched){
+            throw new appError(401,'You are already joined')
+          }
+
+          const matchedRequest = team.requests.find(el => el==player)
+          if(matchedRequest){
+            throw new appError(401,'Request already sent')
+          }
+
           player.sentRequests.push(team)
           team.requests.push(player)
           await player.save()
@@ -103,9 +124,7 @@ router.route('/')
 
           res.json({'msg':'Request sent successfully'});
 
-          if(!team){
-              new appError(500,'Error sending request')
-          }
+          
     
         }))
       

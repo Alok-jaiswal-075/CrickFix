@@ -20,12 +20,7 @@ const Team = (props) => {
                 })
     
                 const data = await res.json();
-                if(res.status === 200){
-                    window.alert(data)
-                }
-                else{
-                    window.alert(data.msg)
-                }
+                if(data) window.alert(data.msg)
                     
             } catch (error) {
                 window.alert(error.msg)
