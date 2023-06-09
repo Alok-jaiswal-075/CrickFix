@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { MultiSelect, useParams } from "react-multi-select-component";
+import {useParams} from 'react-router-dom'
+import { MultiSelect } from "react-multi-select-component";
 
 // const options = [
 //   { label: "Grapes 🍇", value: "grapes" },
