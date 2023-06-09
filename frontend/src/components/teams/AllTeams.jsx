@@ -15,8 +15,10 @@ const AllTeams = () => {
             })
 
             const data = await res.json();
-            setTeamsData(data)
-            // console.log(data)
+            if(data){
+                setTeamsData(data)
+            }
+            else window.alert('No Teams to show')
     }
 
     useEffect(() => {
