@@ -11,7 +11,11 @@ import EditPlayer from "./components/players/EditPlayer";
 import EditTeam from "./components/teams/EditTeam";
 import ScoreBoard from "./components/matches/ScoreBoard";
 import TeamRequests from "./components/teams/TeamRequests"
+
 import TeamDashboard from "./components/TeamDashboard";
+
+import ChoosePlayers from './components/matches/ChoosePlayers'
+
 
 function App() {
   return (
@@ -29,10 +33,10 @@ function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/editPlayer" element={<EditPlayer />} />
       <Route path="/team/:id" element={<EditTeam />} />
-      <Route path="/scoreboard" element={<ScoreBoard />} />
+      <Route path="/match/scoreboard" element={<ScoreBoard />} />
       <Route path="/teamRequests/:id" element={<TeamRequests />} />
       <Route path="/teamRequests/:id" element={<TeamRequests />} />
-      <Route path="/dashboard/" element={<TeamDashboard />} />
+      <Route path="/match/chooseplayers" element={<ChoosePlayers />} />
       {/* <Route path="*" element={<Error />} /> */}
 
      </Routes>
