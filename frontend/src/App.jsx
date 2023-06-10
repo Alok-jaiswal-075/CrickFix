@@ -37,6 +37,7 @@ function App() {
       <Route path="/teamRequests/:id" element={<TeamRequests />} />
       <Route path="/teamRequests/:id" element={<TeamRequests />} />
       <Route path="/match/chooseplayers" element={<ChoosePlayers />} />
+      <Route path="/dashboard/" element={<TeamDashboard />} />
       {/* <Route path="*" element={<Error />} /> */}
 
      </Routes>
