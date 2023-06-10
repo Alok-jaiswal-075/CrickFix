@@ -1,0 +1,54 @@
+.dashboard {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    height: 100%;
+  }
+  
+  .dashboard-left {
+
+    width: 200px;
+    margin-right: 1rem;
+    margin-left: 10rem;
+  }
+  
+  .dashboard-option {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  
+  }
+  
+  .dashboard-option:hover {
+    background-color: #f5f5f5;
+  }
+
+  .dashboard-option.selected {
+    background-color: #f5f5f5;
+  }
+  
+  .dashboard-right {
+    flex: 1;
+    margin-right: 10rem;
+  }
+  
+  .cards {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    height: 80vh;
+    overflow: auto;
+  }
+  
+  
+  .card-header {
+    background-color: #f5f5f5;
+    padding: 1rem;
+    font-weight: bold;
+  }
+  
+  .card-body {
+    padding: 1rem;
+    
+  }
+  
