@@ -26,6 +26,20 @@ router.route('/')
         res.json(team)
     }))
 
+ router.route('/myteams').get(isLoggedIn,catchAsync(async (req,res,next) => {
+        const myteams = await Team.find({ captain: req.playerId }).exec();
+        // console.log(myteams);
+        // console.log('hello')
+        res.json(myteams)
+    }))
+
+ router.route('/otherteams').get(isLoggedIn,catchAsync(async (req,res,next) => {
+        const otherteams = await Team.find({ captain: {$ne: req.playerId}}).exec();
+        // console.log(otherteams);
+        // console.log('hello')
+        res.json(otherteams)
+    }))
+
 
 router.route('/:id')
     .put(isLoggedIn,isCaptain,catchAsync(async (req,res,next)=>{
@@ -36,7 +50,7 @@ router.route('/:id')
         // console.log(req.body.team);
     }))
     .get(isLoggedIn,catchAsync(async (req,res,next)=>{
-        const team =await Team.findById(req.params.id).populate('players');
+        const team =await Team.findById(req.params.id).populate('players').populate('captain');
         if(!team){
             throw new appError(404,'Team not found');
         }

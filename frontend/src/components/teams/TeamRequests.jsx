@@ -30,6 +30,7 @@ const TeamRequests = () => {
             window.alert(error.msg)
         }
     }
+    
 
     useEffect(() => {
         // callRequestsPage();

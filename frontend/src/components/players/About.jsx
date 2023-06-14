@@ -7,7 +7,7 @@ const About = () => {
     const navigate = useNavigate();
 
     const [player, setPlayerData] = useState({})
-    const [requests, setRequests] = useState([]);
+    // const [requests, setRequests] = useState([]);
 
     // const callRequestsPage = async () => {
     //     try {

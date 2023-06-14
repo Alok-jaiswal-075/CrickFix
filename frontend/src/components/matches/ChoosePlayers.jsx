@@ -15,8 +15,11 @@ const ChoosePlayers = () => {
   const [overs, setOvers] = useState(2);
   const [team1data,setTeam1] = useState({})
   const [team2data,setTeam2] = useState({})
+  const [feasible,setfeasible] = useState(0)
 
   const {team1,team2} = params
+
+  // console.log(team1,team2)
 
   const fetchTeam1 = async () => {
     try {
@@ -30,8 +33,9 @@ const ChoosePlayers = () => {
       })
 
       const data = await res.json();
-      if(data){
+      if(res.status === 200 && data){
           setTeam1(data);
+          if(data.players.length < 4) setfeasible(1)
       }
       else{
         window.alert(data.msg)
@@ -54,8 +58,9 @@ const ChoosePlayers = () => {
       })
 
       const data = await res.json();
-      if(data){
+      if(res.status === 200 && data){
           setTeam2(data);
+          if(team2data.players.length < 4) setfeasible(1)
       }
       else{
         window.alert(data.msg)
@@ -72,29 +77,33 @@ const ChoosePlayers = () => {
 }, []);
 
 
-  const options = [team1data.players.map((player) => ({label : player.fname+" "+player.lname, value : player}))]
+const options = team1data.players ? [team1data.players.map((player) => ({label : player.fname+" "+player.lname, value : player}))] : []
 
     const handlesubmit = () => {
-        
+        console.log(team1data)
     }
 
   return (
     <div>
-        <h3>Select Players in order of their batting</h3>
-        <MultiSelect
-            options={options}
-            value={selected}
-            onChange={setSelected}
-            labelledBy="Select"
-        />
+      {feasible  ? <div>Not enough players</div> : 
+        <div>
+            <h3>Select Players in order of their batting</h3>
+            <MultiSelect
+                options={options}
+                value={selected}
+                onChange={setSelected}
+                labelledBy="Select"
+            />
 
-        {/* {props.requesting && <h3>Select number of overs</h3>}
-        {props.requesting && <input type="number" name="overs" value={overs} onChange={(e) => {setOvers(e.target.value)}}/>} */}
-        <h3>Select number of overs</h3>
-        <input type="number" name="overs" value={overs} onChange={(e) => {setOvers(e.target.value)}}/>
+            {/* {props.requesting && <h3>Select number of overs</h3>}
+            {props.requesting && <input type="number" name="overs" value={overs} onChange={(e) => {setOvers(e.target.value)}}/>} */}
+            <h3>Select number of overs</h3>
+            <input type="number" name="overs" value={overs} onChange={(e) => {setOvers(e.target.value)}}/>
 
-        <button className="btn btn-success" onClick={handlesubmit}>Submit</button>
+            <button className="btn btn-success" onClick={handlesubmit}>Submit</button>
+        </div>}
     </div>
+    
   );
 };
 

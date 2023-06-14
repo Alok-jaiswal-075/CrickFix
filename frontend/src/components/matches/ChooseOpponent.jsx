@@ -35,6 +35,7 @@ const Team = (props) => {
 }
 
 const ChooseOpponent = () => {
+    let temp = 0;
 
     const [teams,setTeams] = useState([]);
 

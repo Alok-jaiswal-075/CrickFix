@@ -34,11 +34,11 @@ const Team = (props) => {
 }
 
 const ChooseTeam = () => {
+    let temp = 0;
 
     const [teams,setTeams] = useState([]);
 
     const fetchMyTeams = async () => {
-        try {
             const res = await fetch('/teams/myteams', {
                 method: "GET",
                 headers: {
@@ -49,14 +49,13 @@ const ChooseTeam = () => {
             })
 
             const data = await res.json();
-            if(data){
+            if(res.status === 200 && data){
                 setTeams(data);
             }
             else window.alert("You don't have any team!!")
+            // console.log(data)
 
-        } catch (error) {
-            window.alert(error.msg)
-        }
+        
     }
 
     useEffect(() => {
@@ -67,7 +66,7 @@ const ChooseTeam = () => {
     return (
         <div>
             {teams && <div className='d-flex flex-wrap'>
-            {teams.map((team) => <Team key={temp++} team={team}/>)}
+            {teams && teams.map((team) => <Team key={temp++} team={team}/>)}
         </div>}
         </div>
     )

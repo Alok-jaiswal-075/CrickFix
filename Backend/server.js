@@ -13,7 +13,7 @@ const auth = require('./Routes/auth')
 app.use(express.urlencoded({ extended: true }));
 
 // DB connection
-const dbUrl = 'mongodb+srv://alokjaiswal075:gfghackathon098@cluster0.cpvvrzj.mongodb.net/?retryWrites=true&w=majority'
+const dbUrl = 'mongodb+srv://myprojects121130:rootuser@cluster0.gwub0n1.mongodb.net/?retryWrites=true&w=majority'
 
 mongoose.connect(dbUrl,{
     // useCreateIndex:true,
