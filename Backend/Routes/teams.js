@@ -90,14 +90,14 @@ router.route('/request-accept/:id/:playerid')
         await player.save()
         await team.save()
 
-        res.json({'msg':'Request sent successfully'})
+        res.json({'msg':'Request accepted'})
 
         if(!team){
-            throw new appError(500,'Error sending request');
+            throw new appError(500,'Error accepting request');
         }
 
         if(!player){
-            throw new appError(500,'Error sending request');
+            throw new appError(500,'Error accepting request');
         }
                
         }))

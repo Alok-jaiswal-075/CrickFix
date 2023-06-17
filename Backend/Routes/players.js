@@ -101,17 +101,17 @@ router.route('/')
           // add the team from the player's received requests array
         // console.log(team.captain._id)
         // console.log(playerId)
-          if(playerId === team.captain._id){
+          if(team.captain._id.equals(playerId)){
             console.log("hello")
-            throw new appError(401,'You are already joined')
+            throw new appError(401,'You are captain!!')
           }
         
-          const matched = team.players.find(el => el==player)
+          const matched = team.players.find(el => el._id.equals(playerId))
           if(matched){
             throw new appError(401,'You are already joined')
           }
 
-          const matchedRequest = team.requests.find(el => el==player)
+          const matchedRequest = team.requests.find(el => el._id.equals(playerId))
           if(matchedRequest){
             throw new appError(401,'Request already sent')
           }

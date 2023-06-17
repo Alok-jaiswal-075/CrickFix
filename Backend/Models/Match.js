@@ -7,7 +7,7 @@ const matchSchema = new Schema({
     Team1 : {
         type: Schema.Types.ObjectId,
         ref: 'Team',
-        players : [
+        participants : [
             {
                 type : Schema.Types.ObjectId,
                 ref : 'Player'
@@ -18,7 +18,7 @@ const matchSchema = new Schema({
     Team2: {
         type: Schema.Types.ObjectId,
         ref: 'Team',
-        players : [
+        participants : [
             {
                 type : Schema.Types.ObjectId,
                 ref : 'Player'

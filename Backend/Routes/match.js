@@ -4,23 +4,46 @@ const Match = require('../Models/Match')
 const Team = require('../Models/Team')
 const appError = require('../Utility/appError')
 const catchAsync = require('../Utility/catchAsync')
+const { isLoggedIn } = require("../Middlewares")
 
 
-router.route('/:team1Id/:team2Id')
-    .post(catchAsync(async (req,res,next)=>{
-        const {team1Id,team2Id} = req.params;
-        const team1 = await Team.findById(team1Id)
-        const team2 = await Team.findById(team2Id)
-        // console.log(team1,team2)
-        if(!team1 || !team2){
-            throw new appError('Team does not exist',404)
-        }
+router.route('/request/:team1Id/:team2Id').post(catchAsync( async (req, res,next) => {
+    const { team1Id,team2Id } = req.params
+    console.log(req.body)
 
-        const match = new Match(req.body.match);
-        match.Team1 = team1;
-        match.Team2 = team2;
-        match.save();
-        res.json(match);
+    const team1 = await Team.findById(team1Id);
+    if(!team1){
+        new appError(500,'Team does not exits')
+    }
+    const team2 = await Team.findById(team2Id);
+    if(!team2){
+        new appError(500,'Team does not exits')
+    }
+
+    const match = new Match();
+    match.Team1 = team1;
+    match.Team1.participants = req.body.players
+    match.Team2 = team2;
+    match.Team2.participants = []
+    match.overs = req.body.overs
+
+    
+
+    team1.sent_match_requests.push(match)
+    team2.match_requests.push(match)
+
+    console.log(team1)
+    console.log(team2)
+
+    await team1.save()
+    await team2.save()
+    await match.save()
+
+
+      res.json({'msg':'Match request sent'});
+
+      
+
     }))
 
 

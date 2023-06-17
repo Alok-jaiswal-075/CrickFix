@@ -21,6 +21,7 @@ const TeamRequest = (props) => {
         }
         else{
             window.alert(data.msg)
+            navigate('/teamRequests/'+props.id)
         }
     }
 
@@ -39,7 +40,7 @@ const TeamRequest = (props) => {
         }
         else{
             window.alert(data.msg)
-            navigate('/teamRequests'+props.id)
+            navigate('/teamRequests/'+props.id)
         }
     }
 

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Player = require('./Player')
+const Match = require('./Match')
 const {Schema} = mongoose
 
 const teamSchema = new Schema({
@@ -48,7 +49,24 @@ const teamSchema = new Schema({
         }
     ],
 
-    
+    match_requests : [
+        {
+            type : Schema.Types.ObjectId,
+            ref : 'Match'
+        }
+    ],
+    sent_match_requests : [
+        {
+            type : Schema.Types.ObjectId,
+            ref : 'Match'
+        }
+    ],
+    new_matches : [
+        {
+            type : Schema.Types.ObjectId,
+            ref : 'Match'
+        }
+    ]
 
 })
 

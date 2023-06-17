@@ -15,14 +15,14 @@ const ChoosePlayers = () => {
   const [overs, setOvers] = useState(2);
   const [team1data,setTeam1] = useState({})
   const [team2data,setTeam2] = useState({})
-  const [feasible,setfeasible] = useState(0)
+  const [feasible,setfeasible] = useState(1)
+  let options = []
 
   const {team1,team2} = params
 
   // console.log(team1,team2)
 
   const fetchTeam1 = async () => {
-    try {
       const res = await fetch('/teams/'+team1, {
           method: "GET",
           headers: {
@@ -33,21 +33,13 @@ const ChoosePlayers = () => {
       })
 
       const data = await res.json();
-      if(res.status === 200 && data){
-          setTeam1(data);
-          if(data.players.length < 4) setfeasible(1)
-      }
-      else{
-        window.alert(data.msg)
-      }
+      setTeam1(data);
+      if(team1data) setfeasible(0)
+      // console.log(data)
 
-    } catch (error) {
-        window.alert(error.msg)
-    }
   }
 
   const fetchTeam2 = async () => {
-    try {
       const res = await fetch('/teams/'+team2, {
           method: "GET",
           headers: {
@@ -58,18 +50,12 @@ const ChoosePlayers = () => {
       })
 
       const data = await res.json();
-      if(res.status === 200 && data){
-          setTeam2(data);
-          if(team2data.players.length < 4) setfeasible(1)
-      }
-      else{
-        window.alert(data.msg)
-      }
+      setTeam2(data);
+      if(team2data) setfeasible(0)
+      // console.log(data)
 
-    } catch (error) {
-        window.alert(error.msg)
-    }
   }
+
 
   useEffect(() => {
     fetchTeam1();
@@ -77,11 +63,33 @@ const ChoosePlayers = () => {
 }, []);
 
 
-const options = team1data.players ? [team1data.players.map((player) => ({label : player.fname+" "+player.lname, value : player}))] : []
+// const options = team1data.players && !feasible ? [team1data.players.map((player) => ({label : player.fname+" "+player.lname, value : player}))] : []
 
-    const handlesubmit = () => {
-        console.log(team1data)
+
+    const handlesubmit = async () => {
+        // team1data.players = selected
+        try {
+          const res = await fetch('/matches/request/'+team1+"/"+team2, {
+                method: "POST",
+                headers: {
+                    "Content-type" : "application/json"
+                },
+                body : JSON.stringify({
+                    players : selected, overs:overs
+                })
+              })
+  
+              const data = await res.json();
+              if(data) window.alert(data.msg)
+                  
+          } catch (error) {
+              console.log(error)
+          }
+
     }
+
+
+    
 
   return (
     <div>
@@ -89,7 +97,7 @@ const options = team1data.players ? [team1data.players.map((player) => ({label :
         <div>
             <h3>Select Players in order of their batting</h3>
             <MultiSelect
-                options={options}
+                options={team1data.players ? team1data.players.map((player) => ({label : player.fname+" "+player.lname, value : player})) : []}
                 value={selected}
                 onChange={setSelected}
                 labelledBy="Select"

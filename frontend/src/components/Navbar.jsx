@@ -29,6 +29,9 @@ const Navbar = () => {
                 <NavLink className="nav-link" to="/allplayers">All Players</NavLink>
               </li>
               <li className="nav-item">
+                <NavLink className="nav-link" to="/match/creatematch">New Match</NavLink>
+              </li>
+              <li className="nav-item">
                 <NavLink className="nav-link" to="/login">Login</NavLink>
               </li>
               <li className="nav-item">

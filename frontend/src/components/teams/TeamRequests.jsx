@@ -11,7 +11,6 @@ const TeamRequests = () => {
 
     const [requests, setRequests] = useState([])
 
-
     const fetchRequests = async () => {
         try {
             const res = await fetch('/teams/requests/'+id, {
@@ -30,7 +29,6 @@ const TeamRequests = () => {
             window.alert(error.msg)
         }
     }
-    
 
     useEffect(() => {
         // callRequestsPage();
