@@ -80,10 +80,16 @@ const Team = (props) => {
                 && 
                 <button type="button" className="btn btn-danger btn-sm m-2" onClick={handleDelete}>Delete</button>
             }
+            <br />
             {
                 props.isCaptain 
                 && 
-                <a href={"/teamRequests/"+props.team._id} className="card-link">View Requests</a>
+                <a href={"team/teamRequests/"+props.team._id} className="card-link">Join Requests</a>
+            }
+            {
+                props.isCaptain 
+                && 
+                <a href={"team/matchRequests/"+props.team._id} className="card-link">Match Requests</a>
             }
             
             { 

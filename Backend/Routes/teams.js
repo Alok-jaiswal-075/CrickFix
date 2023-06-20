@@ -72,6 +72,31 @@ router.route('/requests/:id')
 
         res.json(team.requests)
     }))
+router.route('/matchRequests/:id')
+    .get(isLoggedIn,isCaptain,catchAsync(async (req,res,next) => {
+        const {id} = req.params
+        const team = await Team.findById(id).populate('sent_match_requests').populate('received_match_requests').populate('accepted_match_requests').populate({
+            path: 'sent_match_requests',
+            populate: {
+                path: 'Team2'
+            }
+        }).populate({
+            path: 'received_match_requests',
+            populate: {
+                path: 'Team1'
+            }
+        }).populate({
+            path: 'accepted_match_requests',
+            populate: {
+                path: 'Team2'
+            }
+        });
+        if(!team) throw new appError(500,'Cannot get team details')
+
+        let requests = {sentRequests : team.sent_match_requests, receivedRequests : team.received_match_requests,acceptedRequests : team.accepted_match_requests } 
+        // console.log(requests)
+        res.json(requests)
+    }))
 
 // Endpoint for sending a request from a player to a team
 router.route('/request-accept/:id/:playerid')
@@ -123,6 +148,7 @@ router.post('/request-reject/:id/:playerid',isLoggedIn,isCaptain,catchAsync( asy
     res.json({'msg':'Request rejected successfully'})
 
 }))
+
     
 
 module.exports = router

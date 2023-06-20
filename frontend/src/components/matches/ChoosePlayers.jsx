@@ -68,15 +68,17 @@ const ChoosePlayers = () => {
 
     const handlesubmit = async () => {
         // team1data.players = selected
+        let players = []
+        if(selected) players = selected.map(player => player.value)
         try {
           const res = await fetch('/matches/request/'+team1+"/"+team2, {
                 method: "POST",
                 headers: {
                     "Content-type" : "application/json"
                 },
-                body : JSON.stringify({
-                    players : selected, overs:overs
-                })
+                body : JSON.stringify(
+                    {players : players, overs:overs}
+                )
               })
   
               const data = await res.json();
