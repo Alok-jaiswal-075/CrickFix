@@ -6,25 +6,25 @@ const {Schema} = mongoose
 const matchSchema = new Schema({
     Team1 : {
         type: Schema.Types.ObjectId,
-        ref: 'Team',
-        participants : [
-            {
-                type : Schema.Types.ObjectId,
-                ref : 'Player'
-            }
-        ]
+        ref: 'Team'
     },
 
     Team2: {
         type: Schema.Types.ObjectId,
-        ref: 'Team',
-        participants : [
-            {
-                type : Schema.Types.ObjectId,
-                ref : 'Player'
-            }
-        ]
+        ref: 'Team'
     },
+    team1_players : [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Player'
+        }
+    ],
+    team2_players : [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Player'
+        }
+    ],
 
     overs : {
         type : Number,

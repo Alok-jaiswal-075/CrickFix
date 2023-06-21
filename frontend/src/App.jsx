@@ -17,6 +17,7 @@ import TeamDashboard from "./components/TeamDashboard";
 import ChoosePlayers from './components/matches/ChoosePlayers'
 import ChooseTeam from "./components/matches/ChooseTeam";
 import ChooseOpponent from "./components/matches/ChooseOpponent";
+import MatchRequests from './components/teams/MatchRequests'
 
 
 function App() {
@@ -36,8 +37,8 @@ function App() {
       <Route path="/editPlayer" element={<EditPlayer />} />
       <Route path="/team/:id" element={<EditTeam />} />
       <Route path="/match/scoreboard" element={<ScoreBoard />} />
-      <Route path="/teamRequests/:id" element={<TeamRequests />} />
-      <Route path="/teamRequests/:id" element={<TeamRequests />} />
+      <Route path="team/teamRequests/:id" element={<TeamRequests />} />
+      <Route path="team/matchRequests/:id" element={<MatchRequests />} />
       <Route path="/match/chooseplayers" element={<ChoosePlayers />} />
       <Route path="/match/creatematch" element={<ChooseTeam />} />
       <Route path="/match/creatematch/:team1" element={<ChooseOpponent />} />

@@ -49,7 +49,7 @@ const teamSchema = new Schema({
         }
     ],
 
-    match_requests : [
+    received_match_requests : [
         {
             type : Schema.Types.ObjectId,
             ref : 'Match'
@@ -61,7 +61,7 @@ const teamSchema = new Schema({
             ref : 'Match'
         }
     ],
-    new_matches : [
+    accepted_match_requests : [
         {
             type : Schema.Types.ObjectId,
             ref : 'Match'
