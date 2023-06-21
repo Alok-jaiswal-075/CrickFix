@@ -40,6 +40,7 @@ app.use('/matches',matchRoutes)
 
 app.get('/hello', (req, res)=>{
     res.send({"Hello" :"World"})
+    console.log('hello')
 })
 
 
