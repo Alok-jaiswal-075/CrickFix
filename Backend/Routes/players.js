@@ -78,7 +78,7 @@ router.route('/')
     }))
 
     router.get('/all-players', catchAsync(async (req, res) => {
-          const players = await Player.find();
+          const players = await Player.find().populate('teams_joined');
           if(!players) throw new appError(401,'No player found')
           res.json(players);
       }));

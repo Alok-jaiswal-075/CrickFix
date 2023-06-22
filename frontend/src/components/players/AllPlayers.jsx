@@ -7,6 +7,7 @@ const PlayerCard = ({ player }) => (
       <p className="card-text">Age: {player.age}</p>
       <p className="card-text">Contact: {player.contact}</p>
       <p className="card-text">Email: {player.email}</p>
+      <p className="card-text">Teams: {player.teams_joined && player.teams_joined.map((team) => team.name+" | ")}</p>
     </div>
   </div>
 );

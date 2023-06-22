@@ -15,9 +15,10 @@ import TeamRequests from "./components/teams/TeamRequests"
 import TeamDashboard from "./components/TeamDashboard";
 
 import ChoosePlayers from './components/matches/ChoosePlayers'
+import ChoosePlayersTeam2 from './components/matches/ChoosePlayersTeam2'
 import ChooseTeam from "./components/matches/ChooseTeam";
 import ChooseOpponent from "./components/matches/ChooseOpponent";
-import MatchRequests from './components/teams/MatchRequests'
+import MatchRequests from './components/matches/MatchRequests'
 
 
 function App() {
@@ -36,13 +37,14 @@ function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/editPlayer" element={<EditPlayer />} />
       <Route path="/team/:id" element={<EditTeam />} />
-      <Route path="/match/scoreboard" element={<ScoreBoard />} />
+      <Route path="/match/scoreboard/:matchId" element={<ScoreBoard />} />
       <Route path="team/teamRequests/:id" element={<TeamRequests />} />
       <Route path="team/matchRequests/:id" element={<MatchRequests />} />
       <Route path="/match/chooseplayers" element={<ChoosePlayers />} />
       <Route path="/match/creatematch" element={<ChooseTeam />} />
       <Route path="/match/creatematch/:team1" element={<ChooseOpponent />} />
       <Route path="/match/creatematch/:team1/:team2" element={<ChoosePlayers />} />
+      <Route path="/match/match_request_accept/:matchId" element={<ChoosePlayersTeam2 />} />
       <Route path="/dashboard/" element={<TeamDashboard />} />
       {/* <Route path="*" element={<Error />} /> */}
 

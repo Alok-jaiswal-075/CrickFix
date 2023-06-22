@@ -4,10 +4,25 @@ const Match = require('../Models/Match')
 const Team = require('../Models/Team')
 const appError = require('../Utility/appError')
 const catchAsync = require('../Utility/catchAsync')
-const { isLoggedIn } = require("../Middlewares")
+const { isLoggedIn,isCaptain } = require("../Middlewares")
+
+router.route('/:id').get(isLoggedIn, catchAsync(async (req,res,next) => {
+    const {id} = req.params
+
+    const match = await Match.findById(id).populate('Team1').populate('Team2').populate({
+        path: 'Team2',
+        populate: {
+            path: 'players'
+        }
+    })
+    if(!match) new appError(404,"Match does not exist")
+
+    res.json(match);
+
+}))
 
 
-router.route('/request/:team1Id/:team2Id').post(catchAsync( async (req, res,next) => {
+router.route('/request/:team1Id/:team2Id').post(isLoggedIn,catchAsync( async (req, res,next) => {
     const { team1Id,team2Id } = req.params
     // console.log(req.body)
 
@@ -45,6 +60,106 @@ router.route('/request/:team1Id/:team2Id').post(catchAsync( async (req, res,next
       
 
     }))
+    
+    router.route('/match_request_accept/:matchId').post(isLoggedIn,isCaptain,catchAsync( async (req, res,next) => {
+        const { matchId } = req.params
+        // console.log(req.body)
+    
+        const match = await Match.findById(matchId).populate('Team1').populate('Team2');
+    
+        match.team2_players = req.body.players
 
+        const team1 = await Team.findById(match.Team1._id);
+        if(!team1) new appError(404,'Team not found')
+        const team2 = await Team.findById(match.Team2._id)
+        if(!team2) new appError(404,'Team not found')
+        
+        // console.log(match.team1_players)
+        team1.sent_match_requests.pull(match)
+        team2.received_match_requests.pull(match)
+        team1.accepted_match_requests.push(match);
+    
+        // console.log(team1)
+        // console.log(team2)
+    
+        await team1.save()
+        await team2.save()
+        await match.save()
+    
+    
+          res.json({'msg':'Match request accepted'});
+    
+          
+    
+        }))
+
+
+        router.route('/setbowling/:matchId').get(isLoggedIn,isCaptain,catchAsync( async (req, res,next) => {
+            const { matchId } = req.params
+            // console.log(req.body)
+        
+            const match = await Match.findById(matchId).populate('Team1').populate('Team2').populate('team1_players').populate('team2_players');
+        
+            const team1 = await Team.findById(match.Team1._id).populate('captain');
+            if(!team1) new appError(404,'Team not found')
+            const team2 = await Team.findById(match.Team2._id).populate('captain')
+            if(!team2) new appError(404,'Team not found')
+
+            // console.log(match)
+            
+            if(team1.captain._id.equals(playerId)) 
+            {
+                let tempteam = match.Team1;
+                match.Team1 = match.Team2;
+                match.Team2 = tempteam;
+
+                let tempplayers = match.team1_players
+                match.team1_players = match.team2_players
+                match.team2_players = tempplayers
+            }
+
+            
+
+            // console.log(match)
+        
+            await match.save()
+            res.json('done')
+        
+            }))
+
+        router.route('/setbatting/:matchId').get(isLoggedIn,isCaptain,catchAsync( async (req, res,next) => {
+            const { matchId } = req.params
+            // console.log(req.body)
+        
+            const match = await Match.findById(matchId).populate('Team1').populate('Team2').populate('team1_players').populate('team2_players');
+        
+            const team1 = await Team.findById(match.Team1._id).populate('captain');
+            if(!team1) new appError(404,'Team not found')
+            const team2 = await Team.findById(match.Team2._id).populate('captain')
+            if(!team2) new appError(404,'Team not found')
+
+            // console.log(match)
+            
+            if(team2.captain._id.equals(playerId)) 
+            {
+                let tempteam = match.Team1;
+                match.Team1 = match.Team2;
+                match.Team2 = tempteam;
+
+                let tempplayers = match.team1_players
+                match.team1_players = match.team2_players
+                match.team2_players = tempplayers
+            }
+
+            
+
+            // console.log(match)
+        
+            await match.save()
+            res.json('done')
+        
+            }))
+
+    
 
     module.exports = router

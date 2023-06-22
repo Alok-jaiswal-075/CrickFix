@@ -75,6 +75,8 @@ router.route('/requests/:id')
 router.route('/matchRequests/:id')
     .get(isLoggedIn,isCaptain,catchAsync(async (req,res,next) => {
         const {id} = req.params
+        
+
         const team = await Team.findById(id).populate('sent_match_requests').populate('received_match_requests').populate('accepted_match_requests').populate({
             path: 'sent_match_requests',
             populate: {
@@ -91,6 +93,8 @@ router.route('/matchRequests/:id')
                 path: 'Team2'
             }
         });
+
+
         if(!team) throw new appError(500,'Cannot get team details')
 
         let requests = {sentRequests : team.sent_match_requests, receivedRequests : team.received_match_requests,acceptedRequests : team.accepted_match_requests } 
