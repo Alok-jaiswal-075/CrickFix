@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import {useParams} from 'react-router-dom'
+import {useParams, useNavigate} from 'react-router-dom'
 import { MultiSelect } from "react-multi-select-component";
 
 const ChoosePlayersTeam2 = () => {
   const params = useParams();
+  const navigate = useNavigate();
 
   const [selected, setSelected] = useState([]);
-  const [team1data,setTeam1] = useState({})
   const [team2data,setTeam2] = useState({})
   const [feasible,setfeasible] = useState(1)
 
@@ -23,8 +23,7 @@ const ChoosePlayersTeam2 = () => {
     })
 
     const data = await res.json();
-    if(res.status == 200){
-        setTeam1(data.Team1)
+    if(res.status === 200){
         setTeam2(data.Team2)
         if(team2data) setfeasible(0)
     }
@@ -56,6 +55,7 @@ const ChoosePlayersTeam2 = () => {
   
               const data = await res.json();
               if(data) window.alert(data.msg)
+              navigate('/team/matchRequests/'+team2data._id)
                   
           } catch (error) {
               console.log(error)

@@ -1,86 +1,20 @@
-import React,{useState} from 'react'
-
+import React,{useState, useEffect} from 'react'
+import { useParams } from 'react-router-dom'
 
 const ScoreBoard = () => {
 
-    const Team1 = {
-        id: 1,
-        score : 0,
-        players : [
-            {
-                id: 'p1',
-                half_centuries : 0,
-                centuries : 0,
-                total_score : 0,
-                fours:0,
-                sixes:0,
-                balls: 0
-            },
-            {
-                id: 'p2',
-                half_centuries : 0,
-                centuries : 0,
-                total_score : 0,
-                fours:0,
-                sixes:0,
-                balls:0
-            },
-            {
-                id: 'p5',
-                half_centuries : 0,
-                centuries : 0,
-                total_score : 0,
-                fours:0,
-                sixes:0,
-                balls:0
-            }
-        ]
-    }
-
-    const Team2 = {
-        id: 1,
-        score : 0,
-        players : [
-            {
-                id: 'p3',
-                half_centuries : 0,
-                centuries : 0,
-                total_score : 0,
-                fours:0,
-                sixes:0,
-                balls:0
-            },
-            {
-                id: 'p4',
-                half_centuries : 0,
-                centuries : 0,
-                total_score : 0,
-                fours:0,
-                sixes:0,
-                balls:0
-            },
-            {
-                id: 'p6',
-                half_centuries : 0,
-                centuries : 0,
-                total_score : 0,
-                fours:0,
-                sixes:0,
-                balls:0
-            }
-        ]
-    }
+    const params = useParams()
+    const {matchId} = params
 
 
-    const maxOvers = 10;
-    const maxWickets = 3
 
-
-    const [team1,setteam1] = useState(Team1)
-    const [team2,setteam2] = useState(Team2)
+    const [team1,setteam1] = useState({})
+    const [team2,setteam2] = useState({})
+    const [maxOvers,setmaxOvers] = useState(2)
+    const [maxWickets,setmaxWickets] = useState(4)
     const [currteam,setcurrteam] = useState(1);
-    const [player1, setplayer1] = useState(team1.players[0]);
-    const [player2, setplayer2] = useState(team1.players[1]);
+    const [player1, setplayer1] = useState({});
+    const [player2, setplayer2] = useState({});
     const [isnb, setisnb] = useState(false);
     const [totalScore,settotalScore] = useState(0);
     const [nextIndex, setnextIndex] = useState(2);
@@ -89,6 +23,112 @@ const ScoreBoard = () => {
     const [currInning, setcurrInning] = useState(1);
     const [striker, setstriker] = useState(1);
     const [wickets, setwickets] = useState(0);
+
+
+
+    const fetchMatchDetails = async () => {
+        // console.log('hello')
+        const res = await fetch('/matches/scoreboard/'+matchId, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            credentials: "include"
+        })
+  
+        const data = await res.json();
+        // console.log(data)
+        if(data && res.status === 200){
+            setteam1(data.team1)
+            setteam2(data.team2)
+            setmaxOvers(data.overs)
+            setmaxWickets(data.wickets)
+            if(data.team1) setplayersdata(data.team1)
+        }
+    }
+
+    const setplayersdata = (team) => {
+         setplayer1(team.players[0])
+         setplayer2(team.players[1])
+        // console.log(player1)
+        // console.log(player2)
+    }
+
+    useEffect(() => {
+        fetchMatchDetails()
+    }, []);
+
+    // const Team1 = {
+    //     id: 1,
+    //     score : 0,
+    //     players : [
+    //         {
+    //             id: 'p1',
+    //             half_centuries : 0,
+    //             centuries : 0,
+    //             total_score : 0,
+    //             fours:0,
+    //             sixes:0,
+    //             balls: 0
+    //         },
+    //         {
+    //             id: 'p2',
+    //             half_centuries : 0,
+    //             centuries : 0,
+    //             total_score : 0,
+    //             fours:0,
+    //             sixes:0,
+    //             balls:0
+    //         },
+    //         {
+    //             id: 'p5',
+    //             half_centuries : 0,
+    //             centuries : 0,
+    //             total_score : 0,
+    //             fours:0,
+    //             sixes:0,
+    //             balls:0
+    //         }
+    //     ]
+    // }
+
+    // const Team2 = {
+    //     id: 2,
+    //     score : 0,
+    //     players : [
+    //         {
+    //             id: 'p3',
+    //             half_centuries : 0,
+    //             centuries : 0,
+    //             total_score : 0,
+    //             fours:0,
+    //             sixes:0,
+    //             balls:0
+    //         },
+    //         {
+    //             id: 'p4',
+    //             half_centuries : 0,
+    //             centuries : 0,
+    //             total_score : 0,
+    //             fours:0,
+    //             sixes:0,
+    //             balls:0
+    //         },
+    //         {
+    //             id: 'p6',
+    //             half_centuries : 0,
+    //             centuries : 0,
+    //             total_score : 0,
+    //             fours:0,
+    //             sixes:0,
+    //             balls:0
+    //         }
+    //     ]
+    // }
+
+
+
 
 
     const handleEndInning = ()=>{
@@ -261,7 +301,7 @@ const ScoreBoard = () => {
     const updateTeam = (team, player, teamNum) => {
         const oldPlayers = team.players
         team.players = oldPlayers.map((oldPlayer) => {
-            if (oldPlayer.id === player.id) {
+            if (oldPlayer._id === player._id) {
               return { ...oldPlayer, 
                     total_score : player.total_score,
                     fours:player.fours,
@@ -306,7 +346,7 @@ const ScoreBoard = () => {
                             <tbody className="table-group-divider">
                                 <tr>
                                     <td>{striker===1 && '*'}</td>
-                                    <td>{player1.id}</td>
+                                    <td>{player1.fname} {player1.lname}</td>
                                     <td>{player1.total_score}({player1.balls})</td>
                                     <td>{player1.fours}</td>
                                     <td>{player1.sixes}</td>
@@ -314,7 +354,7 @@ const ScoreBoard = () => {
                                 </tr>
                                 <tr>
                                     <td>{striker===2 && '*'}</td>
-                                    <td>{player2.id}</td>
+                                    <td>{player2.fname} {player2.lname}</td>
                                     <td>{player2.total_score}({player2.balls})</td>
                                     <td>{player2.fours}</td>
                                     <td>{player2.sixes}</td>

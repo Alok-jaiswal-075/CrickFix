@@ -47,6 +47,18 @@ const playerSchema = new Schema({
         type: Number,
         default: 0
     },
+    fours : {
+        type : Number,
+        default : 0
+    },
+    sixes : {
+        type : Number,
+        default : 0
+    },
+    balls : {
+        type : Number,
+        default : 0
+    },
     highest_score: {
         type: Number,
         default: 0

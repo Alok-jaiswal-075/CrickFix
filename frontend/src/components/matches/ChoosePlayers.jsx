@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {useParams} from 'react-router-dom'
+import {useParams, useNavigate} from 'react-router-dom'
 import { MultiSelect } from "react-multi-select-component";
 
 // const options = [
@@ -10,6 +10,7 @@ import { MultiSelect } from "react-multi-select-component";
 
 const ChoosePlayers = () => {
   const params = useParams();
+  const navigate = useNavigate();
 
   const [selected, setSelected] = useState([]);
   const [overs, setOvers] = useState(2);
@@ -83,6 +84,7 @@ const ChoosePlayers = () => {
   
               const data = await res.json();
               if(data) window.alert(data.msg)
+              navigate('/team/matchRequests/'+team1)
                   
           } catch (error) {
               console.log(error)

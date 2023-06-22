@@ -9,7 +9,6 @@ const app = express()
 const port = 5000
 
 // Route imports
-const auth = require('./Routes/auth')
 app.use(express.urlencoded({ extended: true }));
 
 // DB connection
