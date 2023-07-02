@@ -30,8 +30,11 @@ const Home = () => {
       }, [])
     
     return(
-        <div>
-            <h1>This is our home page</h1>
+        <div className=''>
+          <h1 className="text-3xl  font-bold underline bg-pink-600">
+             check check !
+          </h1>
+
             <button className='btn btn-primary' onClick = {()=>setisopen(true)}>modal</button>
             <Modal open={isOpen} onClose={() => setisopen(false)}>This is our modal</Modal>
         </div>

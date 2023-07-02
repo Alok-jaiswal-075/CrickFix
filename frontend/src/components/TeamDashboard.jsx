@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import "./dashboard.css"
 import AllPlayers from "./players/AllPlayers";
 // import Request from "./teams/Request";
 const Card = ({ title, children }) => {
