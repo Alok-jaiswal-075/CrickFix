@@ -30,8 +30,8 @@ const Home = () => {
       }, [])
     
     return(
-        <div className=''>
-          <h1 className="text-3xl  font-bold underline bg-pink-600">
+        <div className='bg-col-bg-primary'>
+          <h1 className="text-3xl  font-bold underline col-text">
              check check !
           </h1>
 

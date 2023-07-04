@@ -7,15 +7,15 @@ module.exports = {
     
     extend: {
       colors: {
-        'bg-primary': '#1A0E1C',
-        'bg-dark' : '#140B15',
+        'col-bg-primary': '#1A0E1C',
+        'col-bg-dark' : '#140B15',
         'col-text' : '#B9B9B9', 
-        'link-inactive' : '#7C7C7C',
+        'col-link-inactive' : '#7C7C7C',
         'col-btn' : '#F95333' 
       },
       fontFamily: {
-        'font-heading': ['"Hanuman"', 'serif'],
-        'font-text': ['"Poppins"', 'sans-serif']
+        'heading': ['"Hanuman"', 'serif'],
+        'text': ['"Poppins"', 'sans-serif']
       },
     },
   },
