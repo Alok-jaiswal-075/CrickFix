@@ -29,7 +29,7 @@ const Home = () => {
         
       }, [])
     
-    return(
+      return(
         <div className='bg-col-bg-primary'>
           <h1 className="text-3xl  font-bold underline col-text font-heading">
              check check !
