@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 
 const Register = () => {
@@ -40,9 +40,31 @@ const Register = () => {
     }
 
     return(
-      <div>
-        Register Page
-      </div>
+        <div className="mt-28 grid grid-cols-12 gap-4">
+
+            <div className="bg-transparent flex flex-col justify-center items-center gap-3 col-start-5 col-span-4  font-text ">
+
+                <h1 className="m-7 text-5xl">Register</h1>
+
+                <form method="POST" className="flex flex-col justify-center items-center gap-7" noValidate autoComplete="off">
+
+                    <input type="email" className="border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 text-lg focus:outline-none"  
+                    placeholder = "Email" name="email" value={player.email} 
+                    onChange={handleInput} required />
+
+                    <input type="password" className="border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 text-lg focus:outline-none"  
+                    placeholder = "Password" name="password" value={player.password} 
+                    onChange={handleInput} required />
+
+                    <button className="border border-col-btn bg-col-btn px-20 py-2 text-lg font-bold rounded-full hover:bg-transparent transition duration-300 ease-in-out" type="submit" onClick={handleSubmit}>Register</button>
+
+                    <p className="my-4">Already have a account ? <Link to="/login" className="text-col-btn hover:text-col-text transition duration-300 ease-in-out">Login</Link></p>
+
+                </form>
+
+            </div>
+
+        </div>
     )
 }
 

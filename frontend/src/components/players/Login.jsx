@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import {useNavigate} from 'react-router-dom'
+import {useNavigate,Link} from 'react-router-dom'
 
 
 
@@ -43,32 +43,62 @@ const Login = () => {
     }
 
     return(
-        <div className="container">
-            <div className="row">
-                <form method="POST" className="row g-3 needs-validation" noValidate autoComplete="off">
 
-                    <div className="col-12">
-                    <label htmlFor="validationCustom02" className="form-label">Email</label>
-                    <input type="email" className="form-control" id="validationCustom01" name="email" value={player.email} onChange={handleInput} required />
-                    <div className="valid-feedback">
-                        Looks good!
-                    </div>
-                    </div>
 
-                    <div className="col-12">
-                    <label htmlFor="validationCustom03" className="form-label">Password</label>
-                    <input type="password" className="form-control" id="validationCustom02" name="password" value={player.password} onChange={handleInput} required />
-                    <div className="valid-feedback">
-                        Looks good!
-                    </div>
-                    </div>
+        <div className="mt-28 grid grid-cols-12 gap-4">
 
-                    <div className="col-12">
-                    <button className="btn btn-success" type="submit" onClick={handleSubmit}>Login</button>
-                    </div>
+            <div className="bg-transparent flex flex-col justify-center items-center gap-3 col-start-5 col-span-4  font-text ">
+
+                <h1 className="m-7 text-5xl">Login</h1>
+            
+                <form method="POST" className="flex flex-col justify-center items-center gap-7" noValidate autoComplete="off">
+
+                    <input type="email" className="border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 text-lg focus:outline-none"  
+                    placeholder = "Email" name="email" value={player.email} 
+                    onChange={handleInput} required />
+
+                    <input type="password" className="border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 text-lg focus:outline-none"  
+                    placeholder = "Password" name="password" value={player.password} 
+                    onChange={handleInput} required />
+
+                    <button className="border border-col-btn bg-col-btn px-20 py-2 text-lg font-bold rounded-full hover:bg-transparent transition duration-300 ease-in-out" type="submit" onClick={handleSubmit}>Login</button>
+
+                    <p className="my-4">Don't have a account ? <Link to="/register" className="text-col-btn hover:text-col-text transition duration-300 ease-in-out">Register</Link></p>
+
                 </form>
+
             </div>
+
         </div>
+
+
+
+        // <div className="container">
+        //     <div className="row">
+                // <form method="POST" className="row g-3 needs-validation" noValidate autoComplete="off">
+
+                //     <div className="col-12">
+                    // <label htmlFor="validationCustom02" className="form-label">Email</label>
+                    // <input type="email" className="form-control" id="validationCustom01" name="email" value={player.email} onChange={handleInput} required />
+                //     <div className="valid-feedback">
+                //         Looks good!
+                //     </div>
+                //     </div>
+
+                //     <div className="col-12">
+                //     <label htmlFor="validationCustom03" className="form-label">Password</label>
+                //     <input type="password" className="form-control" id="validationCustom02" name="password" value={player.password} onChange={handleInput} required />
+                //     <div className="valid-feedback">
+                //         Looks good!
+                //     </div>
+                //     </div>
+
+                //     <div className="col-12">
+                //     <button className="btn btn-success" type="submit" onClick={handleSubmit}>Login</button>
+                //     </div>
+                // </form>
+        //     </div>
+        // </div>
     )
 }
 
