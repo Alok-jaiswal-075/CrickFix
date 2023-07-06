@@ -10,13 +10,13 @@ const SideBar = (props) => {
 	}
 
 	// console.log(visible)
-	const isVisible = "bg-col-bg-dark w-full block sm:hidden child:bg-transparent h-screen h-[100svh] z-1 float-left absolute ease duration-300 top-0"
-	const isNotVisible = "bg-col-bg-dark w-full block sm:hidden child:bg-transparent h-screen h-[100svh] z-1 float-left absolute ease duration-300 top-0 -translate-x-full"
+	const isVisible = "bg-col-bg-dark w-full block sm:hidden child:bg-transparent h-screen h-[100svh] z-40 float-left absolute ease duration-300 top-0"
+	const isNotVisible = "bg-col-bg-dark w-full block sm:hidden child:bg-transparent h-screen h-[100svh] z-40 float-left absolute ease duration-300 top-0 -translate-x-full"
 
 	let sideClassList = props.visible ? isVisible : isNotVisible;
 
 	const inactive = 'text-lg bg-transparent text-col-link-inactive'
-	const active = 'text-lg bg-transparent text-white'
+	const active = 'text-lg bg-transparent text-col-btn'
 
 	return (
 		<div id="sidebar" className={sideClassList}>
