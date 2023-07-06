@@ -1,6 +1,8 @@
 import React,{useEffect, useState} from 'react'
 import Modal from './Modal'
 import backgroundImage from '../asset/Hero.png'; 
+
+
 const Home = () => {
 
     const [isOpen,setisopen] = useState(false);
@@ -37,12 +39,12 @@ const Home = () => {
 
           <div className='pl-48 bg-transparent min-w-fit mb-42 absolute z-10'>
 
-            <p className='font-heading text-6xl leading-snug'>
+            <p className='font-heading text-6xl leading-snug bg-inherit'>
               Complete Match <br /> Organizing Facilities<br />
               For Cricket Lovers <br /> like You
             </p>
 
-            <p className='font-text text-xl leading-relaxed'>
+            <p className='font-text text-xl leading-relaxed bg-inherit'>
               CricFix provides you with features like Team Building, <br />
               Competitions and Score Maintenance, so that you can enjoy <br /> 
               your games to the fullest.

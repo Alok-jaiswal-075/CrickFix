@@ -4,14 +4,22 @@ import { Link, NavLink } from "react-router-dom";
 
 const SideBar = (props) => {
 
-	// console.log(visible)
-	let isVisible = "bg-col-bg-dark w-full block sm:hidden child:bg-transparent h-screen h-[100svh] z-1 float-left absolute ease duration-300 top-0"
-	let isNotVisible = "bg-col-bg-dark w-full block sm:hidden child:bg-transparent h-screen h-[100svh] z-1 float-left absolute ease duration-300 top-0 -left-[100%]"
+	const closeSideBar = ()=>{
+		props.setIsOpen(false)
 
-	let classList = props.visible ? isVisible : isNotVisible;
+	}
+
+	// console.log(visible)
+	const isVisible = "bg-col-bg-dark w-full block sm:hidden child:bg-transparent h-screen h-[100svh] z-1 float-left absolute ease duration-300 top-0"
+	const isNotVisible = "bg-col-bg-dark w-full block sm:hidden child:bg-transparent h-screen h-[100svh] z-1 float-left absolute ease duration-300 top-0 -translate-x-full"
+
+	let sideClassList = props.visible ? isVisible : isNotVisible;
+
+	const inactive = 'text-lg bg-transparent text-col-link-inactive'
+	const active = 'text-lg bg-transparent text-white'
 
 	return (
-		<div id="sidebar" className={classList}>
+		<div id="sidebar" className={sideClassList}>
 			<ul className="flex flex-col items-center justify-center child:bg-inherit h-full">
 				{/* <li className="nav-item my-4">
 					<NavLink className="nav-link text-lg bg-transparent text-col-link-inactive" to="/">Home</NavLink>
@@ -43,7 +51,7 @@ const SideBar = (props) => {
 				{
 					props.linkList.map((link, key) => (
 						<li className="nav-item my-4">
-							<NavLink id={key} className="nav-link text-lg bg-transparent text-col-link-inactive" to={link.link}>{link.linkName}</NavLink>
+							<NavLink id={key} className={props.currentPath === link.link ? active : inactive} to={link.link}>{link.linkName}</NavLink>
 						</li>
 					))
 				}

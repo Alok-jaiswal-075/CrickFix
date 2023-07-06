@@ -4,70 +4,69 @@ import React, { useState } from "react";
 import { Sling as Hamburger } from 'hamburger-react'
 import NavBarLink from "./Utility/NavBarLink";
 import SideBar from "./SideBar";
+import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false)
 
 	const linkList = [
 		{
-			id : 0,
 			link: '/',
 			linkName: 'Home'
 		},
 		{
-			id : 1,
 			link: '/about',
 			linkName: 'About'
 		},
 		{
-			id : 2,
 			link: '/newTeam',
 			linkName: 'New Team'
 		},
 		{
-			id : 3,
 			link: '/teams',
 			linkName: 'Teams'
 		},
 		{
-			id : 4,
 			link: '/allplayers',
 			linkName: 'All Players'
 		},
 		{
-			id : 5,
 			link: '/match/creatematch',
 			linkName: 'New Match'
 		},
 		{
-			id : 6,
 			link: '/login',
 			linkName: 'Login'
 		},
 		{
-			id : 7,
-			link: '/register',
-			linkName: 'Register'
-		},
-		{
-			id : 8,
 			link: '/dashboard',
 			linkName: 'Team Dashboard'
 		},
 	]
 
+	// const handleNavbarLinkClick = (id)=>{
+	// 	const renderLinks = linkList.map((link, index) =>
+	// 	<li className="nav-item bg-transparent">
+	// 		<NavBarLink index={index} to={link.link} content={link.linkName} isActive={false} clickHandler={handleNavbarLinkClick} ></NavBarLink>
+	// 	</li>
+	// );
+	// }
+
+	const {pathname} = useLocation()
+	console.log(pathname)
+
 	const renderLinks = linkList.map((link, index) =>
 		<li className="nav-item bg-transparent">
-			<NavBarLink index={index} to={link.link} content={link.linkName} isActive={false} ></NavBarLink>
+			<NavBarLink index={index} to={link.link} content={link.linkName} isActive={pathname == link.link ? true:false} ></NavBarLink>
 		</li>
 	);
 
 	return (
-		<div className="ease duration-500">
-			<nav className="sticky top-0 flex items-center justify-between p-2 bg-col-bg-dark drop-shadow-lg z-10">
-				<NavBarLink to="/" content={<img className="w-[70%] bg-inherit" src="./img/logo.png" alt="LOGO" />}></NavBarLink>
+		<div className="ease duration-500 sticky top-0">
+			<nav className="sticky top-0 flex items-center justify-between p-2 px-4 bg-col-bg-dark drop-shadow-lg z-10">
+				<NavBarLink to="/" content={<img className="w-[70%] sm:w-[40%] lg:w-[70%] bg-inherit border" src="./img/logo.png" alt="LOGO" />}></NavBarLink>
 
-				<ul className="hidden sm:flex bg-inherit">
+				<ul className="hidden sm:flex items-center justify-between bg-inherit w-[70%] border">
 					{renderLinks}
 				</ul>
 
@@ -81,7 +80,7 @@ const Navbar = () => {
 					}
 				} /></span>
 			</nav>
-			<SideBar visible={isOpen} linkList={linkList} setIsOpen={setIsOpen}/>
+			<SideBar currentPath={pathname} visible={isOpen} linkList={linkList} setIsOpen={setIsOpen}/>
 		</div>
 	)
 }
