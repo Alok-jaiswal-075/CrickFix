@@ -6,7 +6,7 @@ const SideBar = (props) => {
 
 	const closeSideBar = ()=>{
 		props.setIsOpen(false)
-
+		
 	}
 
 	// console.log(visible)
@@ -51,7 +51,7 @@ const SideBar = (props) => {
 				{
 					props.linkList.map((link, key) => (
 						<li className="nav-item my-4">
-							<NavLink id={key} className={props.currentPath === link.link ? active : inactive} to={link.link}>{link.linkName}</NavLink>
+							<NavLink onClick={()=>{props.setIsOpen(false)}} id={key} className={props.currentPath === link.link ? active : inactive} to={link.link}>{link.linkName}</NavLink>
 						</li>
 					))
 				}
