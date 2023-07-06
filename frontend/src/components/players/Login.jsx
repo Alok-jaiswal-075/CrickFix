@@ -49,7 +49,7 @@ const Login = () => {
 
             <div className="bg-transparent flex flex-col justify-center items-center gap-3 col-start-5 col-span-4 font-text ">
 
-                <h1 className="my-7 sm:text-5xl text-2xl">Login</h1>
+                <h1 className="my-7 sm:text-5xl text-2xl font-heading tracking-wider">Login</h1>
             
                 <form method="POST" className="flex flex-col justify-center items-center gap-7" noValidate autoComplete="off">
 
