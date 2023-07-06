@@ -81,7 +81,7 @@ const Navbar = () => {
 					}
 				} /></span>
 			</nav>
-			<SideBar visible={isOpen} />
+			<SideBar visible={isOpen} linkList={linkList} setIsOpen={setIsOpen}/>
 		</div>
 	)
 }
