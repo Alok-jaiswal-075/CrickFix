@@ -55,56 +55,58 @@ const Team = (props) => {
 
 
     return(
-        <div className="m-auto d-flex justify-content-center">
-            <div className="card" style={{width: '18rem'}}>
-            <div className="card-body">
-            <h5 className="card-title">{props.team.name}</h5>
-            </div>
-            <ul className="list-group list-group-flush">
-            <li className="list-group-item">Location Based: {props.team.location_based}</li>
-            <li className="list-group-item">Matches Played: {props.team.matches_played}</li>
-            <li className="list-group-item">Matches Won: {props.team.matches_won}</li>
-            <li className="list-group-item">Matches Lost: {props.team.matches_lost}</li>
-            <li className="list-group-item">Matches Draw: {props.team.matches_draw}</li>
-            <li className="list-group-item">Captain:  {props.team.captain.fname} {props.team.captain.lname}</li>
-            </ul>
-            <div className="card-body">
 
-            {
-                props.isCaptain 
-                && 
-                <button type="button" className="btn btn-success btn-sm m-2" onClick={gotoEditPage}>Edit</button>
-            }
-            {
-                props.isCaptain 
-                && 
-                <button type="button" className="btn btn-danger btn-sm m-2" onClick={handleDelete}>Delete</button>
-            }
-            <br />
-            {
-                props.isCaptain 
-                && 
-                <a href={"team/teamRequests/"+props.team._id} className="card-link">Join Requests</a>
-            }
-            {
-                props.isCaptain 
-                && 
-                <a href={"team/matchRequests/"+props.team._id} className="card-link">Match Requests</a>
-            }
-            
-            { 
-                !props.isCaptain 
-                &&
-                <button className="btn btn-primary" onClick={handleSendRequest} disabled={isLoading}>
-                {isLoading ? 'Sent' : 'Send Request'}
-                </button>
-            }
+
+
+        <div className="bg-col-bg-dark p-5 drop-shadow-xl flex justify-start flex-col rounded-2xl hover:scale-110 duration-300">
+                <h2 className="sm:text-2xl text-lg font-heading bg-col-bg-dark">{props.team.name}</h2>
+                <ul className="font-text mt-2 bg-col-bg-dark">
+                    <li className="bg-col-bg-dark">Location Based := {props.team.location_based}</li>
+                    <li className="bg-col-bg-dark">Matches Played := {props.team.matches_played}</li>
+                    <li className="bg-col-bg-dark">Matches Won := {props.team.matches_won}</li>
+                    <li className="bg-col-bg-dark">Matches Lost := {props.team.matches_lost}</li>
+                    <li className="bg-col-bg-dark">Matches Draw := {props.team.matches_draw}</li>
+                    <li className="bg-col-bg-dark">Captain:  {props.team.captain.fname} {props.team.captain.lname}</li>
+                </ul>
+
+                <div className="card-body">
+
+                    {
+                        props.isCaptain 
+                        && 
+                        <button type="button" className='border border-col-btn  text-col-text bg-col-btn  rounded text-md px-3 py-1.5 hover:bg-transparent transition duration-300 ease-in-out ' onClick={gotoEditPage}>Edit</button>
+                    }
+                    {
+                        props.isCaptain 
+                        && 
+                        <button type="button" className='border border-col-btn text-col-text bg-col-btn  rounded text-md px-3 py-1.5 hover:bg-transparent transition duration-300 ease-in-out ' onClick={handleDelete}>Delete</button>
+                    }
+                    <br />
+                    {
+                        props.isCaptain 
+                        && 
+                        <a href={"team/teamRequests/"+props.team._id} className="card-link">Join Requests</a>
+                    }
+                    {
+                        props.isCaptain 
+                        && 
+                        <a href={"team/matchRequests/"+props.team._id} className="card-link">Match Requests</a>
+                    }
+                    
+                    { 
+                        !props.isCaptain 
+                        &&
+                        <button className='border border-col-btn text-col-text bg-col-btn  rounded text-md px-3 py-1.5 hover:bg-transparent transition duration-300 ease-in-out ' onClick={handleSendRequest} disabled={isLoading}>
+                        {isLoading ? 'Sent' : 'Send Request'}
+                        </button>
+                    }
             
 
             </div>
         </div>
-        </div>
-    )
+
+
+)
 }
 
 export default Team

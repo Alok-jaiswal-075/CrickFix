@@ -26,10 +26,14 @@ const AllTeams = () => {
     }, []);
     
     return(
-        <div>
-            {teams && <div className='d-flex flex-wrap'>
-            {teams.map((team) => <Team key={temp++} team={team}/>)}
-        </div>}
+        <div className="mt-28 grid grid-cols-12 gap-4">
+            <div className=" flex justify-center col-start-2 col-span-10 font-text ">
+                {teams && 
+                    <div className='flex flex-wrap gap-10 justify-center'>
+                        {teams && teams.map((team) => <Team key={temp++} team={team}/>)}
+                    </div>
+                }
+            </div>
         </div>
     )
 }

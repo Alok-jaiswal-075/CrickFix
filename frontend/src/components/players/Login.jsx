@@ -54,11 +54,11 @@ const Login = () => {
             
                 <form method="POST" className="flex flex-col justify-center items-center gap-7" noValidate autoComplete="off">
 
-                    <input type="email" className="border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 sm:text-lg text-sm focus:outline-none"  
+                    <input type="email" className="bg-transparent border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 sm:text-lg text-sm focus:outline-none"  
                     placeholder = "Email" name="email" value={player.email} 
                     onChange={handleInput} required />
 
-                    <input type="password" className="border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 sm:text-lg text-sm focus:outline-none"  
+                    <input type="password" className="bg-transparent border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 sm:text-lg text-sm focus:outline-none"  
                     placeholder = "Password" name="password" value={player.password} 
                     onChange={handleInput} required />
 

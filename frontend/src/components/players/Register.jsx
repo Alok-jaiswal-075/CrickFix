@@ -55,33 +55,33 @@ const Register = () => {
 
                 <form method="POST" className="flex flex-col justify-center items-center gap-7" noValidate autoComplete="off">
 
-                    <input type="text" className="border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 sm:text-lg text-sm focus:outline-none"  
+                    <input type="text" className="bg-transparent border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 sm:text-lg text-sm focus:outline-none"  
                     placeholder = "First Name" name="fname" value={player.fname} 
                     onChange={handleInput} required />
 
-                    <input type="text" className="border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 sm:text-lg text-sm focus:outline-none"  
+                    <input type="text" className="bg-transparent border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 sm:text-lg text-sm focus:outline-none"  
                     placeholder = "Last Name" name="lname" value={player.lname} 
                     onChange={handleInput} required />
 
-                    <input type="number" className="border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 sm:text-lg text-sm focus:outline-none"  
+                    <input type="number" className="bg-transparent border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 sm:text-lg text-sm focus:outline-none"  
                     placeholder = "Age" name="age" value={player.age} 
                     onChange={handleInput} required />
 
-                    <input type="email" className="border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 sm:text-lg text-sm focus:outline-none"  
+                    <input type="email" className="bg-transparent border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 sm:text-lg text-sm focus:outline-none"  
                     placeholder = "Email" name="email" value={player.email} 
                     onChange={handleInput} required />
 
-                    <input type="number" className="border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 sm:text-lg text-sm focus:outline-none"  
+                    <input type="number" className="bg-transparent border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 sm:text-lg text-sm focus:outline-none"  
                     placeholder = "Contact" name="contact" value={player.contact} 
                     onChange={handleInput} required />
 
 
-                    <input type="password" className="border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 sm:text-lg text-sm focus:outline-none"  
+                    <input type="password" className="bg-transparent border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 sm:text-lg text-sm focus:outline-none"  
                     placeholder = "Password" name="password" value={player.password} 
                     onChange={handleInput} required />
 
 
-                    <input type="text" className="border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 sm:text-lg text-sm focus:outline-none"  
+                    <input type="text" className="bg-transparent border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 sm:text-lg text-sm focus:outline-none"  
                     placeholder = "Confirm Password" name="cpassword" value={player.cpassword} 
                     onChange={handleInput} required />
 
