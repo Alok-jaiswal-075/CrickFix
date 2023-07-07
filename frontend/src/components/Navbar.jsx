@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-// import { Divide as Hamburger } from 'hamburger-react'
-// import { Squash as Hamburger } from 'hamburger-react'
-import { Sling as Hamburger } from 'hamburger-react'
 import NavBarLink from "./Utility/NavBarLink";
 import SideBar from "./SideBar";
 import { useLocation } from "react-router-dom";
+
+// DIFFERENT ANIMATIONS FOR HAMBURGER ICON :
+// import { Divide as Hamburger } from 'hamburger-react'
+// import { Squash as Hamburger } from 'hamburger-react'
+import { Sling as Hamburger } from 'hamburger-react'
 
 const Navbar = () => {
 	// state for hiding and revealing sidebar
