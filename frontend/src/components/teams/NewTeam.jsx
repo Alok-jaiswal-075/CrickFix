@@ -39,31 +39,32 @@ const NewTeam = () => {
     }
 
     return(
-        <div className="container">
-            <div className="row">
-                <form className="row g-3 needs-validation" method="POST" noValidate autoComplete="off">
-                    <div className="col-12">
-                    <label htmlFor="validationCustom01" className="form-label">Name</label>
-                    <input type="text" className="form-control"  name="name" value={team.name} onChange={handleInput} required />
-                    <div className="valid-feedback">
-                        Looks good!
-                    </div>
-                    </div>
 
-                    <div className="col-12">
-                    <label htmlFor="validationCustom02" className="form-label">Location based</label>
-                    <input type="text" className="form-control"  name="location_based" value={team.location_based} onChange={handleInput} required />
-                    <div className="valid-feedback">
-                        Looks good!
-                    </div>
-                    </div>
-                    
-                    <div className="col-12">
-                    <button className="btn btn-success" type="submit" onClick={handleSubmit}>Create Team</button>
-                    </div>
+
+
+
+        <div className="mt-28 grid grid-cols-12 gap-4 sm:flex justify-center items-center">
+
+            <div className="bg-transparent flex flex-col justify-center items-center gap-3 col-start-5 col-span-4 font-text ">
+
+                <h1 className="my-7 sm:text-5xl text-xl font-heading tracking-wider">New Team</h1>
+            
+                <form method="POST" className="flex flex-col justify-center items-center gap-7" noValidate autoComplete="off">
+
+                    <input type="text" className="bg-transparent border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 sm:text-lg text-sm focus:outline-none"  
+                    placeholder = "Team Name" name="name" value={team.name} onChange={handleInput} required />
+
+                    <input type="text" className="bg-transparent border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 sm:text-lg text-sm focus:outline-none"  
+                    placeholder = "Location Based" name="location_based" value={team.location_based} onChange={handleInput} required />
+
+                    <button className="border border-col-btn bg-col-btn px-20 py-2 sm:text-lg text-sm font-bold rounded-full hover:bg-transparent transition duration-300 ease-in-out" type="submit" onClick={handleSubmit}>Create Team</button>
+
                 </form>
+
             </div>
+
         </div>
+
     )
 }
 
