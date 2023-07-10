@@ -28,22 +28,23 @@ const About = () => {
     //   };
 
     const callPlayerPage = async () => {
-        try {
-            const res = await fetch('/players', {
-                method: "GET",
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
-                credentials: "include"
-            })
+        const res = await fetch('/players', {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            credentials: "include"
+        })
 
-            const data = await res.json();
+        const data = await res.json();
+        if(data &&  res.status === 200){
             setPlayerData(data)
-            // console.log(data)
-        } catch (error) {
-            window.alert(error.msg)
         }
+        else{
+            window.alert(data.msg);
+        }
+            
     }
 
     useEffect(() => {

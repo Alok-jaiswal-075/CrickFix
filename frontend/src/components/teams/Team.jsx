@@ -58,7 +58,7 @@ const Team = (props) => {
 
 
 
-        <div className="bg-col-bg-dark p-5 drop-shadow-xl flex justify-start flex-col rounded-2xl hover:scale-110 duration-300">
+        <div className="w-fit bg-col-bg-dark p-5 drop-shadow-xl flex flex-col rounded-2xl hover:scale-110 duration-300">
                 <h2 className="sm:text-2xl text-lg font-heading bg-col-bg-dark">{props.team.name}</h2>
                 <ul className="font-text mt-2 bg-col-bg-dark">
                     <li className="bg-col-bg-dark">Location Based := {props.team.location_based}</li>
@@ -69,7 +69,7 @@ const Team = (props) => {
                     <li className="bg-col-bg-dark">Captain:  {props.team.captain.fname} {props.team.captain.lname}</li>
                 </ul>
 
-                <div className="card-body">
+                <div className="">
 
                     {
                         props.isCaptain 
