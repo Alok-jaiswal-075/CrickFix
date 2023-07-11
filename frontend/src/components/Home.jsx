@@ -1,15 +1,16 @@
 import React,{useEffect, useState} from 'react'
 import Modal from './Modal'
 import backgroundImage from '../asset/Hero.png'; 
+import Loading from './Utility/Loading';
 
 
-const Home = () => {
+const Home = (props) => {
 
-    const [isOpen,setisopen] = useState(false);
+    const [isOpen,setisopen] = useState(true);
+    const [loading, setLoading] = useState(true);
 
     const homePage = async () => {
-
-        
+ 
       try{ 
            const res = await fetch ('/hello',{
             method : "GET",
@@ -18,7 +19,9 @@ const Home = () => {
           });
     
         const data = await res.json();
+        setLoading(false)
         console.log(data);
+        
     
       } catch(err){
           console.log(err);
@@ -28,13 +31,13 @@ const Home = () => {
 
     useEffect(() => {
         homePage();
-      
         
       }, [])
     
       return(
+        loading ? <Loading />
+        :
         <>
-      
         <div className='flex  items-center min-h-screen bg-cover' style={{ backgroundImage: `url(${backgroundImage})` }}>
 
           <div className='pl-48 bg-transparent min-w-fit mb-42 absolute z-10'>

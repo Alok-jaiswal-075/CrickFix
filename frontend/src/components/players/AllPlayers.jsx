@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Loading from '../Utility/Loading';
 
 const PlayerCard = ({ player }) => (
   <div className="card">
@@ -15,12 +16,15 @@ const PlayerCard = ({ player }) => (
 const PlayersList = () => {
   const [players, setPlayers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetch('/players/all-players')
       .then(response => response.json())
       .then(data => {
         setPlayers(data);
+        setLoading(false)
+
       })
       .catch(error => {
         console.error(error);
@@ -34,6 +38,8 @@ const PlayersList = () => {
   });
 
   return (
+    loading ? <Loading /> 
+    :
     <div className="container">
       <h1>Players List</h1>
       <div className="form-group">
