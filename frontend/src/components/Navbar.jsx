@@ -57,7 +57,7 @@ const Navbar = () => {
 			<nav className="sticky top-0 flex items-center justify-between p-2 px-4 bg-col-bg-dark drop-shadow-lg z-50">
 				<NavBarLink to="/" content={<img className="w-[70%] sm:w-[40%] lg:w-[70%] bg-inherit" src="./img/logo.png" alt="LOGO" />}></NavBarLink>
 
-				<ul className="hidden sm:flex items-center justify-between bg-inherit w-[70%]">
+				<ul className="hidden md:flex items-center justify-between bg-inherit w-[70%]">
 					{
 						linkList.map((link, index) =>
 						<li className="nav-item bg-transparent">
@@ -67,7 +67,7 @@ const Navbar = () => {
 					}
 				</ul>
 
-				<span className="inline-block sm:hidden"><Hamburger className="inline-block sm:hidden" toggled={isOpen} rounded onToggle={
+				<span className="inline-block md:hidden"><Hamburger className="inline-block sm:hidden" toggled={isOpen} rounded onToggle={
 					toggled => {
 						if (toggled) {
 							setIsOpen(true)

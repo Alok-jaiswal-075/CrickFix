@@ -1,5 +1,10 @@
 import React from 'react'
+<<<<<<< HEAD
 import SyncLoader from 'react-spinners/SyncLoader'
+=======
+import SyncLoader from "react-spinners/SyncLoader";
+
+>>>>>>> 38a311275ed5d1bb22a8cdfa2eca2e89d4a47239
 
 function Loading() {
   // List of quote objects
@@ -58,6 +63,17 @@ function Loading() {
       <p className='text-xl text-col-text'>{quoteObj.quote}</p>
       <p className="text-lg text-col-text">- {quoteObj.saidBy}</p>
       </div>
+<<<<<<< HEAD
+=======
+
+        {/* DIFFERENT lOADING ANIMATIONS TO TRY */}
+        {/* <BarLoader size={150} color='#7C7C7C' /> */}
+        {/* <BounceLoader color='#B9B9B9' /> */}
+        {/* <SquareLoader color='#B9B9B9' /> */}
+        {/* <ClimbingBoxLoader color='#B9B9B9' /> */}
+        {/* <HashLoader color='#B9B9B9' /> */}
+        {/* <ScaleLoader color='#F95333' /> */}
+>>>>>>> 38a311275ed5d1bb22a8cdfa2eca2e89d4a47239
         <SyncLoader color='#F95333' />
     </div>
   )
