@@ -4,10 +4,10 @@ import { NavLink } from "react-router-dom";
 
 const SideBar = (props) => {
 
-	const closeSideBar = ()=>{
-		props.setIsOpen(false)
+	// const closeSideBar = ()=>{
+	// 	props.setIsOpen(false)
 		
-	}
+	// }
 
 	// console.log(visible)
 	const isVisible = "bg-col-bg-dark w-full block sm:hidden child:bg-transparent h-screen h-[100svh] z-40 float-left absolute ease duration-300 top-0"

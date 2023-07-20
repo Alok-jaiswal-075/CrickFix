@@ -53,7 +53,7 @@ const Navbar = () => {
 	console.log(pathname)
 
 	return (
-		<div className="ease duration-500 sticky top-0">
+		<div className="ease duration-500 sticky top-0 z-50">
 			<nav className="sticky top-0 flex items-center justify-between p-2 px-4 bg-col-bg-dark drop-shadow-lg z-50">
 				<NavBarLink to="/" content={<img className="w-[70%] sm:w-[40%] lg:w-[70%] bg-inherit" src="./img/logo.png" alt="LOGO" />}></NavBarLink>
 
