@@ -1,5 +1,15 @@
 import React from 'react'
+<<<<<<< HEAD
 import ScaleLoader from "react-spinners/ScaleLoader";
+=======
+import BounceLoader from "react-spinners/BounceLoader";
+import BarLoader from "react-spinners/BarLoader";
+import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
+import SquareLoader from 'react-spinners/SquareLoader'
+import HashLoader from 'react-spinners/HashLoader'
+import ScaleLoader from 'react-spinners/ScaleLoader'
+import SyncLoader from 'react-spinners/SyncLoader'
+>>>>>>> 89d601080ac87d952811c800419eb6df2f313a64
 
 function Loading() {
   // List of quote objects
@@ -58,7 +68,19 @@ function Loading() {
       <p className='text-xl text-col-text'>{quoteObj.quote}</p>
       <p className="text-lg text-col-text">- {quoteObj.saidBy}</p>
       </div>
+<<<<<<< HEAD
         <ScaleLoader color='#7C7C7C' size={10} />
+=======
+
+        {/* DIFFERENT lOADING ANIMATIONS TO TRY */}
+        {/* <BarLoader size={150} color='#7C7C7C' /> */}
+        {/* <BounceLoader color='#B9B9B9' /> */}
+        {/* <SquareLoader color='#B9B9B9' /> */}
+        {/* <ClimbingBoxLoader color='#B9B9B9' /> */}
+        {/* <HashLoader color='#B9B9B9' /> */}
+        {/* <ScaleLoader color='#F95333' /> */}
+        <SyncLoader color='#F95333' />
+>>>>>>> 89d601080ac87d952811c800419eb6df2f313a64
     </div>
   )
 }
