@@ -18,3 +18,42 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: #140B15;
+}
+  
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #394032;
+    border-radius: 5px;
+}
+  
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #292F23;
+}
+
+/* Track */
+::-webkit-scrollbar-track:horizontal {
+    background: #140B15;
+    border-radius: 5px;
+}
+  
+/* Handle */
+::-webkit-scrollbar-thumb:horizontal {
+    background: #394032;
+    border-radius: 5px;
+}
+  
+/* Handle on hover */
+::-webkit-scrollbar-thumb:horizontal:hover {
+    background: #292F23;
+}

@@ -1,10 +1,13 @@
 import React,{useEffect,useState} from 'react'
 import Team from './Team'
+import Loading from '../Utility/Loading';
 const AllTeams = () => {
     var temp = 0;
     const [teams,setTeamsData] = useState([])
+    const [loading, setLoading] = useState(true)
 
     const callTeamsPage = async () =>{
+        try{
             const res = await fetch('/teams',{
                 method : "GET",
                 headers : {
@@ -14,11 +17,14 @@ const AllTeams = () => {
                 credentials : "include"
             })
 
-            const data = await res.json();
-            if(data){
+            const data = await res.json()
                 setTeamsData(data)
+                setLoading(false)
             }
-            else window.alert('No Teams to show')
+            catch(err){
+            window.alert('No Teams to show')
+
+        }
     }
 
     useEffect(() => {
@@ -26,6 +32,9 @@ const AllTeams = () => {
     }, []);
     
     return(
+        loading ? 
+        <Loading />
+        :
         <div className="mt-28 grid grid-cols-12 gap-4">
             <div className=" flex justify-center col-start-2 col-span-10 font-text ">
                 {teams && 
