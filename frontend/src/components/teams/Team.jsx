@@ -58,10 +58,10 @@ const Team = (props) => {
 
 
 
-        <div className="w-fit bg-col-bg-dark p-5 drop-shadow-xl flex flex-col rounded-2xl hover:scale-110 duration-300">
-                <h2 className="sm:text-2xl text-lg font-heading bg-col-bg-dark">{props.team.name}</h2>
+        <div className=" w-2/5 min-w-[18rem] max-w-lg bg-col-bg-dark p-5 drop-shadow-xl flex flex-col rounded-2xl hover:scale-110 duration-300">
+                <h2 className="sm:text-2xl text-lg font-heading bg-col-bg-dark">{props.team.name.length > 18 ? props.team.name.substring(0, 15) + '...' : props.team.name}</h2>
                 <ul className="font-text mt-2 bg-col-bg-dark">
-                    <li className="bg-col-bg-dark">Location Based := {props.team.location_based}</li>
+                    <li className="bg-col-bg-dark">Location Based := {props.team.location_based.length > 10 ? props.team.location_based.substring(0, 7) + '...' : props.team.location_based}</li>
                     <li className="bg-col-bg-dark">Matches Played := {props.team.matches_played}</li>
                     <li className="bg-col-bg-dark">Matches Won := {props.team.matches_won}</li>
                     <li className="bg-col-bg-dark">Matches Lost := {props.team.matches_lost}</li>

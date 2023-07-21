@@ -71,21 +71,25 @@ const About = (props) => {
 
                 <h1 className="text-center text-4xl sm:text-5xl my-6">Hi, {player.fname}</h1>
 
+                {/* User Info Section */}
                 <div className="w-full flex flex-col items-center sm:flex-row sm:items-start sm:justify-center gap-16 sm:gap-28">
 
                     {/* User Info Card */}
                     <div className="bg-col-bg-dark drop-shadow-lg inline-block w-11/12 sm:w-2/5 p-4 rounded-xl relative">
 
-                        <div className=" w-full flex justify-center sm:justify-normal -translate-y-1/2">
+                        {/* User image */}
+                        <div className=" w-full flex justify-center sm:justify-normal -translate-y-1/2 -mb-10 sm:-mb-14">
                             <img className="rounded-full w-1/2 sm:w-1/3" src="./img/sample-user.jpg" alt="User" />
                         </div>
 
                         <div className="flex items-center justify-between">
-                            <h3 className="text-2xl sm:text-3xl">Personal Information</h3>
-                            <button><img className="w-8 sm:w-12" src="./img/edit-icon.png" alt="Edit" /></button>
+                            <h3 className="text-xl sm:text-3xl">Personal Information</h3>
+                            <div className="flex flex-row items-center justify-center gap-4">
+                            <button onClick={gotoEditPage}><img className="w-8 sm:w-12" src="./img/edit-icon.png" alt="Edit" /></button>
+                            </div>
                         </div>
 
-                        <ul className="list-none">
+                        <ul className="list-none text-sm">
                             <li className="my-2">Age: {player.age}</li>
                             <li className="my-2">Email: {player.email}</li>
                             <li className="my-2">Contact: {player.contact}</li>
@@ -110,13 +114,13 @@ const About = (props) => {
                             <button type="button" className="btn btn-danger btn-sm m-2" onClick={handleDelete}>Delete</button>
 
                         </div> */}
-                        
+
                     </div>
 
-                    {/* User Info Card */}
+                    {/* Leaderboard Info Card */}
                     <div className="bg-col-bg-dark drop-shadow-lg inline-block w-11/12 sm:w-2/5 p-4 rounded-xl relative">
-                    <h3 className="text-2xl sm:text-3xl">Personal Information</h3>
-                        <ul className="list-none">
+                    <h3 className="text-xl sm:text-3xl">Leaderboard Info</h3>
+                        <ul className="list-none text-sm">
                             <li className="my-2">Ranking: {player.ranking}</li>
                             <li className="my-2">Half Centuries: {player.centuries}</li>
                             <li className="my-2">Centuries:  {player.centuries}</li>
@@ -129,16 +133,17 @@ const About = (props) => {
                             <button type="button" className="btn btn-danger btn-sm m-2" onClick={handleDelete}>Delete</button>
 
                         </div>
-                        
+
                     </div>
 
                 </div>
 
 
                 {/* Display teams with user as captain */}
-                <div className="">
-                    {player.captainOf && <div className="flex flex-row p-8 items-center gap-4 overflow-x-scroll w-4/5">
-                        {player.captainOf.map((team) => <Team className="w-24" key={temp++} team={team} isCaptain={1} />)}
+                <div className=" w-4/5 lg:w-2/3">
+                    <h1></h1>
+                    {player.captainOf && <div className="flex flex-row p-8 items-end gap-4 overflow-x-scroll w-[90%]">
+                        {player.captainOf.map((team) => <Team className="" key={temp++} team={team} isCaptain={1} />)}
                     </div>}
                 </div>
             </div>
