@@ -6,12 +6,12 @@ module.exports = {
   theme: {
     
     extend: {
-      colors: {
+      colors: {        
         'col-bg-primary': '#1A0E1C',
-        'col-bg-dark' : '#140B15',
+        'col-bg-dark' : '#170d1a',
         'col-text' : '#B9B9B9', 
         'col-link-inactive' : '#7C7C7C',
-        'col-btn' : '#F95333' 
+        'col-btn' : '#F86C4F' 
       },
       fontFamily: {
         'heading': ['"Hanuman"', 'serif'],

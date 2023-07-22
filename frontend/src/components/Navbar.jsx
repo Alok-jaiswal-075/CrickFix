@@ -50,7 +50,6 @@ const Navbar = () => {
 
 	// getting current path for highlighting navbar and sidebar links
 	const {pathname} = useLocation()
-	console.log(pathname)
 
 	return (
 		<div className="ease duration-500 sticky top-0 z-50">

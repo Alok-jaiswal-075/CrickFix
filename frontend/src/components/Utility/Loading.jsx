@@ -57,7 +57,7 @@ function Loading() {
       <p className='text-xl text-col-text'>{quoteObj.quote}</p>
       <p className="text-lg text-col-text">- {quoteObj.saidBy}</p>
       </div>
-        <SyncLoader color='#F95333' />
+        <SyncLoader color='#F86C4F' />
     </div>
   )
 }

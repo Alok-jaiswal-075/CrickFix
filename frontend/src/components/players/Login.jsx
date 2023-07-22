@@ -62,8 +62,8 @@ const Login = () => {
                     placeholder = "Password" name="password" value={player.password} 
                     onChange={handleInput} required />
 
-                    {/* <button className="border border-col-btn bg-col-btn px-20 py-2 sm:text-lg text-sm font-bold rounded-full hover:bg-transparent transition duration-300 ease-in-out" type="submit" onClick={handleSubmit}>Login</button> */}
-                    <Button type="submit" onClick={handleSubmit} />
+                    <button className="border border-col-btn bg-col-btn px-20 py-2 sm:text-lg text-sm font-bold rounded-full hover:bg-transparent transition duration-300 ease-in-out" type="submit" onClick={handleSubmit}>Login</button>
+                    {/* <Button type="submit" onClick={handleSubmit} /> */}
 
                     <p className="my-4">Don't have a account ? <Link to="/register" className="text-col-btn hover:text-col-text transition duration-300 ease-in-out">Register</Link></p>
 

@@ -4,7 +4,8 @@ import Team from '../teams/Team'
 import Loading from "../Utility/Loading";
 
 const About = (props) => {
-    let temp = 1;
+    let yourTeamsTemp = 1;
+    let joinedTeamsTemp = 1;
     const navigate = useNavigate();
 
     const [player, setPlayerData] = useState({})
@@ -23,6 +24,8 @@ const About = (props) => {
 
             const data = await res.json();
             setPlayerData(data)
+            // console.log(player.captainOf)
+            // console.log(player.joined_teams)
             setLoading(false)
 
         } catch (error) {
@@ -41,22 +44,25 @@ const About = (props) => {
     }
 
     const handleDelete = async () => {
-        try {
-            const res = await fetch('/players', {
-                method: "DELETE",
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
-                credentials: "include"
-            })
+        let opt = window.confirm('Are you sure you want to delete this account?')
+        if (opt) {
+            try {
+                const res = await fetch('/players', {
+                    method: "DELETE",
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    credentials: "include"
+                })
 
-            const data = await res.json();
-            if (data) {
-                window.alert("Player deleted successfully")
+                const data = await res.json();
+                if (data) {
+                    window.alert("Player deleted successfully")
+                }
+            } catch (error) {
+                window.alert(error.msg)
             }
-        } catch (error) {
-            window.alert(error.msg)
         }
     }
 
@@ -69,27 +75,32 @@ const About = (props) => {
         return (
             <div className="m-4 flex flex-col items-center gap-20 sm:gap-24">
 
-                <h1 className="text-center text-4xl sm:text-5xl my-6">Hi, {player.fname}</h1>
+                <h1 className="text-center text-4xl sm:text-5xl my-6">Hi, {player.fname}!</h1>
 
                 {/* User Info Section */}
-                <div className="w-full flex flex-col items-center sm:flex-row sm:items-start sm:justify-center gap-16 sm:gap-28">
+                <div className="w-full flex flex-col items-center sm:flex-row sm:items-start sm:justify-center gap-16 sm:gap-10 ">
 
                     {/* User Info Card */}
-                    <div className="bg-col-bg-dark drop-shadow-lg inline-block w-11/12 sm:w-2/5 p-4 rounded-xl relative">
+                    <div className="bg-col-bg-dark drop-shadow-lg inline-block w-full sm:w-2/5 p-4 px-8 rounded-xl relative">
 
                         {/* User image */}
                         <div className=" w-full flex justify-center sm:justify-normal -translate-y-1/2 -mb-10 sm:-mb-14">
-                            <img className="rounded-full w-1/2 sm:w-1/3" src="./img/sample-user.jpg" alt="User" />
+                            {/* Find 'big-smile' in the img src and replace it with the names of different styles from below link to change avatar style */}
+
+                            {/* https://www.dicebear.com/styles/bottts */}
+                            
+                            <img className="rounded-full w-1/2 sm:w-1/3" src={`https://api.dicebear.com/6.x/big-smile/svg?seed=${player.fname}&backgroundColor=b6e3f4,c0aede,d1d4f9&scale=90&accessoriesProbability=50&backgroundType=gradientLinear,solid`} alt="User" />
                         </div>
 
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between gap-0">
                             <h3 className="text-xl sm:text-3xl">Personal Information</h3>
                             <div className="flex flex-row items-center justify-center gap-4">
-                            <button onClick={gotoEditPage}><img className="w-8 sm:w-12" src="./img/edit-icon.png" alt="Edit" /></button>
+                                <button onClick={gotoEditPage}><img className="w-8 sm:w-10" src="./img/edit-icon.png" alt="Edit" /></button>
+                                <button onClick={handleDelete}><img className="w-7 sm:w-8" src="./img/delete.png" alt="Edit" /></button>
                             </div>
                         </div>
 
-                        <ul className="list-none text-sm">
+                        <ul className="list-none text-sm sm:text-base">
                             <li className="my-2">Age: {player.age}</li>
                             <li className="my-2">Email: {player.email}</li>
                             <li className="my-2">Contact: {player.contact}</li>
@@ -118,9 +129,9 @@ const About = (props) => {
                     </div>
 
                     {/* Leaderboard Info Card */}
-                    <div className="bg-col-bg-dark drop-shadow-lg inline-block w-11/12 sm:w-2/5 p-4 rounded-xl relative">
-                    <h3 className="text-xl sm:text-3xl">Leaderboard Info</h3>
-                        <ul className="list-none text-sm">
+                    <div className="bg-col-bg-dark drop-shadow-lg inline-block w-full sm:w-2/5 p-4 px-8 rounded-xl relative">
+                        <h3 className="text-xl sm:text-3xl">Leaderboard Info</h3>
+                        <ul className="list-none text-sm sm:text-base">
                             <li className="my-2">Ranking: {player.ranking}</li>
                             <li className="my-2">Half Centuries: {player.centuries}</li>
                             <li className="my-2">Centuries:  {player.centuries}</li>
@@ -128,12 +139,6 @@ const About = (props) => {
                             <li className="my-2">Highest Score: {player.highest_score}</li>
                             <li className="my-2">Tournaments played: {player.tournaments_played}</li>
                         </ul>
-                        <div className="card-body">
-                            <button type="button" className="btn btn-success btn-sm m-2" onClick={gotoEditPage}>Edit</button>
-                            <button type="button" className="btn btn-danger btn-sm m-2" onClick={handleDelete}>Delete</button>
-
-                        </div>
-
                     </div>
 
                 </div>
@@ -141,11 +146,19 @@ const About = (props) => {
 
                 {/* Display teams with user as captain */}
                 <div className=" w-4/5 lg:w-2/3">
-                    <h1></h1>
-                    {player.captainOf && <div className="flex flex-row p-8 items-end gap-4 overflow-x-scroll w-[90%]">
-                        {player.captainOf.map((team) => <Team className="" key={temp++} team={team} isCaptain={1} />)}
+                    <h2 className="text-center text-3xl sm:text-4xl">Your Teams</h2>
+                    {player.captainOf && <div className="flex flex-row p-8 items-end gap-6 overflow-x-scroll w-[90%]">
+                        {player.captainOf.map((team) => <Team key={yourTeamsTemp++} team={team} isCaptain={1} />)}
                     </div>}
                 </div>
+
+                {/* Display teams with user in them */}
+                {/* <div className=" w-4/5 lg:w-2/3">
+                    <h2 className="text-center text-3xl sm:text-4xl">Your Teams</h2>
+                    <div className="flex flex-row p-8 items-end gap-6 overflow-x-scroll w-[90%]">
+                        {player.teams_joined.map((team) => <Team key={yourTeamsTemp++} team={team} isCaptain={0} />)}
+                    </div>
+                </div> */}
             </div>
         )
     }
