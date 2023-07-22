@@ -85,7 +85,7 @@ const Register = () => {
                     placeholder = "Confirm Password" name="cpassword" value={player.cpassword} 
                     onChange={handleInput} required />
 
-                    <button className="border border-col-btn bg-col-btn px-20 py-2 sm:text-lg text-sm font-bold rounded-full hover:bg-transparent transition duration-300 ease-in-out" type="submit" onClick={handleSubmit}>Register</button>
+                    <button className="border text-col-bg-dark hover:text-col-text border-col-btn bg-col-btn px-20 py-2 sm:text-lg text-sm font-bold rounded-full hover:bg-transparent transition duration-300 ease-in-out" type="submit" onClick={handleSubmit}>Register</button>
 
                     <p className="my-4">Already have a account ? <Link to="/login" className="text-col-btn hover:text-col-text transition duration-300 ease-in-out">Login</Link></p>
 

@@ -65,7 +65,7 @@ const EditPlayer = () => {
                         onChange={handleInput} required />
 
                     <div className="col-12">
-                        <button className="border border-col-btn bg-col-btn px-20 py-2 sm:text-lg text-sm font-bold rounded-full hover:bg-transparent transition duration-300 ease-in-out" type="submit" onClick={handleSubmit}>Update Player</button>
+                        <button className="border text-col-bg-dark hover:text-col-text border-col-btn bg-col-btn px-20 py-2 sm:text-lg text-sm font-bold rounded-full hover:bg-transparent transition duration-300 ease-in-out" type="submit" onClick={handleSubmit}>Update Player</button>
                     </div>
                 </form>
             </div>

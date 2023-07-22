@@ -9,6 +9,7 @@ const About = (props) => {
     const navigate = useNavigate();
 
     const [player, setPlayerData] = useState({})
+    const [playerCount, setPlayerCount] = useState(0)
     const [loading, setLoading] = useState(true)
 
     const callPlayerPage = async () => {
@@ -21,6 +22,17 @@ const About = (props) => {
                 },
                 credentials: "include"
             })
+
+            const countRes = await fetch('/players/all-players', {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                credentials: "include"
+            })
+            const players = await countRes.json()
+            setPlayerCount(players.length)
 
             const data = await res.json();
             setPlayerData(data)
@@ -93,7 +105,7 @@ const About = (props) => {
                         </div>
 
                         <div className="flex items-center justify-between gap-0">
-                            <h3 className="text-xl sm:text-3xl">Personal Information</h3>
+                            <h3 className="text-xl sm:text-3xl mb-4">Personal Information</h3>
                             <div className="flex flex-row items-center justify-center gap-4">
                                 <button onClick={gotoEditPage}><img className="w-8 sm:w-10" src="./img/edit-icon.png" alt="Edit" /></button>
                                 <button onClick={handleDelete}><img className="w-7 sm:w-8" src="./img/delete.png" alt="Edit" /></button>
@@ -128,17 +140,22 @@ const About = (props) => {
 
                     </div>
 
-                    {/* Leaderboard Info Card */}
+                    {/* Player Stats Card */}
                     <div className="bg-col-bg-dark drop-shadow-lg inline-block w-full sm:w-2/5 p-4 px-8 rounded-xl relative">
-                        <h3 className="text-xl sm:text-3xl">Leaderboard Info</h3>
+                        <h3 className="text-xl sm:text-3xl mb-4">Player Statistics</h3>
+                        <div className="flex flex-row w-full items-center justify-between gap-5">
                         <ul className="list-none text-sm sm:text-base">
-                            <li className="my-2">Ranking: {player.ranking}</li>
                             <li className="my-2">Half Centuries: {player.centuries}</li>
                             <li className="my-2">Centuries:  {player.centuries}</li>
                             <li className="my-2">Total Score:  {player.total_score}</li>
                             <li className="my-2">Highest Score: {player.highest_score}</li>
                             <li className="my-2">Tournaments played: {player.tournaments_played}</li>
                         </ul>
+                        <div className="flex text-lg sm:text-2xl flex-col items-start justify-center gap-2 mr-4">
+                            <span>Rank :</span>
+                            <p><span className="text-6xl sm:text-8xl">{player.ranking}</span>/{playerCount}</p>
+                        </div>
+                        </div>
                     </div>
 
                 </div>
