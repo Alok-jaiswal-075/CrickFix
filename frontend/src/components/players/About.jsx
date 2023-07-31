@@ -31,6 +31,7 @@ const About = (props) => {
                 credentials: "include"
             })
             const playerData = await res.json();
+            console.log('playerData')
             // setPlayerData(data)
 
             // fetching number of players
@@ -46,25 +47,25 @@ const About = (props) => {
             // setPlayerCount(players.length)
 
             // fetching all teams the player is in
-            const teamRes = await fetch('/teams',{
-                method : "GET",
-                headers : {
-                    "Accept" : "application/json",
-                    "Content-Type" : "application/json"
-                },
-                credentials: "include"
-            })
+            // const teamRes = await fetch('https://backend-crickfix.onrender.com/teams',{
+            //     method : "GET",
+            //     headers : {
+            //         "Accept" : "application/json",
+            //         "Content-Type" : "application/json"
+            //     },
+            //     credentials: "include"
+            // })
 
-            const teams = await teamRes.json()
+            // const teams = await teamRes.json()
             let tempTeamList = []
-            playerData.captainOf.forEach((team) => {
-                tempTeamList.push(team)
-            })
-            teams.forEach(team => {
-                if (!tempTeamList.includes(team) && team.players.includes(playerData)) {
-                    tempTeamList.push(team)
-                }
-            })
+            // playerData.captainOf.forEach((team) => {
+            //     tempTeamList.push(team)
+            // })
+            // teams.forEach(team => {
+            //     if (!tempTeamList.includes(team) && team.players.includes(playerData)) {
+            //         tempTeamList.push(team)
+            //     }
+            // })
             // setTeamList(tempTeamList)
 
             // console.log(aboutState.player.captainOf)
