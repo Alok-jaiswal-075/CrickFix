@@ -5,6 +5,7 @@ const teamRoutes = require('./Routes/teams')
 const matchRoutes = require('./Routes/match')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
+const cors = require('cors');
 const app = express()
 const port = 5000
 
@@ -29,6 +30,13 @@ mongoose.connect(dbUrl,{
 app.use(express.json())
 app.use(urlencoded({extended: false}))
 app.use(cookieParser())
+
+app.use(cors({
+    credentials: true,
+    // origin:'http://localhost:3000'
+    origin:'https://crickfix.onrender.com'
+}));
+
 
 app.use('/players',playerRoutes);
 app.use('/teams',teamRoutes)

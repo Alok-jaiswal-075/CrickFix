@@ -28,7 +28,7 @@ const ScoreBoard = () => {
 
     const fetchMatchDetails = async () => {
         // console.log('hello')
-        const res = await fetch('/matches/scoreboard/'+matchId, {
+        const res = await fetch('https://backend-crickfix.onrender.com/matches/scoreboard/'+matchId, {
             method: "GET",
             headers: {
                 "Accept": "application/json",

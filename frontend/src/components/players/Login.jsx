@@ -21,7 +21,7 @@ const Login = () => {
 
         const {email,password} = player
 
-        const res = await fetch("/players/login", {
+        const res = await fetch("https://backend-crickfix.onrender.com/players/login", {
             method: "POST",
             headers: {
                 "Content-type" : "application/json"

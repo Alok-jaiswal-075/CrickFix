@@ -20,7 +20,7 @@ const EditTeam = () => {
     const handleSubmit = async (e) =>{
         e.preventDefault();
 
-        const res = await fetch("/teams/"+id, {
+        const res = await fetch("https://backend-crickfix.onrender.com/teams/"+id, {
             method: "PUT",
             headers: {
                 "Content-type" : "application/json"
