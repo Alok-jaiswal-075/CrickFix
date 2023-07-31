@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import Loading from '../Utility/Loading';
+import Loading from '../Utility/Loading';
 
 const PlayerCard = ({ player }) => (
 
@@ -17,14 +17,14 @@ const PlayerCard = ({ player }) => (
 const PlayersList = () => {
   const [players, setPlayers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  // const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetch('/players/all-players')
       .then(response => response.json())
       .then(data => {
         setPlayers(data);
-        // setLoading(false)
+        setLoading(false)
 
       })
       .catch(error => {
@@ -39,8 +39,8 @@ const PlayersList = () => {
   });
 
   return (
-    // loading ? <Loading /> 
-    // :
+    loading ? <Loading /> 
+    :
     <div className="mt-28 grid grid-cols-12 gap-4">
       <div className="col-start-2 col-span-10 flex flex-col justify-center items-center font-text gap-8">
         <h1 className='my-7 sm:text-5xl text-2xl font-heading tracking-wider'>Players</h1>
