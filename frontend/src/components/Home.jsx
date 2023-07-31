@@ -2,6 +2,7 @@ import React,{useEffect, useState} from 'react'
 import Modal from './Modal'
 import backgroundImage from '../asset/Hero.png';
 // import Loading from './Utility/Loading';
+const axios = require('axios');
 
 
 const Home = (props) => {
@@ -11,22 +12,18 @@ const Home = (props) => {
 
   const homePage = async () => {
  
-      try{ 
-           const res = await fetch ('https://backend-crickfix.onrender.com/hello',{
-            method : "GET",
-            headers: {'Accept': 'application/json', },
-            
+    try {
+      const response = await axios.get('https://backend-crickfix.onrender.com/hello', {
+        headers: {
+          'Accept': 'application/json'
+        }
       });
-
-      const data = await res.json();
-        // setLoading(false)
-      console.log(data);
-        
     
-      } catch(err){
-      console.log(err);
-          
-      }
+      const data = response.data;
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
     }
 
   useEffect(() => {
