@@ -19,7 +19,7 @@ const NewTeam = () => {
     const handleSubmit = async (e) =>{
         e.preventDefault();
 
-        const res = await fetch("https://backend-crickfix.onrender.com/teams", {
+        const res = await fetch("/teams", {
             method: "POST",
             headers: {
                 "Content-type" : "application/json"

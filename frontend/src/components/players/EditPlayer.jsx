@@ -17,7 +17,7 @@ const EditPlayer = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const res = await fetch("https://backend-crickfix.onrender.com/players", {
+        const res = await fetch("/players", {
             method: "PUT",
             headers: {
                 "Content-type": "application/json"
@@ -39,7 +39,7 @@ const EditPlayer = () => {
     }
 
     return (
-        <div className="w-full h-full grid grid-cols-12 gap-4 sm:flex justify-center items-center">
+        <div className="mt-28 grid grid-cols-12 gap-4 sm:flex justify-center items-center">
             <div className="bg-transparent flex flex-col justify-center items-center gap-3 col-start-5 col-span-4 font-text ">
                 <h1 className="my-7 sm:text-5xl text-2xl font-heading tracking-wider">Edit Player</h1>
                 <form className="flex flex-col justify-center items-center gap-7" method="POST" noValidate autoComplete="off">

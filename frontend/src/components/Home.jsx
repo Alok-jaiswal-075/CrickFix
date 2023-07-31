@@ -1,29 +1,32 @@
 import React,{useEffect, useState} from 'react'
 import Modal from './Modal'
 import backgroundImage from '../asset/Hero.png';
-// import Loading from './Utility/Loading';
-const axios = require('axios');
+import Loading from './Utility/Loading';
 
 
 const Home = (props) => {
 
     const [isOpen,setisopen] = useState(true);
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const homePage = async () => {
  
-    try {
-      const response = await axios.get('https://backend-crickfix.onrender.com/hello', {
-        headers: {
-          'Accept': 'application/json'
-        }
+      try{ 
+           const res = await fetch ('/hello',{
+            method : "GET",
+            headers: {'Accept': 'application/json', },
+            
       });
-    
-      const data = response.data;
+
+      const data = await res.json();
+        setLoading(false)
       console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
+        
+    
+      } catch(err){
+      console.log(err);
+          
+      }
     }
 
   useEffect(() => {
@@ -32,8 +35,8 @@ const Home = (props) => {
       }, [])
     
       return(
-        // loading ? <Loading />
-        // :
+        loading ? <Loading />
+        :
       <>
         <div className='flex items-center min-h-screen bg-cover' style={{ backgroundImage: `url(${backgroundImage})` }}>
           <div className='pl-10 md:pl-48 bg-transparent min-w-fit mb-42 md:absolute z-10'>

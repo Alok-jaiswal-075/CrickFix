@@ -34,7 +34,7 @@ const ChooseOpponent = () => {
 
     const fetchOtherTeams = async () => {
         try {
-            const res = await fetch('https://backend-crickfix.onrender.com/teams/otherTeams', {
+            const res = await fetch('/teams/otherTeams', {
                 method: "GET",
                 headers: {
                     "Accept": "application/json",

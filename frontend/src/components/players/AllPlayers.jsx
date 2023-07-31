@@ -20,7 +20,7 @@ const PlayersList = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('https://backend-crickfix.onrender.com/players/all-players')
+    fetch('/players/all-players')
       .then(response => response.json())
       .then(data => {
         setPlayers(data);

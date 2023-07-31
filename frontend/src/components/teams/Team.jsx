@@ -10,7 +10,7 @@ const Team = (props) => {
         setIsLoading(true);
 
         try {
-            const res = await fetch('https://backend-crickfix.onrender.com/players/send-request/' + props.team._id, {
+            const res = await fetch('/players/send-request/' + props.team._id, {
                 method: "POST",
                 headers: {
                     "Accept": "application/json",
@@ -28,13 +28,13 @@ const Team = (props) => {
     };
 
 
-    const goToTeamDashboard = () => {
+    const gotoEditPage = () => {
         navigate('/team/' + props.team._id);
     }
 
     const handleDelete = async () => {
         try {
-            const res = await fetch('https://backend-crickfix.onrender.com/teams/' + props.team._id, {
+            const res = await fetch('/teams/' + props.team._id, {
                 method: "DELETE",
                 headers: {
                     "Accept": "application/json",
@@ -68,7 +68,7 @@ const Team = (props) => {
                 <li className="bg-col-bg-dark">Matches Draw := {props.team.matches_draw}</li>
             </ul>
 
-            <div className="flex my-2 gap-2 items-center justify-start p-0">
+            <div className="">
 
                 {/* {
                         props.isCaptain 
@@ -93,7 +93,7 @@ const Team = (props) => {
                         <a href={"team/matchRequests/"+props.team._id} className="text-col-btn hover:text-col-text transition-all duration-200">Match Requests</a>
                     } */}
 
-                <button type="button" className='border border-col-btn text-col-bg-dark hover:text-col-text bg-col-btn  rounded text-md px-5 py-1 hover:bg-transparent  transition duration-300 ease-in-out ' onClick={goToTeamDashboard}>View</button>
+                <button type="button" className='border border-col-btn text-col-bg-dark hover:text-col-text bg-col-btn  rounded text-md px-5 py-1 hover:bg-transparent  transition duration-300 ease-in-out ' onClick={gotoEditPage}>View</button>
 
                 {
                     !props.isCaptain

@@ -13,7 +13,7 @@ const ChoosePlayersTeam2 = () => {
   const {matchId} = params
 
   const fetchMatchDetails = async () => {
-    const res = await fetch('https://backend-crickfix.onrender.com/matches/'+matchId, {
+    const res = await fetch('/matches/'+matchId, {
         method: "GET",
         headers: {
             "Accept": "application/json",
@@ -43,7 +43,7 @@ const ChoosePlayersTeam2 = () => {
         let players = []
         if(selected) players = selected.map(player => player.value)
         try {
-          const res = await fetch('https://backend-crickfix.onrender.com/matches/match_request_accept/'+matchId, {
+          const res = await fetch('/matches/match_request_accept/'+matchId, {
                 method: "POST",
                 headers: {
                     "Content-type" : "application/json"

@@ -36,8 +36,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/editPlayer" element={<EditPlayer />} />
-      <Route path="/team/:id" element={<TeamDashboard/>} />
-      <Route path="/editTeam/:id" element={<EditTeam/>} />
+      <Route path="/team/:id" element={<EditTeam />} />
       <Route path="/match/scoreboard/:matchId" element={<ScoreBoard />} />
       <Route path="team/teamRequests/:id" element={<TeamRequests />} />
       <Route path="team/matchRequests/:id" element={<MatchRequests />} />
@@ -46,7 +45,7 @@ function App() {
       <Route path="/match/creatematch/:team1" element={<ChooseOpponent />} />
       <Route path="/match/creatematch/:team1/:team2" element={<ChoosePlayers />} />
       <Route path="/match/match_request_accept/:matchId" element={<ChoosePlayersTeam2 />} />
-      {/* <Route path="/dashboard/" element={<TeamDashboard />} /> */}
+      <Route path="/dashboard/" element={<TeamDashboard />} />
       {/* <Route path="*" element={<Error />} /> */}
 
      </Routes>
