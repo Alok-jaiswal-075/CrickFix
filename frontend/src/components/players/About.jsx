@@ -23,7 +23,7 @@ const About = (props) => {
     const callPlayerPage = async () => {
         try {
             // fetching player data
-            const res = await fetch('/players', {
+            const res = await fetch('https://backend-crickfix.onrender.com/players', {
                 method: "GET",
                 headers: {
                     "Accept": "application/json",
@@ -35,7 +35,7 @@ const About = (props) => {
             // setPlayerData(data)
 
             // fetching number of players
-            const countRes = await fetch('/players/all-players', {
+            const countRes = await fetch('https://backend-crickfix.onrender.com/players/all-players', {
                 method: "GET",
                 headers: {
                     "Accept": "application/json",
@@ -47,7 +47,7 @@ const About = (props) => {
             // setPlayerCount(players.length)
 
             // fetching all teams the player is in
-            const teamRes = await fetch('/teams',{
+            const teamRes = await fetch('https://backend-crickfix.onrender.com/teams',{
                 method : "GET",
                 headers : {
                     "Accept" : "application/json",
@@ -98,7 +98,7 @@ const About = (props) => {
         let opt = window.confirm('Are you sure you want to delete this account?')
         if (opt) {
             try {
-                const res = await fetch('/players', {
+                const res = await fetch('https://backend-crickfix.onrender.com/players', {
                     method: "DELETE",
                     headers: {
                         "Accept": "application/json",

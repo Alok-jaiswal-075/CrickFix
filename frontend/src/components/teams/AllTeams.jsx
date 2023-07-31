@@ -8,7 +8,7 @@ const AllTeams = () => {
 
     const callTeamsPage = async () =>{
         try{
-            const res = await fetch('/teams',{
+            const res = await fetch('https://backend-crickfix.onrender.com/teams',{
                 method : "GET",
                 headers : {
                     "Accept" : "application/json",

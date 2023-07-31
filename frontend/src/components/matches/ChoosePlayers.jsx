@@ -24,7 +24,7 @@ const ChoosePlayers = () => {
   // console.log(team1,team2)
 
   const fetchTeam1 = async () => {
-      const res = await fetch('/teams/'+team1, {
+      const res = await fetch('https://backend-crickfix.onrender.com/teams/'+team1, {
           method: "GET",
           headers: {
               "Accept": "application/json",
@@ -41,7 +41,7 @@ const ChoosePlayers = () => {
   }
 
   const fetchTeam2 = async () => {
-      const res = await fetch('/teams/'+team2, {
+      const res = await fetch('https://backend-crickfix.onrender.com/teams/'+team2, {
           method: "GET",
           headers: {
               "Accept": "application/json",

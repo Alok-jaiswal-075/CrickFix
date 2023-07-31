@@ -12,7 +12,7 @@ const Home = (props) => {
   const homePage = async () => {
  
       try{ 
-           const res = await fetch ('/hello',{
+           const res = await fetch ('https://backend-crickfix.onrender.com/hello',{
             method : "GET",
             headers: {'Accept': 'application/json', },
             

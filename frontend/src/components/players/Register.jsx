@@ -20,7 +20,7 @@ const Register = () => {
         e.preventDefault();
 
         if(player.password === player.cpassword){
-            const res = await fetch("/players", {
+            const res = await fetch("https://backend-crickfix.onrender.com/players", {
                 method: "POST",
                 headers: {
                     "Content-type" : "application/json"
