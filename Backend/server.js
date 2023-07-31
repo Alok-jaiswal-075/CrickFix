@@ -5,6 +5,7 @@ const teamRoutes = require('./Routes/teams')
 const matchRoutes = require('./Routes/match')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
+const cors = require('cors');
 const app = express()
 const port = 5000
 
