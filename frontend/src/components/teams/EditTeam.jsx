@@ -34,31 +34,24 @@ const EditTeam = () => {
         if(!data || res.status === 401 || res.status===500){
             window.alert(data.msg)
         }
-        navigate('/teams')
+        navigate('/team/' + id)
     }
 
     return(
-        <div className="container">
-            <div className="row">
-                <form className="row g-3 needs-validation" method="POST" noValidate autoComplete="off">
-                    <div className="col-12">
-                    <label htmlFor="validationCustom01" className="form-label">First name</label>
-                    <input type="text" className="form-control"  name="name" value={team.name} onChange={handleInput} required />
-                    <div className="valid-feedback">
-                        Looks good!
-                    </div>
-                    </div>
+        <div className="w-full h-full mt-28 gap-4 sm:flex justify-center items-center">
+            <div className="bg-transparent flex flex-col justify-center items-center gap-3 col-start-5 col-span-4 font-text ">
+                <h1 className="my-7 sm:text-5xl text-2xl font-heading tracking-wider">Edit Team</h1>
+                <form className="flex flex-col justify-center items-center gap-7" method="POST" noValidate autoComplete="off">
+                    <input type="text" className="bg-transparent border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 sm:text-lg text-sm focus:outline-none"
+                        placeholder="Team Name" name="name" value={team.name}
+                        onChange={handleInput} required />
+
+                    <input type="text" className="bg-transparent border-4 border-transparent border-b-col-bg-dark  max-w-full p-2 pl-10 sm:text-lg text-sm focus:outline-none"
+                        placeholder="Team Location" name="location_based" value={team.location_based}
+                        onChange={handleInput} required />
 
                     <div className="col-12">
-                    <label htmlFor="validationCustom02" className="form-label">Location Based</label>
-                    <input type="text" className="form-control"  name="location_based" value={team.location_based} onChange={handleInput} required />
-                    <div className="valid-feedback">
-                        Looks good!
-                    </div>
-                    </div>
-                    
-                    <div className="col-12">
-                    <button className="btn btn-success" type="submit" onClick={handleSubmit}>Update Team</button>
+                        <button className="border text-col-bg-dark hover:text-col-text border-col-btn bg-col-btn px-20 py-2 sm:text-lg text-sm font-bold rounded-full hover:bg-transparent transition duration-300 ease-in-out" type="submit" onClick={handleSubmit}>Update Team</button>
                     </div>
                 </form>
             </div>

@@ -28,7 +28,7 @@ const Team = (props) => {
     };
 
 
-    const gotoEditPage = () => {
+    const goToTeamDashboard = () => {
         navigate('/team/' + props.team._id);
     }
 
@@ -68,7 +68,7 @@ const Team = (props) => {
                 <li className="bg-col-bg-dark">Matches Draw := {props.team.matches_draw}</li>
             </ul>
 
-            <div className="">
+            <div className="flex my-2 gap-2 items-center justify-start p-0">
 
                 {/* {
                         props.isCaptain 
@@ -93,7 +93,7 @@ const Team = (props) => {
                         <a href={"team/matchRequests/"+props.team._id} className="text-col-btn hover:text-col-text transition-all duration-200">Match Requests</a>
                     } */}
 
-                <button type="button" className='border border-col-btn text-col-bg-dark hover:text-col-text bg-col-btn  rounded text-md px-5 py-1 hover:bg-transparent  transition duration-300 ease-in-out ' onClick={gotoEditPage}>View</button>
+                <button type="button" className='border border-col-btn text-col-bg-dark hover:text-col-text bg-col-btn  rounded text-md px-5 py-1 hover:bg-transparent  transition duration-300 ease-in-out ' onClick={goToTeamDashboard}>View</button>
 
                 {
                     !props.isCaptain

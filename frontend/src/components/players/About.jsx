@@ -5,7 +5,6 @@ import Loading from "../Utility/Loading";
 
 const About = (props) => {
     let yourTeamsTemp = 1;
-    // let joinedTeamsTemp = 1;
     const navigate = useNavigate();
 
     // const [player, setPlayerData] = useState({})
@@ -47,27 +46,27 @@ const About = (props) => {
             // setPlayerCount(players.length)
 
             // fetching all teams the player is in
-            const teamRes = await fetch('/teams',{
-                method : "GET",
-                headers : {
-                    "Accept" : "application/json",
-                    "Content-Type" : "application/json"
+            const teamRes = await fetch('/teams', {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
                 },
-                credentials : "include"
+                credentials: "include"
             })
 
             const teams = await teamRes.json()
             let tempTeamList = []
-            playerData.captainOf.forEach((team)=>{
+            playerData.captainOf.forEach((team) => {
                 tempTeamList.push(team)
             })
-            teams.forEach(team=>{
-                if(!tempTeamList.includes(team) && team.players.includes(playerData)){
+            teams.forEach(team => {
+                if (!tempTeamList.includes(team) && team.players.includes(playerData)) {
                     tempTeamList.push(team)
                 }
             })
             // setTeamList(tempTeamList)
-            
+
             // console.log(aboutState.player.captainOf)
             // console.log(aboutState.player.joined_teams)
             // setLoading(false)
@@ -183,7 +182,7 @@ const About = (props) => {
                     <div className="bg-col-bg-dark drop-shadow-lg inline-block w-full sm:w-2/5 p-4 px-8 rounded-xl relative">
                         <div className="flex flex-row w-full items-center justify-between gap-5">
                             <div>
-                            <h3 className="text-xl sm:text-3xl mb-4">Player Statistics</h3>
+                                <h3 className="text-xl sm:text-3xl mb-4">Player Statistics</h3>
                                 <ul className="list-none text-sm sm:text-base">
                                     <li className="my-2">Half Centuries: {aboutState.player.centuries}</li>
                                     <li className="my-2">Centuries:  {aboutState.player.centuries}</li>
@@ -209,15 +208,16 @@ const About = (props) => {
                     {aboutState.player.captainOf && <div className="flex flex-row p-8 items-end gap-6 overflow-x-scroll w-[90%]">
                         {aboutState.player.captainOf.map((team) => <Team key={yourTeamsTemp++} team={team} isCaptain={1} />)}
                     </div>}
+                    <p className="text-center my-4"><a className="text-col-bg-dark bg-col-btn px-4 py-2 rounded-3xl border border-col-btn hover:bg-transparent hover:text-col-btn transition-all duration-200" href="/newTeam">New Team</a></p>
                 </div>
 
                 {/* Display teams with user in them */}
-                 <div className=" w-4/5 lg:w-2/3">
-                     <h2 className="text-center text-3xl sm:text-4xl">Joined Teams</h2>
-                     <div className="flex flex-row p-8 items-end gap-6 overflow-x-scroll w-[90%]">
-                         {aboutState.teamList.map((team) => <Team key={yourTeamsTemp++} team={team} isCaptain={0} />)}
-                     </div>
-                 </div>
+                <div className=" w-4/5 lg:w-2/3">
+                    <h2 className="text-center text-3xl sm:text-4xl">Joined Teams</h2>
+                    <div className="flex flex-row p-8 items-end gap-6 overflow-x-scroll w-[90%]">
+                        {aboutState.teamList.map((team) => <Team key={yourTeamsTemp++} team={team} isCaptain={0} />)}
+                    </div>
+                </div>
             </div>
         )
     }
