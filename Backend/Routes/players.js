@@ -67,8 +67,7 @@ router.route('/')
                 res.cookie('token', token,{
                     expires:new Date(Date.now() + 25892000000),
                     secure: true, 
-                    httpOnly: true, 
-                    sameSite: 'none' 
+                    httpOnly: true 
                   });
                 res.status(200).json({ msg: 'User signed in successfully'})
             }else{
