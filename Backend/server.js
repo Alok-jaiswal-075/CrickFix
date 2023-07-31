@@ -29,9 +29,11 @@ mongoose.connect(dbUrl,{
 app.use(express.json())
 app.use(urlencoded({extended: false}))
 app.use(cookieParser())
+
 app.use(cors({
     credentials: true,
-    origin:'https://backend-crickfix.onrender.com'
+    // origin:'http://localhost:3000'
+    origin:'https://crickfix.onrender.com'
 }));
 
 
