@@ -2,30 +2,40 @@ import React,{useEffect, useState} from 'react'
 import Modal from './Modal'
 import backgroundImage from '../asset/Hero.png';
 // import Loading from './Utility/Loading';
-const axios = require('axios');
+// const axios = require('axios');
 
 
 const Home = (props) => {
 
-    // const [isOpen,setisopen] = useState(true);
-  const [loading, setLoading] = useState(true);
     const [isOpen,setisopen] = useState(true);
   // const [loading, setLoading] = useState(true);
 
   const homePage = async () => {
  
-    try {
-      const response = await axios.get('https://backend-crickfix.onrender.com/hello', {
-        headers: {
+    async function fetchData() {
+      try {
+        const url = 'https://backend-crickfix.onrender.com/hello';
+        const headers = {
           'Accept': 'application/json'
-        }
-      });
+        };
     
-      const data = response.data;
-      console.log(data);
-    } catch (error) {
-      console.error(error);
+        const response = await fetch(url, { headers });
+        
+        if (!response.ok) {
+          throw new Error('Request failed');
+        }
+    
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+      }
     }
+    
+    // Call the fetchData function
+    fetchData();
+    
+    
     }
 
   useEffect(() => {

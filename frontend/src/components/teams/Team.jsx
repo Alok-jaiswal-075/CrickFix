@@ -81,7 +81,7 @@ const Team = (props) => {
                         <button type="button" className='border border-col-btn text-col-bg-dark hover:text-col-text bg-col-btn  rounded text-md px-3 m-2 py-1.5 hover:bg-transparent transition duration-300 ease-in-out ' onClick={handleDelete}>Delete</button>
                     } */}
                 <br />
-                {/* {
+                {
                         props.isCaptain 
                         && 
                         <a href={"team/teamRequests/"+props.team._id} className="text-col-btn hover:text-col-text transition-all duration-200">Join Requests</a>
@@ -91,7 +91,7 @@ const Team = (props) => {
                         props.isCaptain 
                         && 
                         <a href={"team/matchRequests/"+props.team._id} className="text-col-btn hover:text-col-text transition-all duration-200">Match Requests</a>
-                    } */}
+                    }
 
                 <button type="button" className='border border-col-btn text-col-bg-dark hover:text-col-text bg-col-btn  rounded text-md px-5 py-1 hover:bg-transparent  transition duration-300 ease-in-out ' onClick={gotoEditPage}>View</button>
 
