@@ -10,7 +10,9 @@ const { findById, findByIdAndUpdate } = require('../Models/Team');
 const bcrypt = require('bcryptjs')
 const { isLoggedIn } = require("../Middlewares")
 
-const JWT_SECRET = "this is a #$#@# very tough secret @&%^#&&**"
+
+// const JWT_SECRET = "this is a #$#@# very tough secret @&%^#&&**"
+const JWT_SECRET = process.env.JWT_SECRET
 
 router.route('/')
     .post(catchAsync(async (req,res,next)=>{
@@ -64,10 +66,12 @@ router.route('/')
 
             if(player && bcrypt.compareSync(password, player.password)){
                 const token = jwt.sign({ "playerId": player._id}, JWT_SECRET);
+
                 res.cookie('token', token,{
                     expires:new Date(Date.now() + 25892000000),
-                    secure: true, 
-                    httpOnly: true 
+                    // secure: true, 
+                    httpOnly: true,
+                    sameSite : 'none'
                   });
                 res.status(200).json({ msg: 'User signed in successfully'})
             }else{

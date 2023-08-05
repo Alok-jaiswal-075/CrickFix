@@ -1,3 +1,5 @@
+const dotenv = require('dotenv')
+dotenv.config({path:'./config.env'})
 const { urlencoded } = require('express')
 const express = require('express')
 const playerRoutes = require('./Routes/players')
