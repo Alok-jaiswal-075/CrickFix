@@ -68,8 +68,8 @@ router.route('/')
                 const token = jwt.sign({ "playerId": player._id}, JWT_SECRET);
 
                 res.cookie('token', token,{
-                    expires:new Date(Date.now() + 25892000000),
-                    // secure: true, 
+                    // expires:new Date(Date.now() + 25892000000),
+                    secure: true, 
                     httpOnly: true,
                     sameSite : 'none'
                   });
