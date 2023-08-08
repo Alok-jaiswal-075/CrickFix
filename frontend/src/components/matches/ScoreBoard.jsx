@@ -318,87 +318,98 @@ const ScoreBoard = () => {
     }
 
 
+    
+
+
+
+
+    const btnStyle = "border text-col-bg-dark hover:text-col-text border-col-btn bg-col-btn px-10 py-2 sm:px-20 sm:py-2 sm:text-lg text-sm font-bold rounded hover:bg-transparent transition duration-300 ease-in-out"
+
     return (
-        <div className="">
-            <div className='container'>
-                <div className='row'>
-                    <div className='col'></div>
-                    <div className='col-10'>
+        
 
-                        <hr className="border border-primary border-3 opacity-75"></hr>
-                        <div className="d-flex justify-content-between">
-                            <h4 className="d-inline">{totalScore} ({currOvers}.{currBalls})/{wickets}</h4>
-                            <h4 className="d-inline">Inning: {currInning}</h4>
-                        </div>
-                        <hr className="border border-primary border-3 opacity-75"></hr>
+        <div className="grid grid-cols-12 my-4 sm:my-8">
 
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th scope="col">Player</th>
-                                    <th scope="col">R(B)</th>
-                                    <th scope="col">4s</th>
-                                    <th scope="col">6s</th>
-                                    {/* <th scope="col">SR</th> */}
-                                </tr>
-                            </thead>
-                            <tbody className="table-group-divider">
-                                <tr>
-                                    <td>{striker===1 && '*'}</td>
-                                    <td>{player1.fname} {player1.lname}</td>
-                                    <td>{player1.total_score}({player1.balls})</td>
-                                    <td>{player1.fours}</td>
-                                    <td>{player1.sixes}</td>
-                                    {/* <td>{player1.balls!=0 ? player1.total_score/player1.balls : 0}</td> */}
-                                </tr>
-                                <tr>
-                                    <td>{striker===2 && '*'}</td>
-                                    <td>{player2.fname} {player2.lname}</td>
-                                    <td>{player2.total_score}({player2.balls})</td>
-                                    <td>{player2.fours}</td>
-                                    <td>{player2.sixes}</td>
-                                    {/* <td>{player2.balls!=0 ? player2.total_score/player2.balls : 0}</td> */}
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div className='col'></div>
-                </div>
+
+            <div className="my-4 sm:my-5 col-start-2 col-span-10 flex items-center justify-center sm:text-4xl text-xl font-heading tracking-wider text-col-btn">
+                <h1>SCOREBOARD</h1>
             </div>
 
-            <div className="container pt-5">
-                <div className="row">
-                    <div className="col-1"></div>
-                    <div className="col-8">
-                        <div className="row">
-                            <div className="col-10">
-                                <div className="row">
-                                    <div className="col"><button type="button" className="btn btn-outline-info px-5" onClick={() => handleRun(0)}>0</button></div>
-                                    <div className="col"><button type="button" className="btn btn-outline-info px-5" onClick={() => handleRun(1)}>1</button></div>
-                                    <div className="col"><button type="button" className="btn btn-outline-info px-5" onClick={() => handleRun(2)}>2</button></div>
-                                    <div className="col"><button type="button" className="btn btn-outline-info px-5" onClick={() => handleRun(3)}>3</button></div>
-                                </div>
-                                <div className="row mt-2">
-                                    <div className="col"><button type="button" className="btn btn-outline-info px-5" onClick={() => handleRun(4)}>4</button></div>
-                                    <div className="col"><button type="button" className="btn btn-outline-info px-5" onClick={() => handleRun(6)}>6</button></div>
-                                    <div className="col"><button type="button" className="btn btn-outline-info px-5" onClick={handlenb}>nb</button></div>
-                                    <div className="col"><button type="button" className="btn btn-outline-info px-5" onClick={handlewide}>wd</button></div>
-                                </div>
-                            </div>
-                            <div className="col">
-                                <button type="button" className="btn btn-outline-info px-4" onClick={handleOut}>Wicket</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-1"></div>
+            <div className="my-4 sm:my-5 col-start-2 col-span-10">
+                <hr className='my-5'/>
+                <div className="px-10 sm:px-20 flex place-content-between sm:text-2xl text-md">
+                    <p >{totalScore} ({currOvers}.{currBalls}) / {wickets}</p>
+                    <p >Inning : {currInning}</p>
                 </div>
+                <hr className='my-5'/>
             </div>
 
+
+
+
+
+            <div className="my-5 sm:my-10 col-start-1 col-span-full sm:col-start-2 sm:col-span-10">
+
+                <table class="min-w-full text-center font-light sm:text-lg text-sm">
+                    <thead
+                        class="border-b bg-neutral-50 font-medium dark:border-neutral-500 dark:text-neutral-800">
+                        <tr>
+                            <th scope="col" className='py-5 px-5'></th>
+                            <th scope="col" className='py-5 px-5'>Player</th>
+                            <th scope="col" className='py-5 px-5'>R(B)</th>
+                            <th scope="col" className='py-5 px-5'>4s</th>
+                            <th scope="col" className='py-5 px-5'>6s</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b dark:border-neutral-500">
+                            <td className="font-medium px-3">{striker===1 && <img src='../../../img/cricket-player.png' className='w-6 h-6'/>}</td>
+                            <td className='py-5 px-5'>{player1.fname} {player1.lname}</td>
+                            <td className='py-5 px-5'>{player1.total_score}({player1.balls})</td>
+                            <td className='py-5 px-5'>{player1.fours}</td>
+                            <td className='py-5 px-5'>{player1.sixes}</td>
+                        </tr>
+                        <tr class="border-b dark:border-neutral-500">
+                            <td className="font-medium px-3">{striker===2 && <img src='../../../img/cricket-player.png' className='w-6 h-6'/>}</td>
+                            <td className='py-5 px-5'>{player2.fname} {player2.lname}</td>
+                            <td className='py-5 px-5'>{player2.total_score}({player2.balls})</td>
+                            <td className='py-5 px-5'>{player2.fours}</td>
+                            <td className='py-5 px-5'>{player2.sixes}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+
+
+
+
+
+
+
+                
+            </div>
+
+            <div className="my-5 sm:my-10 col-start-1 col-span-full sm:col-start-3 sm:col-span-8">
+                <div className="flex flex-col justify-center items-center">
+                    <div className="flex gap-4 sm:gap-8 flex-wrap justify-center items-center">
+                        <button type="button" className={btnStyle} onClick={() => handleRun(0)}>0</button>
+                        <button type="button" className={btnStyle} onClick={() => handleRun(1)}>1</button>
+                        <button type="button" className={btnStyle} onClick={() => handleRun(2)}>2</button>
+                        <button type="button" className={btnStyle} onClick={() => handleRun(3)}>3</button>
+                        <button type="button" className={btnStyle} onClick={() => handleRun(4)}>4</button>
+                        <button type="button" className={btnStyle} onClick={() => handleRun(6)}>6</button>
+                        <button type="button" className={btnStyle} onClick={handlenb}>nb</button>
+                        <button type="button" className={btnStyle} onClick={handlewide}>wd</button>
+                        <button type="button" className={btnStyle} onClick={handleOut}>Wicket</button>
+                    </div>
+                </div>
+                <div className="col">
+                </div>
+            </div>
 
         </div>
-
-        
     )
 }
 
