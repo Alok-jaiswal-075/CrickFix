@@ -130,6 +130,15 @@ router.route('/')
     router.post('/logout', isLoggedIn, catchAsync(async(req, res)=>{
       res.clearCookie('token').json({'msg':'Logged out successfully'}) 
     }))
+
+    router.get('/dashboard',catchAsync(async (req,res,next)=>{
+      const player =await Player.findById(req.playerId).populate('teams_joined').populate('captainOf');
+      if(!player){
+          throw new appError('Player not found',404);
+      }
+      const {fname,lname,age,email,contact,ranking,half_centuries,centuries,total_score,highest_score,tournaments_played,captainOf} = player
+      res.json({fname,lname,age,email,contact,ranking,half_centuries,centuries,total_score,highest_score,tournaments_played,captainOf})
+  }))
       
 
     // router.post('/send-request',isLoggedIn, async (req, res) => {
