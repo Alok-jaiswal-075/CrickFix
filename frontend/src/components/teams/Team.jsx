@@ -11,7 +11,7 @@ const Team = (props) => {
         // setIsLoading(true);
 
         try {
-            const res = await fetch('/players/send-request/' + props.team._id, {
+            const res = await fetch('/api/players/send-request/' + props.team._id, {
                 method: "POST",
                 headers: {
                     "Accept": "application/json",
@@ -35,7 +35,7 @@ const Team = (props) => {
 
     const handleDelete = async () => {
         try {
-            const res = await fetch('https://backend-crickfix.onrender.com/teams/' + props.team._id, {
+            const res = await fetch('/api/teams/' + props.team._id, {
                 method: "DELETE",
                 headers: {
                     "Accept": "application/json",

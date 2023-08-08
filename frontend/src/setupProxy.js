@@ -5,20 +5,17 @@ const proxy = {
 }
 
 module.exports = function(app) {
+
   app.use(
-    '/hello',
+    '/api/players',
     createProxyMiddleware(proxy)
   );
   app.use(
-    '/players',
+    '/api/teams',
     createProxyMiddleware(proxy)
   );
   app.use(
-    '/teams',
-    createProxyMiddleware(proxy)
-  );
-  app.use(
-    '/matches',
+    '/api/matches',
     createProxyMiddleware(proxy)
   );
 

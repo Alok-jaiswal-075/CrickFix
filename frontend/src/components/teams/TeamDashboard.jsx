@@ -25,7 +25,7 @@ const Dashboard = (props) => {
   const [loading, setLoading] = useState(true)
 
   const getTeamDetails = async () => {
-    const url = `/teams/${id}`
+    const url = `/api/teams/${id}`
     try {
       const res = await fetch(url, {
         method: "GET",
@@ -49,7 +49,7 @@ const Dashboard = (props) => {
     let opt = window.confirm(`Are you sure you want to delete ${team.name}?`)
     if (opt) {
       try {
-        const res = await fetch('/teams/' + id, {
+        const res = await fetch('/api/teams/' + id, {
           method: "DELETE",
           headers: {
             "Accept": "application/json",
@@ -92,7 +92,7 @@ const Dashboard = (props) => {
 
     const handleReject = async () => {
       // console.log('hello')
-      const res = await fetch("/teams/match_request_reject/" + props.id + "/" + props.player._id, {
+      const res = await fetch("/api/teams/match_request_reject/" + props.id + "/" + props.player._id, {
         method: "POST",
         headers: {
           "Content-type": "application/json"
@@ -138,7 +138,7 @@ const Dashboard = (props) => {
     const navigate = useNavigate()
 
     const handleBatting = async () => {
-      const res = await fetch('/matches/setbatting/' + props.matchId, {
+      const res = await fetch('/api/matches/setbatting/' + props.matchId, {
         method: "GET",
         headers: {
           "Accept": "application/json",
@@ -155,7 +155,7 @@ const Dashboard = (props) => {
 
     const handleBowling = async () => {
       console.log('hello')
-      const res = await fetch('/matches/setbowling/' + props.matchId, {
+      const res = await fetch('/api/matches/setbowling/' + props.matchId, {
         method: "GET",
         headers: {
           "Accept": "application/json",

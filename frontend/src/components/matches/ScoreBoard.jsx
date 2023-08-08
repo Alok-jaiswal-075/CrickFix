@@ -28,7 +28,7 @@ const ScoreBoard = () => {
 
     const fetchMatchDetails = async () => {
         // console.log('hello')
-        const res = await fetch('/matches/scoreboard/'+matchId, {
+        const res = await fetch('/api/matches/scoreboard/'+matchId, {
             method: "GET",
             headers: {
                 "Accept": "application/json",
@@ -318,7 +318,7 @@ const ScoreBoard = () => {
     }
 
 
-    
+
 
 
 

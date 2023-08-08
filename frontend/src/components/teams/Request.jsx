@@ -8,7 +8,7 @@ const TeamRequest = (props) => {
     const handleAccept = async () =>{
         console.log('hello')
 
-        const res = await fetch("/teams/request-accept/"+props.id+"/"+props.player._id, {
+        const res = await fetch("/api/teams/request-accept/"+props.id+"/"+props.player._id, {
             method: "POST",
             headers: {
                 "Content-type" : "application/json"
@@ -27,7 +27,7 @@ const TeamRequest = (props) => {
 
     const handleReject = async () =>{
         console.log('hello')
-        const res = await fetch("/teams/request-reject/"+props.id+"/"+props.player._id, {
+        const res = await fetch("/api/teams/request-reject/"+props.id+"/"+props.player._id, {
             method: "POST",
             headers: {
                 "Content-type" : "application/json"

@@ -26,7 +26,7 @@ const ReceivedRequests = (props) => {
 
     const handleReject = async () =>{
         // console.log('hello')
-        const res = await fetch("/teams/match_request_reject/"+props.id+"/"+props.player._id, {
+        const res = await fetch("/api/teams/match_request_reject/"+props.id+"/"+props.player._id, {
             method: "POST",
             headers: {
                 "Content-type" : "application/json"
@@ -60,7 +60,7 @@ const AcceptedRequests = (props) => {
     const navigate = useNavigate()
 
     const handleBatting =async () => {
-        const res = await fetch('/matches/setbatting/'+props.matchId, {
+        const res = await fetch('/api/matches/setbatting/'+props.matchId, {
             method: "GET",
             headers: {
                 "Accept": "application/json",
@@ -77,7 +77,7 @@ const AcceptedRequests = (props) => {
 
     const handleBowling = async () => {
         console.log('hello')
-        const res = await fetch('/matches/setbowling/'+props.matchId, {
+        const res = await fetch('/api/matches/setbowling/'+props.matchId, {
             method: "GET",
             headers: {
                 "Accept": "application/json",
@@ -116,7 +116,7 @@ const TeamRequests = () => {
 
     const fetchRequests = async () => {
         try {
-            const res = await fetch('/teams/matchRequests/'+id, {
+            const res = await fetch('/api/teams/matchRequests/'+id, {
                 method: "GET",
                 headers: {
                     "Accept": "application/json",

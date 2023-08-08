@@ -13,7 +13,7 @@ const TeamRequests = () => {
 
     const fetchRequests = async () => {
         try {
-            const res = await fetch('/teams/requests/'+id, {
+            const res = await fetch('/api/teams/requests/'+id, {
                 method: "GET",
                 headers: {
                     "Accept": "application/json",

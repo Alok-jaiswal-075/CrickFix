@@ -20,7 +20,7 @@ const Register = () => {
         e.preventDefault();
 
         if(player.password === player.cpassword){
-            const res = await fetch("/players", {
+            const res = await fetch("/api/players", {
                 method: "POST",
                 headers: {
                     "Content-type" : "application/json"

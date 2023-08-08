@@ -17,7 +17,7 @@ const EditPlayer = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const res = await fetch("/players", {
+        const res = await fetch("/api/players", {
             method: "PUT",
             headers: {
                 "Content-type": "application/json"

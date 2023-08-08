@@ -30,9 +30,9 @@ app.use(express.json())
 app.use(urlencoded({extended: false}))
 app.use(cookieParser())
 
-app.use('/players',playerRoutes);
-app.use('/teams',teamRoutes)
-app.use('/matches',matchRoutes)
+app.use('/api/players',playerRoutes);
+app.use('/api/teams',teamRoutes)
+app.use('/api/matches',matchRoutes)
 
 // Route Drivers
 // app.use('/api/auth', auth)

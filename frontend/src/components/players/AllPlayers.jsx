@@ -31,7 +31,7 @@ const PlayersList = () => {
   const [loading, setLoading] = useState(true)
   
   useEffect(() => {
-    fetch('/players/all-players')
+    fetch('/api/players/all-players')
       .then(response => response.json())
       .then(data => {
         setPlayers(data);

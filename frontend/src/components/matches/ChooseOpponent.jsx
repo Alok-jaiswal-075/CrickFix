@@ -34,7 +34,7 @@ const ChooseOpponent = () => {
 
     const fetchOtherTeams = async () => {
         try {
-            const res = await fetch('/teams/otherTeams', {
+            const res = await fetch('/api/teams/otherTeams', {
                 method: "GET",
                 headers: {
                     "Accept": "application/json",

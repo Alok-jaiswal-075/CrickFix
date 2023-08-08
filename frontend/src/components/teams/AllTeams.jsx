@@ -8,7 +8,7 @@ const AllTeams = () => {
 
     const callTeamsPage = async () =>{
         try{
-            const res = await fetch('/teams',{
+            const res = await fetch('/api/teams',{
                 method : "GET",
                 headers : {
                     "Accept" : "application/json",

@@ -56,7 +56,7 @@ const ChooseTeam = () => {
     const [teams,setTeams] = useState([]);
 
     const fetchMyTeams = async () => {
-            const res = await fetch('/teams/myteams', {
+            const res = await fetch('/api/teams/myteams', {
                 method: "GET",
                 headers: {
                     "Accept": "application/json",
