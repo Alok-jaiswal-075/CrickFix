@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+      {
+        "source": "/:path*",
+        "destination": "https://backend-crickfix.onrender.com/:path*"
+      }
+    ]
+  }
