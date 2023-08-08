@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import Loading from '../Utility/Loading';
+import { Navigate, useNavigate } from 'react-router-dom';
 
-const PlayerCard = ({ player }) => (
+const PlayerCard = ({ player }) => {
+  const navigate = useNavigate()
 
-    <div className="w-fit bg-col-bg-dark p-5 drop-shadow-xl flex flex-col rounded-2xl hover:scale-110 duration-300 cursor-pointer">
+
+  
+  const goToPlayerDashboard = ()=>{
+    navigate('/')
+  }
+
+    return(
+      <div className="w-fit bg-col-bg-dark p-5 drop-shadow-xl flex flex-col rounded-2xl hover:scale-110 duration-300 cursor-pointer">
         <h2 className="sm:text-2xl text-lg font-heading bg-col-bg-dark">{player.fname}&nbsp; {player.lname}</h2>
         <ul className="font-text mt-2 bg-col-bg-dark">
             <li className="bg-col-bg-dark">Age := {player.age}</li>
@@ -11,14 +20,16 @@ const PlayerCard = ({ player }) => (
             <li className="bg-col-bg-dark">Email := {player.email}</li>
             <li className="bg-col-bg-dark">Teams := {player.teams_joined && player.teams_joined.map((team) => team.name+" | ")}</li>
         </ul>
+        <button type="button" className='border border-col-btn text-col-bg-dark hover:text-col-text bg-col-btn  rounded text-md px-5 py-1 my-2 hover:bg-transparent  transition duration-300 ease-in-out w-fit' onClick={goToPlayerDashboard}>View</button>
     </div>
-);
+    )
+}
 
 const PlayersList = () => {
   const [players, setPlayers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true)
-
+  
   useEffect(() => {
     fetch('/players/all-players')
       .then(response => response.json())
@@ -37,6 +48,7 @@ const PlayersList = () => {
     return name.includes(searchQuery.toLowerCase());
 
   });
+
 
   return (
     loading ? <Loading /> 

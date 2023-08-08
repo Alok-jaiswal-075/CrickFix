@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Team = (props) => {
     const navigate = useNavigate();
+    const {id} = useParams()
 
     const [isLoading, setIsLoading] = useState(false);
 
     const handleSendRequest = async () => {
-        setIsLoading(true);
+        // setIsLoading(true);
 
         try {
             const res = await fetch('/players/send-request/' + props.team._id, {
@@ -28,13 +29,13 @@ const Team = (props) => {
     };
 
 
-    const gotoEditPage = () => {
-        navigate('/team/' + props.team._id);
+    const goToTeamDashboard = () => {
+        navigate('/team/dashboard/' + props.team._id);
     }
 
     const handleDelete = async () => {
         try {
-            const res = await fetch('/teams/' + props.team._id, {
+            const res = await fetch('https://backend-crickfix.onrender.com/teams/' + props.team._id, {
                 method: "DELETE",
                 headers: {
                     "Accept": "application/json",
@@ -68,7 +69,7 @@ const Team = (props) => {
                 <li className="bg-col-bg-dark">Matches Draw := {props.team.matches_draw}</li>
             </ul>
 
-            <div className="">
+            <div className="flex my-2 gap-2 items-center justify-start p-0">
 
                 {/* {
                         props.isCaptain 
@@ -81,7 +82,7 @@ const Team = (props) => {
                         <button type="button" className='border border-col-btn text-col-bg-dark hover:text-col-text bg-col-btn  rounded text-md px-3 m-2 py-1.5 hover:bg-transparent transition duration-300 ease-in-out ' onClick={handleDelete}>Delete</button>
                     } */}
                 <br />
-                {
+                {/* {
                         props.isCaptain 
                         && 
                         <a href={"team/teamRequests/"+props.team._id} className="text-col-btn hover:text-col-text transition-all duration-200">Join Requests</a>
@@ -91,14 +92,14 @@ const Team = (props) => {
                         props.isCaptain 
                         && 
                         <a href={"team/matchRequests/"+props.team._id} className="text-col-btn hover:text-col-text transition-all duration-200">Match Requests</a>
-                    }
+                    } */}
 
-                <button type="button" className='border border-col-btn text-col-bg-dark hover:text-col-text bg-col-btn  rounded text-md px-5 py-1 hover:bg-transparent  transition duration-300 ease-in-out ' onClick={gotoEditPage}>View</button>
+                <button type="button" className='border border-col-btn text-col-bg-dark hover:text-col-text bg-col-btn  rounded text-md px-5 py-1 hover:bg-transparent  transition duration-300 ease-in-out ' onClick={goToTeamDashboard}>View</button>
 
                 {
                     !props.isCaptain
                     &&
-                    <button className='border border-col-btn text-col-bg-dark hover:text-col-text bg-col-btn  rounded text-md px-3 py-1.5 hover:bg-transparent transition duration-300 ease-in-out ' onClick={handleSendRequest} disabled={isLoading}>
+                    <button className='border border-col-btn text-col-bg-dark hover:text-col-text bg-col-btn  rounded text-md px-5 py-1 hover:bg-transparent transition duration-300 ease-in-out ' onClick={handleSendRequest} disabled={isLoading}>
                         {isLoading ? 'Sent' : 'Send Request'}
                     </button>
                 }
@@ -112,3 +113,5 @@ const Team = (props) => {
 }
 
 export default Team
+
+

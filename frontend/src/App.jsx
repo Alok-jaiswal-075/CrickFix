@@ -12,13 +12,14 @@ import EditTeam from "./components/teams/EditTeam";
 import ScoreBoard from "./components/matches/ScoreBoard";
 import TeamRequests from "./components/teams/TeamRequests"
 
-import TeamDashboard from "./components/TeamDashboard";
+import TeamDashboard from "./components/teams/TeamDashboard";
 
 import ChoosePlayers from './components/matches/ChoosePlayers'
 import ChoosePlayersTeam2 from './components/matches/ChoosePlayersTeam2'
 import ChooseTeam from "./components/matches/ChooseTeam";
 import ChooseOpponent from "./components/matches/ChooseOpponent";
 import MatchRequests from './components/matches/MatchRequests'
+// import Footer from "./components/Footer";
 
 
 function App() {
@@ -45,10 +46,12 @@ function App() {
       <Route path="/match/creatematch/:team1" element={<ChooseOpponent />} />
       <Route path="/match/creatematch/:team1/:team2" element={<ChoosePlayers />} />
       <Route path="/match/match_request_accept/:matchId" element={<ChoosePlayersTeam2 />} />
-      <Route path="/dashboard/" element={<TeamDashboard />} />
+      <Route path="/team/dashboard/:id" element={<TeamDashboard />} />
       {/* <Route path="*" element={<Error />} /> */}
 
      </Routes>
+
+     {/* <Footer /> */}
     </div>
 
 

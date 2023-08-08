@@ -50,7 +50,22 @@ router.route('/:id')
         // console.log(req.body.team);
     }))
     .get(isLoggedIn,catchAsync(async (req,res,next)=>{
-        const team =await Team.findById(req.params.id).populate('players').populate('captain');
+        const team =await Team.findById(req.params.id).populate('players').populate('captain').populate('requests').populate({
+            path: 'sent_match_requests',
+            populate: {
+                path: 'Team2'
+            }
+        }).populate({
+            path: 'received_match_requests',
+            populate: {
+                path: 'Team1'
+            }
+        }).populate({
+            path: 'accepted_match_requests',
+            populate: {
+                path: 'Team2'
+            }
+        });
         if(!team){
             throw new appError(404,'Team not found');
         }

@@ -126,6 +126,10 @@ router.route('/')
           
     
         }))
+
+    router.post('/logout', isLoggedIn, catchAsync(async(req, res)=>{
+      res.clearCookie('token').json({'msg':'Logged out successfully'}) 
+    }))
       
 
     // router.post('/send-request',isLoggedIn, async (req, res) => {

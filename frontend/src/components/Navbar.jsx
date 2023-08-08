@@ -20,12 +20,12 @@ const Navbar = () => {
 		},
 		{
 			link: '/about',
-			linkName: 'About'
+			linkName: 'Player Dashboard'
 		},
-		{
-			link: '/newTeam',
-			linkName: 'New Team'
-		},
+		// {
+		// 	link: '/newTeam',
+		// 	linkName: 'New Team'
+		// },
 		{
 			link: '/teams',
 			linkName: 'Teams'
@@ -41,11 +41,7 @@ const Navbar = () => {
 		{
 			link: '/login',
 			linkName: 'Login'
-		},
-		{
-			link: '/dashboard',
-			linkName: 'Team Dashboard'
-		},
+		}
 	]
 
 	// getting current path for highlighting navbar and sidebar links
@@ -54,9 +50,9 @@ const Navbar = () => {
 	return (
 		<div className="ease duration-500 sticky top-0 z-50">
 			<nav className="sticky top-0 flex items-center justify-between p-2 px-4 bg-col-bg-dark drop-shadow-lg z-50">
-				<NavBarLink to="/" content={<img className="w-[70%] sm:w-[40%] lg:w-[70%] bg-inherit" src="./img/logo.png" alt="LOGO" />}></NavBarLink>
+				<NavBarLink to="/" content={<img className="w-[40%] sm:w-[35%] lg:w-[40%] bg-inherit" src="./img/logo-2.png" alt="LOGO" />}></NavBarLink>
 
-				<ul className="hidden md:flex items-center justify-between bg-inherit w-[70%]">
+				<ul className="hidden md:flex items-center justify-end gap-6 bg-inherit w-fit">
 					{
 						linkList.map((link, index) =>
 						<li className="nav-item bg-transparent">
