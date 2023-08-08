@@ -35,7 +35,8 @@ const About = (props) => {
                 credentials: "include"
             })
             const playerData = await res.json();
-            console.log(res.status)
+            
+            // console.log(res.status)
             // setPlayerData(data)
 
             // fetching number of players
@@ -75,6 +76,9 @@ const About = (props) => {
             // console.log(aboutState.player.captainOf)
             // console.log(aboutState.player.joined_teams)
             // setLoading(false)
+            if(res.status === 401){
+                navigate('/login')
+            }
 
             if (res.status === 200) {
                 setAboutState({
