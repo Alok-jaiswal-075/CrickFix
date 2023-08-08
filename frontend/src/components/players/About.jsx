@@ -76,11 +76,9 @@ const About = (props) => {
             // console.log(aboutState.player.captainOf)
             // console.log(aboutState.player.joined_teams)
             // setLoading(false)
-            if(res.status === 401){
-                navigate('/login')
-            }
+           
 
-            if (res.status === 200) {
+            if (res.status === 200 && teamRes.status === 200 && countRes.status === 200) {
                 setAboutState({
                     player: playerData,
                     playerCount: players.length,
@@ -88,13 +86,16 @@ const About = (props) => {
                     loading: false
                 })
             }
+            if(res.status === 401){
+                navigate('/login')
+            }
 
 
             console.log(aboutState.player)
 
 
         } catch (error) {
-            window.alert(error.msg)
+            // window.alert(error.msg)
             console.log('hello')
         }
     }

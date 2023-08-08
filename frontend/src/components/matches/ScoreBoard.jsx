@@ -57,77 +57,7 @@ const ScoreBoard = () => {
 
     useEffect(() => {
         fetchMatchDetails()
-    }, []);
-
-    // const Team1 = {
-    //     id: 1,
-    //     score : 0,
-    //     players : [
-    //         {
-    //             id: 'p1',
-    //             half_centuries : 0,
-    //             centuries : 0,
-    //             total_score : 0,
-    //             fours:0,
-    //             sixes:0,
-    //             balls: 0
-    //         },
-    //         {
-    //             id: 'p2',
-    //             half_centuries : 0,
-    //             centuries : 0,
-    //             total_score : 0,
-    //             fours:0,
-    //             sixes:0,
-    //             balls:0
-    //         },
-    //         {
-    //             id: 'p5',
-    //             half_centuries : 0,
-    //             centuries : 0,
-    //             total_score : 0,
-    //             fours:0,
-    //             sixes:0,
-    //             balls:0
-    //         }
-    //     ]
-    // }
-
-    // const Team2 = {
-    //     id: 2,
-    //     score : 0,
-    //     players : [
-    //         {
-    //             id: 'p3',
-    //             half_centuries : 0,
-    //             centuries : 0,
-    //             total_score : 0,
-    //             fours:0,
-    //             sixes:0,
-    //             balls:0
-    //         },
-    //         {
-    //             id: 'p4',
-    //             half_centuries : 0,
-    //             centuries : 0,
-    //             total_score : 0,
-    //             fours:0,
-    //             sixes:0,
-    //             balls:0
-    //         },
-    //         {
-    //             id: 'p6',
-    //             half_centuries : 0,
-    //             centuries : 0,
-    //             total_score : 0,
-    //             fours:0,
-    //             sixes:0,
-    //             balls:0
-    //         }
-    //     ]
-    // }
-
-
+    }, [])
 
 
 

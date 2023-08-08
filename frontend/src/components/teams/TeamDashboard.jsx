@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import AllPlayers from "../players/AllPlayers";
 import Loading from '../Utility/Loading';
 import Button from '../Utility/Button';
+import TeamRequest from './Request'
 // import Request from "./teams/Request";
 
 
@@ -271,12 +272,15 @@ const Dashboard = (props) => {
             <div className="w-full sm:w-2/5 bg-col-bg-dark rounded-xl p-4">
               <h2 className='text-center text-2xl mb-4'>Join Requests</h2>
               <ul className='list-none'>
-                {
+              {team.requests && <div className="d-flex">
+            {team.requests.map((player) => <TeamRequest key={temp++} player={player} id={id}/>)}
+                    </div>}
+                {/* {
                   team.requests && team.requests.map((player) => (
                     <li className='text-center'>{player.fname}</li>
                   ))
 
-                }
+                } */}
               </ul>
             </div>
 
