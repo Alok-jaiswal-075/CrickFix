@@ -117,8 +117,8 @@ const About = (props) => {
         let opt = window.confirm('Are you sure you want to delete this account?')
         if (opt) {
             try {
-                const res = await fetch('/api/players', {
-                    method: "DELETE",
+                const res = await fetch('/api/players/logout', {
+                    method: "POST",
                     headers: {
                         "Accept": "application/json",
                         "Content-Type": "application/json"
@@ -137,14 +137,12 @@ const About = (props) => {
     }
 
     const handleLogout = async()=>{
-        let opt = window.confirm(`Are you sure you want to logout?`)
-        if (opt) {
+        // let opt = window.confirm(`Are you sure you want to logout?`)
+        // if (opt) {
           try {
             const res = await fetch('/api/players/logout', {
               method: "POST",
               headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
               },
               credentials: "include"
             })
@@ -159,7 +157,7 @@ const About = (props) => {
             window.alert(error.msg)
             // window.alert('sahi se code likh bsdk')
           }
-        }
+        // }
       }
 
     const goToNewTeam = () => {
@@ -175,7 +173,7 @@ const About = (props) => {
         return (
             <div className="m-4 flex flex-col items-center gap-20 sm:gap-24">
                 <h1 className="text-center text-4xl sm:text-5xl my-6">Hi, {aboutState.player.fname}!</h1>
-                {/* <button className="border text-col-bg-dark hover:text-col-text border-col-btn bg-col-btn px-20 py-2 sm:text-lg text-sm font-bold rounded-full hover:bg-transparent transition duration-300 ease-in-out" onClick={handleLogout}>Logout</button> */}
+                <button className="border text-col-bg-dark hover:text-col-text border-col-btn bg-col-btn px-20 py-2 sm:text-lg text-sm font-bold rounded-full hover:bg-transparent transition duration-300 ease-in-out" onClick={handleLogout}>Logout</button>
 
                 {/* User Info Section */}
                 <div className="w-full flex flex-col items-center sm:flex-row sm:items-start sm:justify-center gap-16 sm:gap-10 ">

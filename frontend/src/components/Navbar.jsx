@@ -50,7 +50,7 @@ const Navbar = () => {
 	return (
 		<div className="ease duration-500 sticky top-0 z-50">
 			<nav className="sticky top-0 flex items-center justify-between p-2 px-4 bg-col-bg-dark drop-shadow-lg z-50">
-				<NavBarLink to="/" content={<img className="w-[40%] sm:w-[35%] lg:w-[40%] bg-inherit" src="./img/logo-2.png" alt="LOGO" />}></NavBarLink>
+				<NavBarLink to="/" content={<img className="w-[40%] sm:w-[35%] lg:w-[45%] bg-inherit" src="./img/logo-2.png" alt="LOGO" />}></NavBarLink>
 
 				<ul className="hidden md:flex items-center justify-end gap-6 bg-inherit w-fit">
 					{

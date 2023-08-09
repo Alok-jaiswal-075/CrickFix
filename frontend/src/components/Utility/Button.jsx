@@ -1,8 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
+// import BounceLoader from 'react-spinners/BounceLoader'
+import Loader from 'react-spinners/PuffLoader'
 
 function Button(props) {
+  const classListPrimary = 'border text-col-bg-dark hover:text-col-text border-col-btn bg-col-btn px-20 py-2 sm:text-lg text-sm font-bold rounded-full hover:bg-transparent'
+  const classListLoading = 'text-col-text border-2 border-col-btn bg-transparent w-fit sm:text-lg text-sm font-bold rounded-full'
+
+  const[loading, setLoading] = useState(false)
+
+  const clickHandler = async()=>{
+    await props.handleClick()
+    setLoading(true)
+  }
+
   return (
-    <button type={props.type ? props.type : 'button'} onClick={props.onClick} className='px-14 py-2 sm:text-lg text-sm font-bold before:transition-ease-out before:duration-200  rounded-full border relative border-col-btn before:content-["Login"] before:w-full before:h-full before:rounded-full before:absolute before:left-0 before:top-0 before:bg-col-btn before:z-[0]  truncate before:flex before:items-center before:justify-center before:focus:translate-x-full before:focus:content-[""]'><span className=''>Submitted !</span></button>
+    <button 
+    className={`transition-all duration-300 ease-in-out ${loading ? classListLoading : classListPrimary}`} 
+    type={props.type} 
+    onClick={()=>clickHandler()} 
+    disabled={loading}
+    >
+      {
+        loading ? 
+        <Loader color='#F86C4F' size={45} />
+        :
+        props.content
+      }
+    </button>
   )
 }
 
