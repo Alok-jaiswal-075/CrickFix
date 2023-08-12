@@ -37,7 +37,7 @@ function App() {
       <Route path="/newTeam" element={<NewTeam/>} />
       <Route path="/teams" element={<AllTeams/>} />
       <Route path="/allplayers" element={<AllPlayers/>} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />
       <Route path="/register" element={<Register />} />
       <Route path="/editPlayer" element={<EditPlayer />} />
       <Route path="/team/:id" element={<EditTeam />} />

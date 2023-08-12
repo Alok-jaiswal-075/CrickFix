@@ -41,25 +41,25 @@ const Navbar = (props) => {
 	const handleLogout = async () => {
 		let opt = window.confirm(`Are you sure you want to logout?`)
 		if (opt) {
-		try {
-			const res = await fetch('/api/players/logout', {
-				method: "POST",
-				headers: {
-				},
-				credentials: "include"
-			})
+			try {
+				const res = await fetch('/api/players/logout', {
+					method: "POST",
+					headers: {
+					},
+					credentials: "include"
+				})
 
-			const data = await res.json();
-			if (data) {
-				window.alert(data.msg)
-				props.setIsLoggedIn(false)
-				navigate('/')
+				const data = await res.json();
+				if (data) {
+					window.alert(data.msg)
+					props.setIsLoggedIn(false)
+					navigate('/')
+				}
+
+			} catch (error) {
+				window.alert(error.msg)
+				// window.alert('sahi se code likh bsdk')
 			}
-
-		} catch (error) {
-			window.alert(error.msg)
-			// window.alert('sahi se code likh bsdk')
-		}
 		}
 	}
 
@@ -122,20 +122,22 @@ const Navbar = (props) => {
 				<ul className="hidden md:flex items-center justify-end gap-6 bg-inherit w-fit">
 					{
 						<>
-							{linkList.map((link, index) => (returnLinkCode(link, index)
+							{
+								linkList.map((link, index) => (returnLinkCode(link, index)
 
 
-								// <li className="nav-item bg-transparent">
-								// 	<NavBarLink index={index} to={link.link} content={link.linkName} isActive={pathname === link.link ? true : false} ></NavBarLink>
-								// </li>
-							)
-							)}
+									// <li className="nav-item bg-transparent">
+									// 	<NavBarLink index={index} to={link.link} content={link.linkName} isActive={pathname === link.link ? true : false} ></NavBarLink>
+									// </li>
+								)
+								)
+							}
 
 							{
-								props.isLoggedIn ? 
-								<button onClick={handleLogout} className="text-col-link-inactive hover:text-col-text ease duration-200 bg-transparent mx-2 text-base">Logout</button>
-								:
-								<></>
+								props.isLoggedIn ?
+									<button onClick={handleLogout} className="text-col-link-inactive hover:text-col-text ease duration-200 bg-transparent mx-2 text-base">Logout</button>
+									:
+									<></>
 							}
 						</>
 					}
@@ -151,7 +153,7 @@ const Navbar = (props) => {
 					}
 				} /></span>
 			</nav>
-			<SideBar currentPath={pathname} visible={isOpen} linkList={linkList} setIsOpen={setIsOpen} />
+			<SideBar currentPath={pathname} visible={isOpen} linkList={linkList} setIsOpen={setIsOpen} isLoggedIn={props.isLoggedIn} handleLogout={handleLogout}/>
 		</div>
 	)
 }

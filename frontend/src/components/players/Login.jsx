@@ -6,7 +6,7 @@ import Loader from 'react-spinners/PuffLoader'
 
 
 
-const Login = () => {
+const Login = (props) => {
     const Navigate = useNavigate();
 
     const [player, setPlayer] = useState({ email: "", password: "" });
@@ -49,6 +49,8 @@ const Login = () => {
         }
         else {
             // window.alert(data.msg)
+            props.setIsLoggedIn(true)
+            while(props.isLoggedIn === false){}
             Navigate("/about");
             // console.log(data)
         }

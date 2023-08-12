@@ -6,7 +6,7 @@ const SideBar = (props) => {
 
 	// const closeSideBar = ()=>{
 	// 	props.setIsOpen(false)
-		
+
 	// }
 
 	// console.log(visible)
@@ -17,6 +17,24 @@ const SideBar = (props) => {
 
 	const inactive = 'text-lg bg-transparent text-col-link-inactive'
 	const active = 'text-lg bg-transparent text-col-btn'
+
+	const returnLinkCode = (link, key) => {
+		if (link.linkName === 'Login' && props.isLoggedIn) {
+			return
+		}
+		else {
+			return (
+				<>
+					{/* <li className="nav-item bg-transparent">
+						<NavLink index={index} to={link.link} content={link.linkName} isActive={pathname === link.link ? true : false} ></NavLink>
+					</li> */}
+					<li className="nav-item my-4">
+						<NavLink onClick={() => { props.setIsOpen(false) }} id={key} className={props.currentPath === link.link ? active : inactive} to={link.link}>{link.linkName}</NavLink>
+					</li>
+				</>
+			)
+		}
+	}
 
 	return (
 		<div id="sidebar" className={sideClassList}>
@@ -49,11 +67,22 @@ const SideBar = (props) => {
 					<NavLink className="nav-link text-lg bg-transparent text-col-link-inactive" to="/dashboard">TeamDashboard</NavLink>
 				</li> */}
 				{
-					props.linkList.map((link, key) => (
-						<li className="nav-item my-4">
-							<NavLink onClick={()=>{props.setIsOpen(false)}} id={key} className={props.currentPath === link.link ? active : inactive} to={link.link}>{link.linkName}</NavLink>
-						</li>
-					))
+					<>
+						{
+							props.linkList.map((link, key) => (
+								returnLinkCode(link, key)
+								// <li className="nav-item my-4">
+								// 	<NavLink onClick={() => { props.setIsOpen(false) }} id={key} className={props.currentPath === link.link ? active : inactive} to={link.link}>{link.linkName}</NavLink>
+								// </li>
+							))
+						}
+						{
+							props.isLoggedIn ?
+								<button onClick={props.handleLogout} className="text-col-link-inactive hover:text-col-text ease duration-200 bg-transparent mx-2 text-lg">Logout</button>
+								:
+								<></>
+						}
+					</>
 				}
 			</ul>
 		</div>
