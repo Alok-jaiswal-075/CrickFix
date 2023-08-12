@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Team from '../teams/Team'
 import Loading from "../Utility/Loading";
-import Alert from "../Utility/Alert";
+// import Alert from "../Utility/Alert";
 
 
-const About = (props) => {
+const About = ({ isLoggedIn, setIsLoggedIn }) => {
     let yourTeamsTemp = 1;
     // let joinedTeamsTemp = 1;
     const navigate = useNavigate()
@@ -24,80 +24,91 @@ const About = (props) => {
 
 
     const callPlayerPage = async () => {
-        try {
-            // fetching player data
-            const res = await fetch('/api/players', {
-                method: "GET",
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
-                credentials: "include"
-            })
-            const playerData = await res.json();
-            
-            // console.log(res.status)
-            // setPlayerData(data)
-
-            // fetching number of players
-            const countRes = await fetch('/api/players/all-players', {
-                method: "GET",
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
-                credentials: "include"
-            })
-            const players = await countRes.json()
-            // setPlayerCount(players.length)
-
-            // fetching all teams the player is in
-            const teamRes = await fetch('/api/teams', {
-                method: "GET",
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
-                credentials: "include"
-            })
-
-            const teams = await teamRes.json()
-            let tempTeamList = []
-            playerData.captainOf.forEach((team) => {
-                tempTeamList.push(team)
-            })
-            teams.forEach(team => {
-                if (!tempTeamList.includes(team) && team.players.includes(playerData)) {
-                    tempTeamList.push(team)
-                }
-            })
-            // setTeamList(tempTeamList)
-
-            // console.log(aboutState.player.captainOf)
-            // console.log(aboutState.player.joined_teams)
-            // setLoading(false)
-           
-
-            if (res.status === 200 && teamRes.status === 200 && countRes.status === 200) {
-                setAboutState({
-                    player: playerData,
-                    playerCount: players.length,
-                    teamList: tempTeamList,
-                    loading: false
+        // if (isLoggedIn) {
+            try {
+                // fetching player data
+                console.log('callplayerpage')
+                const res = await fetch('/api/players', {
+                    method: "GET",
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    credentials: "include"
                 })
+                const playerData = await res.json();
+
+                console.log(playerData)
+                // setPlayerData(data)
+
+                // fetching number of players
+                const countRes = await fetch('/api/players/all-players', {
+                    method: "GET",
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    credentials: "include"
+                })
+                const players = await countRes.json()
+                // setPlayerCount(players.length)
+
+                // fetching all teams the player is in
+                const teamRes = await fetch('/api/teams', {
+                    method: "GET",
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    credentials: "include"
+                })
+
+                const teams = await teamRes.json()
+                let tempTeamList = []
+                playerData.captainOf.forEach((team) => {
+                    tempTeamList.push(team)
+                })
+                teams.forEach(team => {
+                    if (!tempTeamList.includes(team) && team.players.includes(playerData)) {
+                        tempTeamList.push(team)
+                    }
+                })
+                // setTeamList(tempTeamList)
+
+                // console.log(aboutState.player.captainOf)
+                // console.log(aboutState.player.joined_teams)
+                // setLoading(false)
+
+
+                if (res.status === 200 && teamRes.status === 200 && countRes.status === 200) {
+                    setAboutState({
+                        player: playerData,
+                        playerCount: players.length,
+                        teamList: tempTeamList,
+                        loading: false
+                    })
+                }
+                if (res.status === 401) {
+                    navigate('/login')
+                }
+
+
+                console.log(aboutState.player)
+
+
+            } catch (error) {
+                // window.alert(error.msg)
+                console.log('hello')
             }
-            if(res.status === 401){
-                navigate('/login')
-            }
-
-
-            console.log(aboutState.player)
-
-
-        } catch (error) {
-            // window.alert(error.msg)
-            console.log('hello')
-        }
+        // }
+        // else {
+        //     setAboutState({
+        //         player: {},
+        //         playerCount: 0,
+        //         teamList: [],
+        //         loading: false
+        //     })
+        // }
     }
 
     useEffect(() => {
@@ -136,44 +147,28 @@ const About = (props) => {
         }
     }
 
-    const handleLogout = async()=>{
-        // let opt = window.confirm(`Are you sure you want to logout?`)
-        // if (opt) {
-          try {
-            const res = await fetch('/api/players/logout', {
-              method: "POST",
-              headers: {
-              },
-              credentials: "include"
-            })
-    
-            const data = await res.json();
-            if (data) {
-              window.alert(data.msg)
-              navigate('/')
-            }
-    
-          } catch (error) {
-            window.alert(error.msg)
-            // window.alert('sahi se code likh bsdk')
-          }
-        // }
-      }
-
     const goToNewTeam = () => {
         navigate('/newteam')
     }
 
-    if (aboutState.loading) {
+    if (!isLoggedIn) {
+        return (
+            <div className="flex flex-col items-center justify-center h-[90vh] gap-4">
+                <p className="text-col-text text-2xl">You are not Logged In</p>
+                <button className="border text-col-bg-dark hover:text-col-text border-col-btn bg-col-btn px-20 py-2 sm:text-lg text-sm font-bold rounded-full hover:bg-transparent transition duration-300 ease-in-out" onClick={goToLogin}>Login</button>
+            </div>
+        )
+    }
+    else if (aboutState.loading) {
         return (
             <Loading />
         )
+        
     }
     else {
         return (
             <div className="m-4 flex flex-col items-center gap-20 sm:gap-24">
                 <h1 className="text-center text-4xl sm:text-5xl my-6">Hi, {aboutState.player.fname}!</h1>
-                <button className="border text-col-bg-dark hover:text-col-text border-col-btn bg-col-btn px-20 py-2 sm:text-lg text-sm font-bold rounded-full hover:bg-transparent transition duration-300 ease-in-out" onClick={handleLogout}>Logout</button>
 
                 {/* User Info Section */}
                 <div className="w-full flex flex-col items-center sm:flex-row sm:items-start sm:justify-center gap-16 sm:gap-10 ">

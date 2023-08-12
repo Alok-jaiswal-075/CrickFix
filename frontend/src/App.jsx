@@ -1,3 +1,4 @@
+import React, {useState} from "react";
 import {Routes,Route} from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from './components/Home'
@@ -23,14 +24,16 @@ import MatchRequests from './components/matches/MatchRequests'
 
 
 function App() {
+  
+	const [isLoggedIn, setIsLoggedIn] = useState(false)
   return (
     <div className="App">
-      <Navbar/>
+      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
 
       <Routes>
      
       <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
+      <Route path="/about" element={<About isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
       <Route path="/newTeam" element={<NewTeam/>} />
       <Route path="/teams" element={<AllTeams/>} />
       <Route path="/allplayers" element={<AllPlayers/>} />

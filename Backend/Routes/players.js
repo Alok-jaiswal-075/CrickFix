@@ -163,6 +163,13 @@ router.route('/')
     //       res.status(500).json({ error: 'Internal server error' });
     //     }
     //   });
+
+    router.get('/isloggedin', isLoggedIn, async(req, res)=>{
+      const response = (await req.playerId) ? true : false
+      res.json({
+        "isLoggedIn": response
+      })
+    })
             
     module.exports = router
 
